@@ -4,6 +4,17 @@ package multiverse;
 
 message Universe {
     repeated Rating ratings = 949521667;
+    repeated Article articles = 1278123;
+}
+
+message Article {
+    string title = 213871293;
+    string body = 3894723947;
+    DateTime created_at = 2398742394;
+}
+
+message DateTime {
+    int64 unix_timestamp = 3894723947;
 }
 
 message LinkRating {
