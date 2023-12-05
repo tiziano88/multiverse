@@ -3,7 +3,7 @@ syntax = "proto3";
 package multiverse;
 
 message Universe {
-    repeated LinkRating link_ratings = 949521667;
+    repeated Rating ratings = 949521667;
 }
 
 message LinkRating {
@@ -26,6 +26,19 @@ message Rating {
         FIVE_STARS = 5;
     }
     StarRating rating = 949521667;
+}
+
+message Rating {
+    oneof subject {
+        Movie movie = 7244351;
+        Link link = 32847932;
+        AmazonProduct amazon_product = 387423;
+    }
+    Rating rating = 949521667;
+}
+
+message AmazonProduct {
+    string asin = 949521667;
 }
 
 message Movie {
