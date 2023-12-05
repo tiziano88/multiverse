@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package multiverse;
+
+message Universe {
+    repeated LinkRating link_ratings = 949521667;
+}
+
+message LinkRating {
+    Link link = 949521667;
+    Rating rating = 949521667;
+}
+
+message Link {
+    string url = 956456770;
+}
+
+message Rating {
+    // classic 5 star rating
+    enum StarRating {
+        UNKNOWN = 0;
+        ONE_STAR = 1;
+        TWO_STARS = 2;
+        THREE_STARS = 3;
+        FOUR_STARS = 4;
+        FIVE_STARS = 5;
+    }
+    StarRating rating = 949521667;
+}
+
+message Movie {
+    // e.g. tt0133093 for "The Matrix" https://www.imdb.com/title/tt0133093/
+    // e.g. tt0111161 for "The Shawshank Redemption" https://www.imdb.com/title/tt0111161/
+    // e.g. tt0068646 for "The Godfather" https://www.imdb.com/title/tt0068646/
+    // e.g. tt0468569 for "The Dark Knight" https://www.imdb.com/title/tt0468569/
+    string imdb_id = 949521667;
+}
