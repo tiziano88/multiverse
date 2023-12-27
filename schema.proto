@@ -44,6 +44,8 @@ message Rating {
         Movie movie = 7244351;
         Link link = 32847932;
         AmazonProduct amazon_product = 387423;
+        GitHubAccount github_account = 9384723;
+        GitHubRepo github_repo = 628761827;
     }
     Rating rating = 949521667;
 }
@@ -58,4 +60,13 @@ message Movie {
     // e.g. tt0068646 for "The Godfather" https://www.imdb.com/title/tt0068646/
     // e.g. tt0468569 for "The Dark Knight" https://www.imdb.com/title/tt0468569/
     string imdb_id = 949521667;
+}
+
+message GitHubAccount {
+    string name = 23789723;
+}
+
+message GitHubRepo {
+    GitHubAccount owner = 23789723;
+    string name = 384378293;
 }
