@@ -19,24 +19,21 @@ message DateTime {
 
 message LinkRating {
     Link link = 949521667;
-    Rating rating = 949521667;
+    Rating rating = 123716273;
 }
 
 message Link {
     string url = 956456770;
 }
 
-message Rating {
-    // classic 5 star rating
-    enum StarRating {
-        UNKNOWN = 0;
-        ONE_STAR = 1;
-        TWO_STARS = 2;
-        THREE_STARS = 3;
-        FOUR_STARS = 4;
-        FIVE_STARS = 5;
-    }
-    StarRating rating = 949521667;
+// classic 5 star rating
+enum StarRating {
+    UNKNOWN = 0;
+    ONE_STAR = 1;
+    TWO_STARS = 2;
+    THREE_STARS = 3;
+    FOUR_STARS = 4;
+    FIVE_STARS = 5;
 }
 
 message Rating {
@@ -47,7 +44,7 @@ message Rating {
         GitHubAccount github_account = 9384723;
         GitHubRepo github_repo = 628761827;
     }
-    Rating rating = 949521667;
+    StarRating star_rating = 949521667;
 }
 
 message AmazonProduct {

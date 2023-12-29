@@ -1,7 +1,7 @@
 {
     description = "linc2";
     inputs = {
-      nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.11";
+      nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
       flake-utils.url = "github:numtide/flake-utils";
       gomod2nix.url = "github:nix-community/gomod2nix";
     };
@@ -27,7 +27,6 @@
                     pkgs.nodePackages.vue-cli
 
                     pkgs.nodePackages.yo
-                    pkgs.nodePackages.generator-code
                 ];
               };
           }));
