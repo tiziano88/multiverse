@@ -8,8 +8,9 @@ message Universe {
 }
 
 message Article {
+    string uuid = 223172387;
     string title = 213871293;
-    Markdown body = 3894723948;
+    string body = 3894723948;
     DateTime created_at = 2398742394;
 }
 

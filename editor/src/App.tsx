@@ -1,24 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import { ArticleComponent } from "./components/ArticleComponent";
+import { multiverse } from "./compiled/schema";
 
 function App() {
+  var article = multiverse.Article.create({
+    uuid: "123",
+    title: "title",
+    body: "body",
+  });
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ArticleComponent
+        article={article}
+        updateArticle={(a) => {
+          article.body = a.body || "";
+          article.title = a.title || "";
+          article.uuid = a.uuid || "";
+          article = article;
+          console.log(article);
+        }}
+      />
     </div>
   );
 }
