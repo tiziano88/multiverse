@@ -18,6 +18,327 @@ $root.multiverse = (function() {
      */
     var multiverse = {};
 
+    multiverse.PublishedItem = (function() {
+
+        /**
+         * Properties of a PublishedItem.
+         * @memberof multiverse
+         * @interface IPublishedItem
+         * @property {string|null} [uuid] PublishedItem uuid
+         * @property {multiverse.IArticle|null} [article] PublishedItem article
+         * @property {multiverse.IYouTubeVideo|null} [youtubeVideo] PublishedItem youtubeVideo
+         * @property {multiverse.IRating|null} [rating] PublishedItem rating
+         */
+
+        /**
+         * Constructs a new PublishedItem.
+         * @memberof multiverse
+         * @classdesc Represents a PublishedItem.
+         * @implements IPublishedItem
+         * @constructor
+         * @param {multiverse.IPublishedItem=} [properties] Properties to set
+         */
+        function PublishedItem(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * PublishedItem uuid.
+         * @member {string} uuid
+         * @memberof multiverse.PublishedItem
+         * @instance
+         */
+        PublishedItem.prototype.uuid = "";
+
+        /**
+         * PublishedItem article.
+         * @member {multiverse.IArticle|null|undefined} article
+         * @memberof multiverse.PublishedItem
+         * @instance
+         */
+        PublishedItem.prototype.article = null;
+
+        /**
+         * PublishedItem youtubeVideo.
+         * @member {multiverse.IYouTubeVideo|null|undefined} youtubeVideo
+         * @memberof multiverse.PublishedItem
+         * @instance
+         */
+        PublishedItem.prototype.youtubeVideo = null;
+
+        /**
+         * PublishedItem rating.
+         * @member {multiverse.IRating|null|undefined} rating
+         * @memberof multiverse.PublishedItem
+         * @instance
+         */
+        PublishedItem.prototype.rating = null;
+
+        // OneOf field names bound to virtual getters and setters
+        var $oneOfFields;
+
+        /**
+         * PublishedItem item.
+         * @member {"article"|"youtubeVideo"|"rating"|undefined} item
+         * @memberof multiverse.PublishedItem
+         * @instance
+         */
+        Object.defineProperty(PublishedItem.prototype, "item", {
+            get: $util.oneOfGetter($oneOfFields = ["article", "youtubeVideo", "rating"]),
+            set: $util.oneOfSetter($oneOfFields)
+        });
+
+        /**
+         * Creates a new PublishedItem instance using the specified properties.
+         * @function create
+         * @memberof multiverse.PublishedItem
+         * @static
+         * @param {multiverse.IPublishedItem=} [properties] Properties to set
+         * @returns {multiverse.PublishedItem} PublishedItem instance
+         */
+        PublishedItem.create = function create(properties) {
+            return new PublishedItem(properties);
+        };
+
+        /**
+         * Encodes the specified PublishedItem message. Does not implicitly {@link multiverse.PublishedItem.verify|verify} messages.
+         * @function encode
+         * @memberof multiverse.PublishedItem
+         * @static
+         * @param {multiverse.IPublishedItem} message PublishedItem message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        PublishedItem.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.youtubeVideo != null && Object.hasOwnProperty.call(message, "youtubeVideo"))
+                $root.multiverse.YouTubeVideo.encode(message.youtubeVideo, writer.uint32(/* id 129382, wireType 2 =*/1035058).fork()).ldelim();
+            if (message.rating != null && Object.hasOwnProperty.call(message, "rating"))
+                $root.multiverse.Rating.encode(message.rating, writer.uint32(/* id 525242, wireType 2 =*/4201938).fork()).ldelim();
+            if (message.article != null && Object.hasOwnProperty.call(message, "article"))
+                $root.multiverse.Article.encode(message.article, writer.uint32(/* id 1728797, wireType 2 =*/13830378).fork()).ldelim();
+            if (message.uuid != null && Object.hasOwnProperty.call(message, "uuid"))
+                writer.uint32(/* id 512585537, wireType 2 =*/4100684298).string(message.uuid);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified PublishedItem message, length delimited. Does not implicitly {@link multiverse.PublishedItem.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof multiverse.PublishedItem
+         * @static
+         * @param {multiverse.IPublishedItem} message PublishedItem message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        PublishedItem.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a PublishedItem message from the specified reader or buffer.
+         * @function decode
+         * @memberof multiverse.PublishedItem
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {multiverse.PublishedItem} PublishedItem
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        PublishedItem.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.multiverse.PublishedItem();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 2123198273: {
+                        message.uuid = reader.string();
+                        break;
+                    }
+                case 1728797: {
+                        message.article = $root.multiverse.Article.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 129382: {
+                        message.youtubeVideo = $root.multiverse.YouTubeVideo.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 525242: {
+                        message.rating = $root.multiverse.Rating.decode(reader, reader.uint32());
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a PublishedItem message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof multiverse.PublishedItem
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {multiverse.PublishedItem} PublishedItem
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        PublishedItem.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a PublishedItem message.
+         * @function verify
+         * @memberof multiverse.PublishedItem
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        PublishedItem.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            var properties = {};
+            if (message.uuid != null && message.hasOwnProperty("uuid"))
+                if (!$util.isString(message.uuid))
+                    return "uuid: string expected";
+            if (message.article != null && message.hasOwnProperty("article")) {
+                properties.item = 1;
+                {
+                    var error = $root.multiverse.Article.verify(message.article);
+                    if (error)
+                        return "article." + error;
+                }
+            }
+            if (message.youtubeVideo != null && message.hasOwnProperty("youtubeVideo")) {
+                if (properties.item === 1)
+                    return "item: multiple values";
+                properties.item = 1;
+                {
+                    var error = $root.multiverse.YouTubeVideo.verify(message.youtubeVideo);
+                    if (error)
+                        return "youtubeVideo." + error;
+                }
+            }
+            if (message.rating != null && message.hasOwnProperty("rating")) {
+                if (properties.item === 1)
+                    return "item: multiple values";
+                properties.item = 1;
+                {
+                    var error = $root.multiverse.Rating.verify(message.rating);
+                    if (error)
+                        return "rating." + error;
+                }
+            }
+            return null;
+        };
+
+        /**
+         * Creates a PublishedItem message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof multiverse.PublishedItem
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {multiverse.PublishedItem} PublishedItem
+         */
+        PublishedItem.fromObject = function fromObject(object) {
+            if (object instanceof $root.multiverse.PublishedItem)
+                return object;
+            var message = new $root.multiverse.PublishedItem();
+            if (object.uuid != null)
+                message.uuid = String(object.uuid);
+            if (object.article != null) {
+                if (typeof object.article !== "object")
+                    throw TypeError(".multiverse.PublishedItem.article: object expected");
+                message.article = $root.multiverse.Article.fromObject(object.article);
+            }
+            if (object.youtubeVideo != null) {
+                if (typeof object.youtubeVideo !== "object")
+                    throw TypeError(".multiverse.PublishedItem.youtubeVideo: object expected");
+                message.youtubeVideo = $root.multiverse.YouTubeVideo.fromObject(object.youtubeVideo);
+            }
+            if (object.rating != null) {
+                if (typeof object.rating !== "object")
+                    throw TypeError(".multiverse.PublishedItem.rating: object expected");
+                message.rating = $root.multiverse.Rating.fromObject(object.rating);
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a PublishedItem message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof multiverse.PublishedItem
+         * @static
+         * @param {multiverse.PublishedItem} message PublishedItem
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        PublishedItem.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.uuid = "";
+            if (message.youtubeVideo != null && message.hasOwnProperty("youtubeVideo")) {
+                object.youtubeVideo = $root.multiverse.YouTubeVideo.toObject(message.youtubeVideo, options);
+                if (options.oneofs)
+                    object.item = "youtubeVideo";
+            }
+            if (message.rating != null && message.hasOwnProperty("rating")) {
+                object.rating = $root.multiverse.Rating.toObject(message.rating, options);
+                if (options.oneofs)
+                    object.item = "rating";
+            }
+            if (message.article != null && message.hasOwnProperty("article")) {
+                object.article = $root.multiverse.Article.toObject(message.article, options);
+                if (options.oneofs)
+                    object.item = "article";
+            }
+            if (message.uuid != null && message.hasOwnProperty("uuid"))
+                object.uuid = message.uuid;
+            return object;
+        };
+
+        /**
+         * Converts this PublishedItem to JSON.
+         * @function toJSON
+         * @memberof multiverse.PublishedItem
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        PublishedItem.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for PublishedItem
+         * @function getTypeUrl
+         * @memberof multiverse.PublishedItem
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        PublishedItem.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/multiverse.PublishedItem";
+        };
+
+        return PublishedItem;
+    })();
+
     multiverse.Universe = (function() {
 
         /**
@@ -26,6 +347,7 @@ $root.multiverse = (function() {
          * @interface IUniverse
          * @property {Array.<multiverse.IRating>|null} [ratings] Universe ratings
          * @property {Array.<multiverse.IArticle>|null} [articles] Universe articles
+         * @property {Array.<multiverse.IPublishedItem>|null} [publishedItems] Universe publishedItems
          */
 
         /**
@@ -39,6 +361,7 @@ $root.multiverse = (function() {
         function Universe(properties) {
             this.ratings = [];
             this.articles = [];
+            this.publishedItems = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -60,6 +383,14 @@ $root.multiverse = (function() {
          * @instance
          */
         Universe.prototype.articles = $util.emptyArray;
+
+        /**
+         * Universe publishedItems.
+         * @member {Array.<multiverse.IPublishedItem>} publishedItems
+         * @memberof multiverse.Universe
+         * @instance
+         */
+        Universe.prototype.publishedItems = $util.emptyArray;
 
         /**
          * Creates a new Universe instance using the specified properties.
@@ -85,12 +416,15 @@ $root.multiverse = (function() {
         Universe.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
+            if (message.ratings != null && message.ratings.length)
+                for (var i = 0; i < message.ratings.length; ++i)
+                    $root.multiverse.Rating.encode(message.ratings[i], writer.uint32(/* id 521667, wireType 2 =*/4173338).fork()).ldelim();
+            if (message.publishedItems != null && message.publishedItems.length)
+                for (var i = 0; i < message.publishedItems.length; ++i)
+                    $root.multiverse.PublishedItem.encode(message.publishedItems[i], writer.uint32(/* id 625362, wireType 2 =*/5002898).fork()).ldelim();
             if (message.articles != null && message.articles.length)
                 for (var i = 0; i < message.articles.length; ++i)
                     $root.multiverse.Article.encode(message.articles[i], writer.uint32(/* id 1278123, wireType 2 =*/10224986).fork()).ldelim();
-            if (message.ratings != null && message.ratings.length)
-                for (var i = 0; i < message.ratings.length; ++i)
-                    $root.multiverse.Rating.encode(message.ratings[i], writer.uint32(/* id 412650755, wireType 2 =*/3301206042).fork()).ldelim();
             return writer;
         };
 
@@ -125,7 +459,7 @@ $root.multiverse = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 949521667: {
+                case 521667: {
                         if (!(message.ratings && message.ratings.length))
                             message.ratings = [];
                         message.ratings.push($root.multiverse.Rating.decode(reader, reader.uint32()));
@@ -135,6 +469,12 @@ $root.multiverse = (function() {
                         if (!(message.articles && message.articles.length))
                             message.articles = [];
                         message.articles.push($root.multiverse.Article.decode(reader, reader.uint32()));
+                        break;
+                    }
+                case 625362: {
+                        if (!(message.publishedItems && message.publishedItems.length))
+                            message.publishedItems = [];
+                        message.publishedItems.push($root.multiverse.PublishedItem.decode(reader, reader.uint32()));
                         break;
                     }
                 default:
@@ -190,6 +530,15 @@ $root.multiverse = (function() {
                         return "articles." + error;
                 }
             }
+            if (message.publishedItems != null && message.hasOwnProperty("publishedItems")) {
+                if (!Array.isArray(message.publishedItems))
+                    return "publishedItems: array expected";
+                for (var i = 0; i < message.publishedItems.length; ++i) {
+                    var error = $root.multiverse.PublishedItem.verify(message.publishedItems[i]);
+                    if (error)
+                        return "publishedItems." + error;
+                }
+            }
             return null;
         };
 
@@ -225,6 +574,16 @@ $root.multiverse = (function() {
                     message.articles[i] = $root.multiverse.Article.fromObject(object.articles[i]);
                 }
             }
+            if (object.publishedItems) {
+                if (!Array.isArray(object.publishedItems))
+                    throw TypeError(".multiverse.Universe.publishedItems: array expected");
+                message.publishedItems = [];
+                for (var i = 0; i < object.publishedItems.length; ++i) {
+                    if (typeof object.publishedItems[i] !== "object")
+                        throw TypeError(".multiverse.Universe.publishedItems: object expected");
+                    message.publishedItems[i] = $root.multiverse.PublishedItem.fromObject(object.publishedItems[i]);
+                }
+            }
             return message;
         };
 
@@ -242,18 +601,24 @@ $root.multiverse = (function() {
                 options = {};
             var object = {};
             if (options.arrays || options.defaults) {
-                object.articles = [];
                 object.ratings = [];
-            }
-            if (message.articles && message.articles.length) {
+                object.publishedItems = [];
                 object.articles = [];
-                for (var j = 0; j < message.articles.length; ++j)
-                    object.articles[j] = $root.multiverse.Article.toObject(message.articles[j], options);
             }
             if (message.ratings && message.ratings.length) {
                 object.ratings = [];
                 for (var j = 0; j < message.ratings.length; ++j)
                     object.ratings[j] = $root.multiverse.Rating.toObject(message.ratings[j], options);
+            }
+            if (message.publishedItems && message.publishedItems.length) {
+                object.publishedItems = [];
+                for (var j = 0; j < message.publishedItems.length; ++j)
+                    object.publishedItems[j] = $root.multiverse.PublishedItem.toObject(message.publishedItems[j], options);
+            }
+            if (message.articles && message.articles.length) {
+                object.articles = [];
+                for (var j = 0; j < message.articles.length; ++j)
+                    object.articles[j] = $root.multiverse.Article.toObject(message.articles[j], options);
             }
             return object;
         };
@@ -371,13 +736,13 @@ $root.multiverse = (function() {
             if (!writer)
                 writer = $Writer.create();
             if (message.title != null && Object.hasOwnProperty.call(message, "title"))
-                writer.uint32(/* id 213871293, wireType 2 =*/1710970346).string(message.title);
-            if (message.uuid != null && Object.hasOwnProperty.call(message, "uuid"))
-                writer.uint32(/* id 223172387, wireType 2 =*/1785379098).string(message.uuid);
-            if (message.createdAt != null && Object.hasOwnProperty.call(message, "createdAt"))
-                $root.multiverse.DateTime.encode(message.createdAt, writer.uint32(/* id 251258746, wireType 2 =*/2010069970).fork()).ldelim();
+                writer.uint32(/* id 2138293, wireType 2 =*/17106346).string(message.title);
             if (message.body != null && Object.hasOwnProperty.call(message, "body"))
-                writer.uint32(/* id 136627564, wireType 2 =*/1093020514).string(message.body);
+                writer.uint32(/* id 4723948, wireType 2 =*/37791586).string(message.body);
+            if (message.createdAt != null && Object.hasOwnProperty.call(message, "createdAt"))
+                $root.multiverse.DateTime.encode(message.createdAt, writer.uint32(/* id 8742394, wireType 2 =*/69939154).fork()).ldelim();
+            if (message.uuid != null && Object.hasOwnProperty.call(message, "uuid"))
+                writer.uint32(/* id 9282123, wireType 2 =*/74256986).string(message.uuid);
             return writer;
         };
 
@@ -412,19 +777,19 @@ $root.multiverse = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 223172387: {
+                case 9282123: {
                         message.uuid = reader.string();
                         break;
                     }
-                case 213871293: {
+                case 2138293: {
                         message.title = reader.string();
                         break;
                     }
-                case 3894723948: {
+                case 4723948: {
                         message.body = reader.string();
                         break;
                     }
-                case 2398742394: {
+                case 8742394: {
                         message.createdAt = $root.multiverse.DateTime.decode(reader, reader.uint32());
                         break;
                     }
@@ -521,18 +886,18 @@ $root.multiverse = (function() {
             var object = {};
             if (options.defaults) {
                 object.title = "";
-                object.uuid = "";
-                object.createdAt = null;
                 object.body = "";
+                object.createdAt = null;
+                object.uuid = "";
             }
             if (message.title != null && message.hasOwnProperty("title"))
                 object.title = message.title;
-            if (message.uuid != null && message.hasOwnProperty("uuid"))
-                object.uuid = message.uuid;
-            if (message.createdAt != null && message.hasOwnProperty("createdAt"))
-                object.createdAt = $root.multiverse.DateTime.toObject(message.createdAt, options);
             if (message.body != null && message.hasOwnProperty("body"))
                 object.body = message.body;
+            if (message.createdAt != null && message.hasOwnProperty("createdAt"))
+                object.createdAt = $root.multiverse.DateTime.toObject(message.createdAt, options);
+            if (message.uuid != null && message.hasOwnProperty("uuid"))
+                object.uuid = message.uuid;
             return object;
         };
 
@@ -563,6 +928,209 @@ $root.multiverse = (function() {
         };
 
         return Article;
+    })();
+
+    multiverse.YouTubeVideo = (function() {
+
+        /**
+         * Properties of a YouTubeVideo.
+         * @memberof multiverse
+         * @interface IYouTubeVideo
+         * @property {string|null} [videoId] YouTubeVideo videoId
+         */
+
+        /**
+         * Constructs a new YouTubeVideo.
+         * @memberof multiverse
+         * @classdesc Represents a YouTubeVideo.
+         * @implements IYouTubeVideo
+         * @constructor
+         * @param {multiverse.IYouTubeVideo=} [properties] Properties to set
+         */
+        function YouTubeVideo(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * YouTubeVideo videoId.
+         * @member {string} videoId
+         * @memberof multiverse.YouTubeVideo
+         * @instance
+         */
+        YouTubeVideo.prototype.videoId = "";
+
+        /**
+         * Creates a new YouTubeVideo instance using the specified properties.
+         * @function create
+         * @memberof multiverse.YouTubeVideo
+         * @static
+         * @param {multiverse.IYouTubeVideo=} [properties] Properties to set
+         * @returns {multiverse.YouTubeVideo} YouTubeVideo instance
+         */
+        YouTubeVideo.create = function create(properties) {
+            return new YouTubeVideo(properties);
+        };
+
+        /**
+         * Encodes the specified YouTubeVideo message. Does not implicitly {@link multiverse.YouTubeVideo.verify|verify} messages.
+         * @function encode
+         * @memberof multiverse.YouTubeVideo
+         * @static
+         * @param {multiverse.IYouTubeVideo} message YouTubeVideo message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        YouTubeVideo.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.videoId != null && Object.hasOwnProperty.call(message, "videoId"))
+                writer.uint32(/* id 2372736, wireType 2 =*/18981890).string(message.videoId);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified YouTubeVideo message, length delimited. Does not implicitly {@link multiverse.YouTubeVideo.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof multiverse.YouTubeVideo
+         * @static
+         * @param {multiverse.IYouTubeVideo} message YouTubeVideo message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        YouTubeVideo.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a YouTubeVideo message from the specified reader or buffer.
+         * @function decode
+         * @memberof multiverse.YouTubeVideo
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {multiverse.YouTubeVideo} YouTubeVideo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        YouTubeVideo.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.multiverse.YouTubeVideo();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 2372736: {
+                        message.videoId = reader.string();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a YouTubeVideo message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof multiverse.YouTubeVideo
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {multiverse.YouTubeVideo} YouTubeVideo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        YouTubeVideo.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a YouTubeVideo message.
+         * @function verify
+         * @memberof multiverse.YouTubeVideo
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        YouTubeVideo.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.videoId != null && message.hasOwnProperty("videoId"))
+                if (!$util.isString(message.videoId))
+                    return "videoId: string expected";
+            return null;
+        };
+
+        /**
+         * Creates a YouTubeVideo message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof multiverse.YouTubeVideo
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {multiverse.YouTubeVideo} YouTubeVideo
+         */
+        YouTubeVideo.fromObject = function fromObject(object) {
+            if (object instanceof $root.multiverse.YouTubeVideo)
+                return object;
+            var message = new $root.multiverse.YouTubeVideo();
+            if (object.videoId != null)
+                message.videoId = String(object.videoId);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a YouTubeVideo message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof multiverse.YouTubeVideo
+         * @static
+         * @param {multiverse.YouTubeVideo} message YouTubeVideo
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        YouTubeVideo.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.videoId = "";
+            if (message.videoId != null && message.hasOwnProperty("videoId"))
+                object.videoId = message.videoId;
+            return object;
+        };
+
+        /**
+         * Converts this YouTubeVideo to JSON.
+         * @function toJSON
+         * @memberof multiverse.YouTubeVideo
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        YouTubeVideo.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for YouTubeVideo
+         * @function getTypeUrl
+         * @memberof multiverse.YouTubeVideo
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        YouTubeVideo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/multiverse.YouTubeVideo";
+        };
+
+        return YouTubeVideo;
     })();
 
     multiverse.DateTime = (function() {
@@ -622,7 +1190,7 @@ $root.multiverse = (function() {
             if (!writer)
                 writer = $Writer.create();
             if (message.unixTimestamp != null && Object.hasOwnProperty.call(message, "unixTimestamp"))
-                writer.uint32(/* id 136627563, wireType 0 =*/1093020504).int64(message.unixTimestamp);
+                writer.uint32(/* id 23947, wireType 0 =*/191576).int64(message.unixTimestamp);
             return writer;
         };
 
@@ -657,7 +1225,7 @@ $root.multiverse = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 3894723947: {
+                case 23947: {
                         message.unixTimestamp = reader.int64();
                         break;
                     }
@@ -848,9 +1416,9 @@ $root.multiverse = (function() {
             if (!writer)
                 writer = $Writer.create();
             if (message.rating != null && Object.hasOwnProperty.call(message, "rating"))
-                $root.multiverse.Rating.encode(message.rating, writer.uint32(/* id 123716273, wireType 2 =*/989730186).fork()).ldelim();
+                $root.multiverse.Rating.encode(message.rating, writer.uint32(/* id 126273, wireType 2 =*/1010186).fork()).ldelim();
             if (message.link != null && Object.hasOwnProperty.call(message, "link"))
-                $root.multiverse.Link.encode(message.link, writer.uint32(/* id 412650755, wireType 2 =*/3301206042).fork()).ldelim();
+                $root.multiverse.Link.encode(message.link, writer.uint32(/* id 949667, wireType 2 =*/7597338).fork()).ldelim();
             return writer;
         };
 
@@ -885,11 +1453,11 @@ $root.multiverse = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 949521667: {
+                case 949667: {
                         message.link = $root.multiverse.Link.decode(reader, reader.uint32());
                         break;
                     }
-                case 123716273: {
+                case 126273: {
                         message.rating = $root.multiverse.Rating.decode(reader, reader.uint32());
                         break;
                     }
@@ -1076,7 +1644,7 @@ $root.multiverse = (function() {
             if (!writer)
                 writer = $Writer.create();
             if (message.url != null && Object.hasOwnProperty.call(message, "url"))
-                writer.uint32(/* id 419585858, wireType 2 =*/3356686866).string(message.url);
+                writer.uint32(/* id 956450, wireType 2 =*/7651602).string(message.url);
             return writer;
         };
 
@@ -1111,7 +1679,7 @@ $root.multiverse = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 956456770: {
+                case 956450: {
                         message.url = reader.string();
                         break;
                     }
@@ -1255,6 +1823,7 @@ $root.multiverse = (function() {
          * @property {multiverse.IAmazonProduct|null} [amazonProduct] Rating amazonProduct
          * @property {multiverse.IGitHubAccount|null} [githubAccount] Rating githubAccount
          * @property {multiverse.IGitHubRepo|null} [githubRepo] Rating githubRepo
+         * @property {multiverse.IYouTubeVideo|null} [youtubeVideo] Rating youtubeVideo
          * @property {multiverse.StarRating|null} [starRating] Rating starRating
          */
 
@@ -1314,6 +1883,14 @@ $root.multiverse = (function() {
         Rating.prototype.githubRepo = null;
 
         /**
+         * Rating youtubeVideo.
+         * @member {multiverse.IYouTubeVideo|null|undefined} youtubeVideo
+         * @memberof multiverse.Rating
+         * @instance
+         */
+        Rating.prototype.youtubeVideo = null;
+
+        /**
          * Rating starRating.
          * @member {multiverse.StarRating} starRating
          * @memberof multiverse.Rating
@@ -1326,12 +1903,12 @@ $root.multiverse = (function() {
 
         /**
          * Rating subject.
-         * @member {"movie"|"link"|"amazonProduct"|"githubAccount"|"githubRepo"|undefined} subject
+         * @member {"movie"|"link"|"amazonProduct"|"githubAccount"|"githubRepo"|"youtubeVideo"|undefined} subject
          * @memberof multiverse.Rating
          * @instance
          */
         Object.defineProperty(Rating.prototype, "subject", {
-            get: $util.oneOfGetter($oneOfFields = ["movie", "link", "amazonProduct", "githubAccount", "githubRepo"]),
+            get: $util.oneOfGetter($oneOfFields = ["movie", "link", "amazonProduct", "githubAccount", "githubRepo", "youtubeVideo"]),
             set: $util.oneOfSetter($oneOfFields)
         });
 
@@ -1371,6 +1948,8 @@ $root.multiverse = (function() {
                 $root.multiverse.GitHubRepo.encode(message.githubRepo, writer.uint32(/* id 91890915, wireType 2 =*/735127322).fork()).ldelim();
             if (message.starRating != null && Object.hasOwnProperty.call(message, "starRating"))
                 writer.uint32(/* id 412650755, wireType 0 =*/3301206040).int32(message.starRating);
+            if (message.youtubeVideo != null && Object.hasOwnProperty.call(message, "youtubeVideo"))
+                $root.multiverse.YouTubeVideo.encode(message.youtubeVideo, writer.uint32(/* id 445860325, wireType 2 =*/3566882602).fork()).ldelim();
             return writer;
         };
 
@@ -1423,6 +2002,10 @@ $root.multiverse = (function() {
                     }
                 case 628761827: {
                         message.githubRepo = $root.multiverse.GitHubRepo.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 982731237: {
+                        message.youtubeVideo = $root.multiverse.YouTubeVideo.decode(reader, reader.uint32());
                         break;
                     }
                 case 949521667: {
@@ -1513,6 +2096,16 @@ $root.multiverse = (function() {
                         return "githubRepo." + error;
                 }
             }
+            if (message.youtubeVideo != null && message.hasOwnProperty("youtubeVideo")) {
+                if (properties.subject === 1)
+                    return "subject: multiple values";
+                properties.subject = 1;
+                {
+                    var error = $root.multiverse.YouTubeVideo.verify(message.youtubeVideo);
+                    if (error)
+                        return "youtubeVideo." + error;
+                }
+            }
             if (message.starRating != null && message.hasOwnProperty("starRating"))
                 switch (message.starRating) {
                 default:
@@ -1564,6 +2157,11 @@ $root.multiverse = (function() {
                 if (typeof object.githubRepo !== "object")
                     throw TypeError(".multiverse.Rating.githubRepo: object expected");
                 message.githubRepo = $root.multiverse.GitHubRepo.fromObject(object.githubRepo);
+            }
+            if (object.youtubeVideo != null) {
+                if (typeof object.youtubeVideo !== "object")
+                    throw TypeError(".multiverse.Rating.youtubeVideo: object expected");
+                message.youtubeVideo = $root.multiverse.YouTubeVideo.fromObject(object.youtubeVideo);
             }
             switch (object.starRating) {
             default:
@@ -1642,6 +2240,11 @@ $root.multiverse = (function() {
             }
             if (message.starRating != null && message.hasOwnProperty("starRating"))
                 object.starRating = options.enums === String ? $root.multiverse.StarRating[message.starRating] === undefined ? message.starRating : $root.multiverse.StarRating[message.starRating] : message.starRating;
+            if (message.youtubeVideo != null && message.hasOwnProperty("youtubeVideo")) {
+                object.youtubeVideo = $root.multiverse.YouTubeVideo.toObject(message.youtubeVideo, options);
+                if (options.oneofs)
+                    object.subject = "youtubeVideo";
+            }
             return object;
         };
 

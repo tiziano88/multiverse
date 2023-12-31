@@ -1,27 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import { ArticleComponent } from "./components/ArticleComponent";
 import { multiverse } from "./compiled/schema";
+import { UniverseComponent } from "./components/UniverseComponent";
 
 function App() {
-  var article = multiverse.Article.create({
-    uuid: "123",
-    title: "title",
-    body: "body",
-  });
+  const [article, setArticle] = useState<multiverse.IArticle>(
+    multiverse.Article.create({
+      title: "title",
+      body: "body",
+    })
+  );
+  const [universe, setUniverse] = useState<multiverse.IUniverse>(
+    multiverse.Universe.create({})
+  );
+  function saveProto() {
+    console.log(multiverse.Article.encode(article).finish());
+  }
   return (
     <div className="App">
+      <UniverseComponent value={universe} updateValue={(v) => setUniverse(v)} />
       <ArticleComponent
-        article={article}
-        updateArticle={(a) => {
-          article.body = a.body || "";
-          article.title = a.title || "";
-          article.uuid = a.uuid || "";
-          article = article;
-          console.log(article);
+        value={article}
+        updateValue={(a) => {
+          setArticle(a);
+          console.log(a);
         }}
       />
+      <button onClick={saveProto}>Save</button>
     </div>
   );
 }

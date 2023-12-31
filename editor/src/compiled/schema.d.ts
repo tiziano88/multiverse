@@ -3,6 +3,124 @@ import Long = require("long");
 /** Namespace multiverse. */
 export namespace multiverse {
 
+    /** Properties of a PublishedItem. */
+    interface IPublishedItem {
+
+        /** PublishedItem uuid */
+        uuid?: (string|null);
+
+        /** PublishedItem article */
+        article?: (multiverse.IArticle|null);
+
+        /** PublishedItem youtubeVideo */
+        youtubeVideo?: (multiverse.IYouTubeVideo|null);
+
+        /** PublishedItem rating */
+        rating?: (multiverse.IRating|null);
+    }
+
+    /** Represents a PublishedItem. */
+    class PublishedItem implements IPublishedItem {
+
+        /**
+         * Constructs a new PublishedItem.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: multiverse.IPublishedItem);
+
+        /** PublishedItem uuid. */
+        public uuid: string;
+
+        /** PublishedItem article. */
+        public article?: (multiverse.IArticle|null);
+
+        /** PublishedItem youtubeVideo. */
+        public youtubeVideo?: (multiverse.IYouTubeVideo|null);
+
+        /** PublishedItem rating. */
+        public rating?: (multiverse.IRating|null);
+
+        /** PublishedItem item. */
+        public item?: ("article"|"youtubeVideo"|"rating");
+
+        /**
+         * Creates a new PublishedItem instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns PublishedItem instance
+         */
+        public static create(properties?: multiverse.IPublishedItem): multiverse.PublishedItem;
+
+        /**
+         * Encodes the specified PublishedItem message. Does not implicitly {@link multiverse.PublishedItem.verify|verify} messages.
+         * @param message PublishedItem message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: multiverse.IPublishedItem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified PublishedItem message, length delimited. Does not implicitly {@link multiverse.PublishedItem.verify|verify} messages.
+         * @param message PublishedItem message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: multiverse.IPublishedItem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a PublishedItem message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns PublishedItem
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): multiverse.PublishedItem;
+
+        /**
+         * Decodes a PublishedItem message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns PublishedItem
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): multiverse.PublishedItem;
+
+        /**
+         * Verifies a PublishedItem message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a PublishedItem message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns PublishedItem
+         */
+        public static fromObject(object: { [k: string]: any }): multiverse.PublishedItem;
+
+        /**
+         * Creates a plain object from a PublishedItem message. Also converts values to other types if specified.
+         * @param message PublishedItem
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: multiverse.PublishedItem, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this PublishedItem to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for PublishedItem
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
     /** Properties of an Universe. */
     interface IUniverse {
 
@@ -11,6 +129,9 @@ export namespace multiverse {
 
         /** Universe articles */
         articles?: (multiverse.IArticle[]|null);
+
+        /** Universe publishedItems */
+        publishedItems?: (multiverse.IPublishedItem[]|null);
     }
 
     /** Represents an Universe. */
@@ -27,6 +148,9 @@ export namespace multiverse {
 
         /** Universe articles. */
         public articles: multiverse.IArticle[];
+
+        /** Universe publishedItems. */
+        public publishedItems: multiverse.IPublishedItem[];
 
         /**
          * Creates a new Universe instance using the specified properties.
@@ -215,6 +339,103 @@ export namespace multiverse {
 
         /**
          * Gets the default type url for Article
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a YouTubeVideo. */
+    interface IYouTubeVideo {
+
+        /** YouTubeVideo videoId */
+        videoId?: (string|null);
+    }
+
+    /** Represents a YouTubeVideo. */
+    class YouTubeVideo implements IYouTubeVideo {
+
+        /**
+         * Constructs a new YouTubeVideo.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: multiverse.IYouTubeVideo);
+
+        /** YouTubeVideo videoId. */
+        public videoId: string;
+
+        /**
+         * Creates a new YouTubeVideo instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns YouTubeVideo instance
+         */
+        public static create(properties?: multiverse.IYouTubeVideo): multiverse.YouTubeVideo;
+
+        /**
+         * Encodes the specified YouTubeVideo message. Does not implicitly {@link multiverse.YouTubeVideo.verify|verify} messages.
+         * @param message YouTubeVideo message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: multiverse.IYouTubeVideo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified YouTubeVideo message, length delimited. Does not implicitly {@link multiverse.YouTubeVideo.verify|verify} messages.
+         * @param message YouTubeVideo message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: multiverse.IYouTubeVideo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a YouTubeVideo message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns YouTubeVideo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): multiverse.YouTubeVideo;
+
+        /**
+         * Decodes a YouTubeVideo message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns YouTubeVideo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): multiverse.YouTubeVideo;
+
+        /**
+         * Verifies a YouTubeVideo message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a YouTubeVideo message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns YouTubeVideo
+         */
+        public static fromObject(object: { [k: string]: any }): multiverse.YouTubeVideo;
+
+        /**
+         * Creates a plain object from a YouTubeVideo message. Also converts values to other types if specified.
+         * @param message YouTubeVideo
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: multiverse.YouTubeVideo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this YouTubeVideo to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for YouTubeVideo
          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns The default type url
          */
@@ -546,6 +767,9 @@ export namespace multiverse {
         /** Rating githubRepo */
         githubRepo?: (multiverse.IGitHubRepo|null);
 
+        /** Rating youtubeVideo */
+        youtubeVideo?: (multiverse.IYouTubeVideo|null);
+
         /** Rating starRating */
         starRating?: (multiverse.StarRating|null);
     }
@@ -574,11 +798,14 @@ export namespace multiverse {
         /** Rating githubRepo. */
         public githubRepo?: (multiverse.IGitHubRepo|null);
 
+        /** Rating youtubeVideo. */
+        public youtubeVideo?: (multiverse.IYouTubeVideo|null);
+
         /** Rating starRating. */
         public starRating: multiverse.StarRating;
 
         /** Rating subject. */
-        public subject?: ("movie"|"link"|"amazonProduct"|"githubAccount"|"githubRepo");
+        public subject?: ("movie"|"link"|"amazonProduct"|"githubAccount"|"githubRepo"|"youtubeVideo");
 
         /**
          * Creates a new Rating instance using the specified properties.
