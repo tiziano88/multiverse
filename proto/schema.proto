@@ -3,7 +3,7 @@ syntax = "proto3";
 package multiverse;
 
 message PublishedItem {
-    string uuid = 2123198273;
+    string uuid = 2128273;
 
     oneof item {
         Article article = 1728797;
@@ -23,6 +23,7 @@ message Article {
     string title = 2138293;
     string body = 4723948;
     DateTime created_at = 8742394;
+    repeated string test = 218731;
 }
 
 message YouTubeVideo {

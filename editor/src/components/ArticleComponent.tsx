@@ -1,5 +1,6 @@
 import React from "react";
 import { multiverse } from "../compiled/schema";
+import { field_row, field_row_add, type } from "../utils/components";
 
 interface Props {
   value: multiverse.IArticle;
@@ -7,47 +8,74 @@ interface Props {
 }
 
 export const ArticleComponent: React.FC<Props> = ({ value, updateValue }) => {
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    field: string
-  ) => {
+  const addValue = (field: "test") => {
     const encoded = multiverse.Article.encode(value).finish();
     const newValue = multiverse.Article.decode(encoded);
-    if (field === "uuid" || field === "title" || field === "body") {
-      newValue[field] = e.target.value;
-    }
+    newValue[field].push("");
     updateValue(newValue);
   };
 
-  return (
-    <div>
-      <div>
-        uuid
+  const setValueSingle = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    field: "uuid" | "title" | "body"
+  ) => {
+    const encoded = multiverse.Article.encode(value).finish();
+    const newValue = multiverse.Article.decode(encoded);
+    newValue[field] = e.target.value;
+    updateValue(newValue);
+  };
+  const setValueRepeated = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    field: "test",
+    index: number
+  ) => {
+    const encoded = multiverse.Article.encode(value).finish();
+    const newValue = multiverse.Article.decode(encoded);
+    newValue[field][index] = e.target.value;
+    updateValue(newValue);
+  };
+
+  return type("Article", [
+    field_row(
+      "uuid",
+      <input
+        type="text"
+        value={value.uuid || ""}
+        onChange={(e) => setValueSingle(e, "uuid")}
+        placeholder="UUID"
+      />
+    ),
+    field_row(
+      "title",
+      <input
+        type="text"
+        value={value.title || ""}
+        onChange={(e) => setValueSingle(e, "title")}
+        placeholder="title"
+      />
+    ),
+    field_row(
+      "content",
+      <input
+        type="text"
+        value={value.body || ""}
+        onChange={(e) => setValueSingle(e, "body")}
+        placeholder="body"
+      />
+    ),
+    ...(value.test || []).map((v, i) =>
+      field_row(
+        "test",
         <input
           type="text"
-          value={value.uuid || ""}
-          onChange={(e) => handleChange(e, "uuid")}
-          placeholder="UUID"
+          value={v || ""}
+          onChange={(e) => setValueRepeated(e, "test", i)}
+          placeholder="test"
         />
-      </div>
-      <div>
-        title
-        <input
-          type="text"
-          value={value.title || ""}
-          onChange={(e) => handleChange(e, "title")}
-          placeholder="Title"
-        />
-      </div>
-      <div>
-        content
-        <input
-          type="text"
-          value={value.body || ""}
-          onChange={(e) => handleChange(e, "body")}
-          placeholder="Content"
-        />
-      </div>
-    </div>
-  );
+      )
+    ),
+    field_row_add("test", () => {
+      addValue("test");
+    }),
+  ]);
 };

@@ -122,7 +122,7 @@ $root.multiverse = (function() {
             if (message.article != null && Object.hasOwnProperty.call(message, "article"))
                 $root.multiverse.Article.encode(message.article, writer.uint32(/* id 1728797, wireType 2 =*/13830378).fork()).ldelim();
             if (message.uuid != null && Object.hasOwnProperty.call(message, "uuid"))
-                writer.uint32(/* id 512585537, wireType 2 =*/4100684298).string(message.uuid);
+                writer.uint32(/* id 2128273, wireType 2 =*/17026186).string(message.uuid);
             return writer;
         };
 
@@ -157,7 +157,7 @@ $root.multiverse = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 2123198273: {
+                case 2128273: {
                         message.uuid = reader.string();
                         break;
                     }
@@ -662,6 +662,7 @@ $root.multiverse = (function() {
          * @property {string|null} [title] Article title
          * @property {string|null} [body] Article body
          * @property {multiverse.IDateTime|null} [createdAt] Article createdAt
+         * @property {Array.<string>|null} [test] Article test
          */
 
         /**
@@ -673,6 +674,7 @@ $root.multiverse = (function() {
          * @param {multiverse.IArticle=} [properties] Properties to set
          */
         function Article(properties) {
+            this.test = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -712,6 +714,14 @@ $root.multiverse = (function() {
         Article.prototype.createdAt = null;
 
         /**
+         * Article test.
+         * @member {Array.<string>} test
+         * @memberof multiverse.Article
+         * @instance
+         */
+        Article.prototype.test = $util.emptyArray;
+
+        /**
          * Creates a new Article instance using the specified properties.
          * @function create
          * @memberof multiverse.Article
@@ -735,6 +745,9 @@ $root.multiverse = (function() {
         Article.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
+            if (message.test != null && message.test.length)
+                for (var i = 0; i < message.test.length; ++i)
+                    writer.uint32(/* id 218731, wireType 2 =*/1749850).string(message.test[i]);
             if (message.title != null && Object.hasOwnProperty.call(message, "title"))
                 writer.uint32(/* id 2138293, wireType 2 =*/17106346).string(message.title);
             if (message.body != null && Object.hasOwnProperty.call(message, "body"))
@@ -793,6 +806,12 @@ $root.multiverse = (function() {
                         message.createdAt = $root.multiverse.DateTime.decode(reader, reader.uint32());
                         break;
                     }
+                case 218731: {
+                        if (!(message.test && message.test.length))
+                            message.test = [];
+                        message.test.push(reader.string());
+                        break;
+                    }
                 default:
                     reader.skipType(tag & 7);
                     break;
@@ -842,6 +861,13 @@ $root.multiverse = (function() {
                 if (error)
                     return "createdAt." + error;
             }
+            if (message.test != null && message.hasOwnProperty("test")) {
+                if (!Array.isArray(message.test))
+                    return "test: array expected";
+                for (var i = 0; i < message.test.length; ++i)
+                    if (!$util.isString(message.test[i]))
+                        return "test: string[] expected";
+            }
             return null;
         };
 
@@ -868,6 +894,13 @@ $root.multiverse = (function() {
                     throw TypeError(".multiverse.Article.createdAt: object expected");
                 message.createdAt = $root.multiverse.DateTime.fromObject(object.createdAt);
             }
+            if (object.test) {
+                if (!Array.isArray(object.test))
+                    throw TypeError(".multiverse.Article.test: array expected");
+                message.test = [];
+                for (var i = 0; i < object.test.length; ++i)
+                    message.test[i] = String(object.test[i]);
+            }
             return message;
         };
 
@@ -884,11 +917,18 @@ $root.multiverse = (function() {
             if (!options)
                 options = {};
             var object = {};
+            if (options.arrays || options.defaults)
+                object.test = [];
             if (options.defaults) {
                 object.title = "";
                 object.body = "";
                 object.createdAt = null;
                 object.uuid = "";
+            }
+            if (message.test && message.test.length) {
+                object.test = [];
+                for (var j = 0; j < message.test.length; ++j)
+                    object.test[j] = message.test[j];
             }
             if (message.title != null && message.hasOwnProperty("title"))
                 object.title = message.title;

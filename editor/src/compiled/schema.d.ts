@@ -244,6 +244,9 @@ export namespace multiverse {
 
         /** Article createdAt */
         createdAt?: (multiverse.IDateTime|null);
+
+        /** Article test */
+        test?: (string[]|null);
     }
 
     /** Represents an Article. */
@@ -266,6 +269,9 @@ export namespace multiverse {
 
         /** Article createdAt. */
         public createdAt?: (multiverse.IDateTime|null);
+
+        /** Article test. */
+        public test: string[];
 
         /**
          * Creates a new Article instance using the specified properties.
