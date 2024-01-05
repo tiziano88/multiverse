@@ -348,6 +348,7 @@ $root.multiverse = (function() {
          * @property {Array.<multiverse.IRating>|null} [ratings] Universe ratings
          * @property {Array.<multiverse.IArticle>|null} [articles] Universe articles
          * @property {Array.<multiverse.IPublishedItem>|null} [publishedItems] Universe publishedItems
+         * @property {multiverse.IArticle|null} [singleArticle] Universe singleArticle
          */
 
         /**
@@ -393,6 +394,14 @@ $root.multiverse = (function() {
         Universe.prototype.publishedItems = $util.emptyArray;
 
         /**
+         * Universe singleArticle.
+         * @member {multiverse.IArticle|null|undefined} singleArticle
+         * @memberof multiverse.Universe
+         * @instance
+         */
+        Universe.prototype.singleArticle = null;
+
+        /**
          * Creates a new Universe instance using the specified properties.
          * @function create
          * @memberof multiverse.Universe
@@ -422,6 +431,8 @@ $root.multiverse = (function() {
             if (message.publishedItems != null && message.publishedItems.length)
                 for (var i = 0; i < message.publishedItems.length; ++i)
                     $root.multiverse.PublishedItem.encode(message.publishedItems[i], writer.uint32(/* id 625362, wireType 2 =*/5002898).fork()).ldelim();
+            if (message.singleArticle != null && Object.hasOwnProperty.call(message, "singleArticle"))
+                $root.multiverse.Article.encode(message.singleArticle, writer.uint32(/* id 721873, wireType 2 =*/5774986).fork()).ldelim();
             if (message.articles != null && message.articles.length)
                 for (var i = 0; i < message.articles.length; ++i)
                     $root.multiverse.Article.encode(message.articles[i], writer.uint32(/* id 1278123, wireType 2 =*/10224986).fork()).ldelim();
@@ -475,6 +486,10 @@ $root.multiverse = (function() {
                         if (!(message.publishedItems && message.publishedItems.length))
                             message.publishedItems = [];
                         message.publishedItems.push($root.multiverse.PublishedItem.decode(reader, reader.uint32()));
+                        break;
+                    }
+                case 721873: {
+                        message.singleArticle = $root.multiverse.Article.decode(reader, reader.uint32());
                         break;
                     }
                 default:
@@ -539,6 +554,11 @@ $root.multiverse = (function() {
                         return "publishedItems." + error;
                 }
             }
+            if (message.singleArticle != null && message.hasOwnProperty("singleArticle")) {
+                var error = $root.multiverse.Article.verify(message.singleArticle);
+                if (error)
+                    return "singleArticle." + error;
+            }
             return null;
         };
 
@@ -584,6 +604,11 @@ $root.multiverse = (function() {
                     message.publishedItems[i] = $root.multiverse.PublishedItem.fromObject(object.publishedItems[i]);
                 }
             }
+            if (object.singleArticle != null) {
+                if (typeof object.singleArticle !== "object")
+                    throw TypeError(".multiverse.Universe.singleArticle: object expected");
+                message.singleArticle = $root.multiverse.Article.fromObject(object.singleArticle);
+            }
             return message;
         };
 
@@ -605,6 +630,8 @@ $root.multiverse = (function() {
                 object.publishedItems = [];
                 object.articles = [];
             }
+            if (options.defaults)
+                object.singleArticle = null;
             if (message.ratings && message.ratings.length) {
                 object.ratings = [];
                 for (var j = 0; j < message.ratings.length; ++j)
@@ -615,6 +642,8 @@ $root.multiverse = (function() {
                 for (var j = 0; j < message.publishedItems.length; ++j)
                     object.publishedItems[j] = $root.multiverse.PublishedItem.toObject(message.publishedItems[j], options);
             }
+            if (message.singleArticle != null && message.hasOwnProperty("singleArticle"))
+                object.singleArticle = $root.multiverse.Article.toObject(message.singleArticle, options);
             if (message.articles && message.articles.length) {
                 object.articles = [];
                 for (var j = 0; j < message.articles.length; ++j)

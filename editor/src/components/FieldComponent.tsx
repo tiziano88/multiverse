@@ -1,7 +1,4 @@
-import React, { Children } from "react";
-import { multiverse } from "../compiled/schema";
-import { PublishedItemComponent } from "./PublishedItemComponent";
-import { generateId } from "../utils/utils";
+import React from "react";
 
 interface Props {
   label: string;

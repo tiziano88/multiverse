@@ -112,32 +112,33 @@ export function repeated_field<
     });
   }
   const elements: ReactNode[] = value.map((v, i) =>
-    component({
-      value: v,
-      updateValue: (v) => {
-        let newValue = clone_proto(parentProtoClass, parent);
-        const oldChildren = fieldLens.get(parent) || [];
-        oldChildren[i] = v;
-        newValue = fieldLens.set(oldChildren)(parent);
-        updateParent(newValue);
-      },
-    })
+    field_row(
+      name,
+      component({
+        value: v,
+        updateValue: (v) => {
+          let newValue = clone_proto(parentProtoClass, parent);
+          const oldChildren = fieldLens.get(parent) || [];
+          oldChildren[i] = v;
+          newValue = fieldLens.set(oldChildren)(parent);
+          updateParent(newValue);
+        },
+      })
+    )
   );
   return (
     <div>
-      {field_row(name, elements, () => {
-        let newValue = clone_proto(parentProtoClass, parent);
-        newValue = fieldLens.set([] as ChildValue[])(parent);
-        updateParent(newValue);
-      })}
-      {field_row_add(name, () => {
-        let newValue = clone_proto(parentProtoClass, parent);
-        const oldChildren = fieldLens.get(parent) || [];
-        const newChild = childFactory();
-        const newChildren = [...oldChildren, newChild];
-        newValue = fieldLens.set(newChildren)(parent);
-        updateParent(newValue);
-      })}
+      {[
+        ...elements,
+        field_row_add(name, () => {
+          let newValue = clone_proto(parentProtoClass, parent);
+          const oldChildren = fieldLens.get(parent) || [];
+          const newChild = childFactory();
+          const newChildren = [...oldChildren, newChild];
+          newValue = fieldLens.set(newChildren)(parent);
+          updateParent(newValue);
+        }),
+      ]}
     </div>
   );
 }
@@ -153,7 +154,11 @@ export interface ProtoClass<T> {
 }
 
 export function clone_proto<U, T extends ProtoClass<U>>(c: T, v: U): U {
+  // Deep clone.
   const encoded = c.encode(v).finish();
   const newValue = c.decode(encoded);
   return newValue;
+
+  // Shallow clone.
+  // return { ...v };
 }

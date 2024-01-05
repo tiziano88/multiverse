@@ -132,6 +132,9 @@ export namespace multiverse {
 
         /** Universe publishedItems */
         publishedItems?: (multiverse.IPublishedItem[]|null);
+
+        /** Universe singleArticle */
+        singleArticle?: (multiverse.IArticle|null);
     }
 
     /** Represents an Universe. */
@@ -151,6 +154,9 @@ export namespace multiverse {
 
         /** Universe publishedItems. */
         public publishedItems: multiverse.IPublishedItem[];
+
+        /** Universe singleArticle. */
+        public singleArticle?: (multiverse.IArticle|null);
 
         /**
          * Creates a new Universe instance using the specified properties.

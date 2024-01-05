@@ -16,6 +16,7 @@ message Universe {
     repeated Rating ratings = 521667;
     repeated Article articles = 1278123;
     repeated PublishedItem published_items = 625362;
+    Article single_article = 721873;
 }
 
 message Article {

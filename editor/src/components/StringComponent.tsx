@@ -1,6 +1,4 @@
 import React from "react";
-import { multiverse } from "../compiled/schema";
-import { field_row, field_row_add, type } from "../utils/components";
 
 interface Props {
   value: string;

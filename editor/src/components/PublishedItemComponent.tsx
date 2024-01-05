@@ -1,7 +1,7 @@
 import React from "react";
 import { multiverse } from "../compiled/schema";
 import { ArticleComponent } from "./ArticleComponent";
-import { clone_proto, optional_field, type } from "../utils/components";
+import { optional_field, type } from "../utils/components";
 import { Lens } from "monocle-ts";
 import { StringComponent } from "./StringComponent";
 import { generateId } from "../utils/utils";
