@@ -1,6 +1,14 @@
 import React from "react";
 import { multiverse } from "../compiled/schema";
-import { field_row, field_row_add, type } from "../utils/components";
+import {
+  field_row,
+  field_row_add,
+  optional_field,
+  repeated_field,
+  type,
+} from "../utils/components";
+import { Lens } from "monocle-ts";
+import { StringComponent } from "./StringComponent";
 
 interface Props {
   value: multiverse.IArticle;
@@ -36,46 +44,41 @@ export const ArticleComponent: React.FC<Props> = ({ value, updateValue }) => {
   };
 
   return type("Article", [
-    field_row(
+    optional_field(
+      multiverse.PublishedItem,
       "uuid",
-      <input
-        type="text"
-        value={value.uuid || ""}
-        onChange={(e) => setValueSingle(e, "uuid")}
-        placeholder="UUID"
-      />
+      value,
+      Lens.fromProp<multiverse.IArticle>()("uuid"),
+      updateValue,
+      StringComponent,
+      () => ""
     ),
-    field_row(
+    optional_field(
+      multiverse.PublishedItem,
       "title",
-      <input
-        type="text"
-        value={value.title || ""}
-        onChange={(e) => setValueSingle(e, "title")}
-        placeholder="title"
-      />
+      value,
+      Lens.fromProp<multiverse.IArticle>()("title"),
+      updateValue,
+      StringComponent,
+      () => ""
     ),
-    field_row(
+    optional_field(
+      multiverse.PublishedItem,
       "content",
-      <input
-        type="text"
-        value={value.body || ""}
-        onChange={(e) => setValueSingle(e, "body")}
-        placeholder="body"
-      />
+      value,
+      Lens.fromProp<multiverse.IArticle>()("body"),
+      updateValue,
+      StringComponent,
+      () => ""
     ),
-    ...(value.test || []).map((v, i) =>
-      field_row(
-        "test",
-        <input
-          type="text"
-          value={v || ""}
-          onChange={(e) => setValueRepeated(e, "test", i)}
-          placeholder="test"
-        />
-      )
+    repeated_field(
+      multiverse.PublishedItem,
+      "test",
+      value,
+      Lens.fromProp<multiverse.IArticle>()("test"),
+      updateValue,
+      StringComponent,
+      () => ""
     ),
-    field_row_add("test", () => {
-      addValue("test");
-    }),
   ]);
 };
