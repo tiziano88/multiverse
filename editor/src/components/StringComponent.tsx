@@ -1,15 +1,14 @@
 import React from "react";
+import { Props } from "../utils/components";
 
-interface Props {
-  value: string;
-  updateValue: (updatedValue: string) => void;
-}
-
-export const StringComponent: React.FC<Props> = ({ value, updateValue }) => {
+export const StringComponent: React.FC<Props<string>> = ({
+  value,
+  updateValue,
+}) => {
   return (
     <input
       type="text"
-      value={value}
+      value={value || ""}
       onChange={(e) => updateValue(e.target.value)}
       placeholder="---"
     />

@@ -1,3 +1,4 @@
+import { ChildProcess } from "child_process";
 import { Lens } from "monocle-ts";
 import { Writer } from "protobufjs";
 import { ReactElement, ReactNode } from "react";
@@ -46,41 +47,36 @@ export function field_row_add(name: string, addItem: () => void): ReactElement {
 
 // Parent -> Child
 export function optional_field<
-  ParentClass extends ProtoClass<ParentValue>,
   ParentValue,
-  ChildValue
+  FieldName extends keyof ParentValue,
+  ChildValue extends ParentValue[FieldName]
 >(
-  parentProtoClass: ParentClass,
   name: string,
   parent: ParentValue,
-  fieldLens: Lens<ParentValue, ChildValue | null | undefined>,
+  fieldName: FieldName,
   updateParent: (value: ParentValue) => void,
-  component: React.FC<{
-    value: ChildValue;
-    updateValue: (value: ChildValue) => void;
-  }>,
+  component: React.FC<Props<NonNullable<ParentValue[FieldName]>>>,
   childFactory: () => ChildValue
 ): ReactElement {
-  const value = fieldLens.get(parent);
+  const value = parent[fieldName];
+  // Ensure that the type of the value is correct.
+
   if (value === null || value === undefined) {
     return field_row_add(name, () => {
-      let newValue = clone_proto(parentProtoClass, parent);
-      newValue = fieldLens.set(childFactory())(parent);
+      const newValue = { [fieldName]: childFactory(), ...parent };
       updateParent(newValue);
     });
   }
   const element: ReactNode = component({
-    value,
+    value: value,
     updateValue: (v) => {
-      let newValue = clone_proto(parentProtoClass, parent);
-      newValue = fieldLens.set(v)(parent);
+      const newValue = { [fieldName]: v, ...parent };
       console.log("newValue", newValue);
       updateParent(newValue);
     },
   });
   return field_row(name, element, () => {
-    let newValue = clone_proto(parentProtoClass, parent);
-    newValue = fieldLens.set(null as ChildValue)(parent);
+    const newValue = { [fieldName]: childFactory(), ...parent };
     updateParent(newValue);
   });
 }
@@ -96,10 +92,7 @@ export function repeated_field<
   parent: ParentValue,
   fieldLens: Lens<ParentValue, ChildValue[] | null | undefined>,
   updateParent: (value: ParentValue) => void,
-  component: React.FC<{
-    value: ChildValue;
-    updateValue: (value: ChildValue) => void;
-  }>,
+  component: React.FC<Props<ChildValue>>,
   childFactory: () => ChildValue
 ): ReactElement {
   const value = fieldLens.get(parent);
@@ -144,8 +137,8 @@ export function repeated_field<
 }
 
 export interface Props<T> {
-  value: T | null | undefined;
-  setValue: (value: T) => void;
+  value: T;
+  updateValue: (value: T) => void;
 }
 
 export interface ProtoClass<T> {
@@ -153,9 +146,12 @@ export interface ProtoClass<T> {
   decode(bytes: Uint8Array): T;
 }
 
-export function clone_proto<U, T extends ProtoClass<U>>(c: T, v: U): U {
+export function clone_proto<U, T extends ProtoClass<U>>(
+  c: T,
+  v: U | null | undefined
+): U {
   // Deep clone.
-  const encoded = c.encode(v).finish();
+  const encoded = v ? c.encode(v).finish() : new Uint8Array();
   const newValue = c.decode(encoded);
   return newValue;
 
