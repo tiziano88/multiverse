@@ -63,20 +63,20 @@ export function optional_field<
 
   if (value === null || value === undefined) {
     return field_row_add(name, () => {
-      const newValue = { [fieldName]: childFactory(), ...parent };
+      const newValue = { ...parent, [fieldName]: childFactory() };
       updateParent(newValue);
     });
   }
   const element: ReactNode = component({
     value: value,
     updateValue: (v) => {
-      const newValue = { [fieldName]: v, ...parent };
+      const newValue = { ...parent, [fieldName]: v };
       console.log("newValue", newValue);
       updateParent(newValue);
     },
   });
   return field_row(name, element, () => {
-    const newValue = { [fieldName]: childFactory(), ...parent };
+    const newValue = { ...parent, [fieldName]: childFactory() };
     updateParent(newValue);
   });
 }
