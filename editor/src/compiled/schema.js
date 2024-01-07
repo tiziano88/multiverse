@@ -2007,16 +2007,16 @@ $root.multiverse = (function() {
                 writer = $Writer.create();
             if (message.amazonProduct != null && Object.hasOwnProperty.call(message, "amazonProduct"))
                 $root.multiverse.AmazonProduct.encode(message.amazonProduct, writer.uint32(/* id 387423, wireType 2 =*/3099386).fork()).ldelim();
+            if (message.starRating != null && Object.hasOwnProperty.call(message, "starRating"))
+                writer.uint32(/* id 521667, wireType 0 =*/4173336).int32(message.starRating);
             if (message.movie != null && Object.hasOwnProperty.call(message, "movie"))
-                $root.multiverse.Movie.encode(message.movie, writer.uint32(/* id 7244351, wireType 2 =*/57954810).fork()).ldelim();
+                $root.multiverse.Movie.encode(message.movie, writer.uint32(/* id 724351, wireType 2 =*/5794810).fork()).ldelim();
             if (message.githubAccount != null && Object.hasOwnProperty.call(message, "githubAccount"))
                 $root.multiverse.GitHubAccount.encode(message.githubAccount, writer.uint32(/* id 9384723, wireType 2 =*/75077786).fork()).ldelim();
             if (message.link != null && Object.hasOwnProperty.call(message, "link"))
                 $root.multiverse.Link.encode(message.link, writer.uint32(/* id 32847932, wireType 2 =*/262783458).fork()).ldelim();
             if (message.githubRepo != null && Object.hasOwnProperty.call(message, "githubRepo"))
                 $root.multiverse.GitHubRepo.encode(message.githubRepo, writer.uint32(/* id 91890915, wireType 2 =*/735127322).fork()).ldelim();
-            if (message.starRating != null && Object.hasOwnProperty.call(message, "starRating"))
-                writer.uint32(/* id 412650755, wireType 0 =*/3301206040).int32(message.starRating);
             if (message.youtubeVideo != null && Object.hasOwnProperty.call(message, "youtubeVideo"))
                 $root.multiverse.YouTubeVideo.encode(message.youtubeVideo, writer.uint32(/* id 445860325, wireType 2 =*/3566882602).fork()).ldelim();
             return writer;
@@ -2053,7 +2053,7 @@ $root.multiverse = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 7244351: {
+                case 724351: {
                         message.movie = $root.multiverse.Movie.decode(reader, reader.uint32());
                         break;
                     }
@@ -2077,7 +2077,7 @@ $root.multiverse = (function() {
                         message.youtubeVideo = $root.multiverse.YouTubeVideo.decode(reader, reader.uint32());
                         break;
                     }
-                case 949521667: {
+                case 521667: {
                         message.starRating = reader.int32();
                         break;
                     }
@@ -2287,6 +2287,8 @@ $root.multiverse = (function() {
                 if (options.oneofs)
                     object.subject = "amazonProduct";
             }
+            if (message.starRating != null && message.hasOwnProperty("starRating"))
+                object.starRating = options.enums === String ? $root.multiverse.StarRating[message.starRating] === undefined ? message.starRating : $root.multiverse.StarRating[message.starRating] : message.starRating;
             if (message.movie != null && message.hasOwnProperty("movie")) {
                 object.movie = $root.multiverse.Movie.toObject(message.movie, options);
                 if (options.oneofs)
@@ -2307,8 +2309,6 @@ $root.multiverse = (function() {
                 if (options.oneofs)
                     object.subject = "githubRepo";
             }
-            if (message.starRating != null && message.hasOwnProperty("starRating"))
-                object.starRating = options.enums === String ? $root.multiverse.StarRating[message.starRating] === undefined ? message.starRating : $root.multiverse.StarRating[message.starRating] : message.starRating;
             if (message.youtubeVideo != null && message.hasOwnProperty("youtubeVideo")) {
                 object.youtubeVideo = $root.multiverse.YouTubeVideo.toObject(message.youtubeVideo, options);
                 if (options.oneofs)
@@ -2606,7 +2606,7 @@ $root.multiverse = (function() {
             if (!writer)
                 writer = $Writer.create();
             if (message.imdbId != null && Object.hasOwnProperty.call(message, "imdbId"))
-                writer.uint32(/* id 412650755, wireType 2 =*/3301206042).string(message.imdbId);
+                writer.uint32(/* id 941667, wireType 2 =*/7533338).string(message.imdbId);
             return writer;
         };
 
@@ -2641,7 +2641,7 @@ $root.multiverse = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 949521667: {
+                case 941667: {
                         message.imdbId = reader.string();
                         break;
                     }

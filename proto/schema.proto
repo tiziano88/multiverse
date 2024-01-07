@@ -57,14 +57,14 @@ enum StarRating {
 
 message Rating {
     oneof subject {
-        Movie movie = 7244351;
+        Movie movie = 724351;
         Link link = 32847932;
         AmazonProduct amazon_product = 387423;
         GitHubAccount github_account = 9384723;
         GitHubRepo github_repo = 628761827;
         YouTubeVideo youtube_video = 982731237;
     }
-    StarRating star_rating = 949521667;
+    StarRating star_rating = 521667;
 }
 
 message AmazonProduct {
@@ -76,7 +76,7 @@ message Movie {
     // e.g. tt0111161 for "The Shawshank Redemption" https://www.imdb.com/title/tt0111161/
     // e.g. tt0068646 for "The Godfather" https://www.imdb.com/title/tt0068646/
     // e.g. tt0468569 for "The Dark Knight" https://www.imdb.com/title/tt0468569/
-    string imdb_id = 949521667;
+    string imdb_id = 941667;
 }
 
 message GitHubAccount {
