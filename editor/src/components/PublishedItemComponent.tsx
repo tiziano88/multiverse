@@ -1,5 +1,6 @@
 import { multiverse } from "../compiled/schema";
 import { FieldEditor, Props, optional_field, type } from "../utils/components";
+import { RatingComponent } from "./RatingComponent";
 import { StringComponent } from "./StringComponent";
 
 export const PublishedItemComponent: FieldEditor<multiverse.IPublishedItem> = ({
@@ -15,17 +16,13 @@ export const PublishedItemComponent: FieldEditor<multiverse.IPublishedItem> = ({
       StringComponent,
       () => ""
     ),
-    // optional_field(
-    //   multiverse.PublishedItem,
-    //   "article",
-    //   value,
-    //   "article",
-    //   updateValue,
-    //   ArticleComponent,
-    //   () =>
-    //     multiverse.Article.create({
-    //       uuid: generateId(),
-    //     })
-    // ),
+    optional_field(
+      "rating",
+      value,
+      "rating",
+      updateValue,
+      RatingComponent,
+      () => multiverse.Rating.create({})
+    ),
   ]);
 };

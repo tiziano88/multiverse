@@ -7,6 +7,7 @@ import {
 } from "../utils/components";
 import { generateId } from "../utils/utils";
 import { ArticleComponent } from "./ArticleComponent";
+import { PublishedItemComponent } from "./PublishedItemComponent";
 
 export const UniverseComponent: FieldEditor<multiverse.IUniverse> = ({
   value,
@@ -32,6 +33,17 @@ export const UniverseComponent: FieldEditor<multiverse.IUniverse> = ({
       ArticleComponent,
       () =>
         multiverse.Article.create({
+          uuid: generateId(),
+        })
+    ),
+    repeated_field(
+      "published_items",
+      value,
+      "publishedItems",
+      updateValue,
+      PublishedItemComponent,
+      () =>
+        multiverse.PublishedItem.create({
           uuid: generateId(),
         })
     ),

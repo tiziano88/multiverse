@@ -1,7 +1,7 @@
 import React from "react";
-import { Props } from "../utils/components";
+import { FieldEditor } from "../utils/components";
 
-export const StringComponent: React.FC<Props<string>> = ({
+export const StringComponent: FieldEditor<string> = ({
   value,
   updateValue,
 }) => {
