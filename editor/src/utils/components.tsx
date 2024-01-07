@@ -1,7 +1,8 @@
 import { ChildProcess } from "child_process";
 import { Lens } from "monocle-ts";
-import { Writer } from "protobufjs";
+import { Field, Writer } from "protobufjs";
 import { ReactElement, ReactNode } from "react";
+import { multiverse } from "../compiled/schema";
 
 export function field_row(
   name: string,
@@ -59,7 +60,6 @@ export function optional_field<
   childFactory: () => ChildValue
 ): ReactElement {
   const value = parent[fieldName];
-  // Ensure that the type of the value is correct.
 
   if (value === null || value === undefined) {
     return field_row_add(name, () => {
@@ -81,39 +81,76 @@ export function optional_field<
   });
 }
 
+type RepeatedFields<T> = {
+  [K in keyof T]: T[K] extends Array<any> | null | undefined
+    ? T[K] | null
+    : never;
+  // [K in keyof T as NonNullable<T[K]> extends Array<any> ? K : never]:
+  //   | NonNullable<T[K]>
+  //   | never;
+};
+
+type IfArray<T> = T extends Array<infer U> ? U : never;
+
+type Foo = {
+  a: string;
+  b: string[] | null;
+  c?: string[] | null;
+};
+
+type X = RepeatedFields<Foo>;
+type Y = RepeatedFields<multiverse.IUniverse>;
+type Z = RepeatedFields<Thing>;
+
+type Thing = {
+  a: number;
+  b: string;
+  c: number[];
+  d: string[];
+  e?: number[]; // Optional array
+};
+
+type InnerType<T> = T extends Array<infer U> ? U : never;
+
 // Parent -> Child[]
 export function repeated_field<
-  ParentClass extends ProtoClass<ParentValue>,
   ParentValue,
-  ChildValue
+  FieldName extends keyof ParentValue,
+  ChildValue extends InnerType<ParentValue[FieldName]>
 >(
-  parentProtoClass: ParentClass,
   name: string,
   parent: ParentValue,
-  fieldLens: Lens<ParentValue, ChildValue[] | null | undefined>,
+  fieldName: FieldName,
   updateParent: (value: ParentValue) => void,
-  component: React.FC<Props<ChildValue>>,
+  component: React.FC<Props<NonNullable<InnerType<ParentValue[FieldName]>>>>,
   childFactory: () => ChildValue
 ): ReactElement {
-  const value = fieldLens.get(parent);
+  const value = Array.isArray(parent[fieldName])
+    ? (parent[fieldName] as Array<NonNullable<ChildValue>>)
+    : [];
+
   if (value === null || value === undefined || value.length === 0) {
     return field_row_add(name, () => {
-      let newValue = clone_proto(parentProtoClass, parent);
-      const newChild = childFactory();
-      newValue = fieldLens.set([newChild])(parent);
+      console.log("repeated field row add");
+      const newValue = { ...parent, [fieldName]: [childFactory()] };
       updateParent(newValue);
     });
   }
-  const elements: ReactNode[] = value.map((v, i) =>
+  const elements: ReactNode[] = value.map((v: NonNullable<ChildValue>, i) =>
     field_row(
       name,
       component({
         value: v,
         updateValue: (v) => {
-          let newValue = clone_proto(parentProtoClass, parent);
-          const oldChildren = fieldLens.get(parent) || [];
-          oldChildren[i] = v;
-          newValue = fieldLens.set(oldChildren)(parent);
+          const previousChildren = Array.isArray(parent[fieldName])
+            ? (parent[fieldName] as Array<NonNullable<ChildValue>>)
+            : [];
+          // TODO: fix this hack.
+          (previousChildren[i] as any) = v;
+          const newValue = {
+            ...parent,
+            [fieldName]: previousChildren,
+          };
           updateParent(newValue);
         },
       })
@@ -124,11 +161,14 @@ export function repeated_field<
       {[
         ...elements,
         field_row_add(name, () => {
-          let newValue = clone_proto(parentProtoClass, parent);
-          const oldChildren = fieldLens.get(parent) || [];
-          const newChild = childFactory();
-          const newChildren = [...oldChildren, newChild];
-          newValue = fieldLens.set(newChildren)(parent);
+          console.log("repeated update");
+          const previousChildren = Array.isArray(parent[fieldName])
+            ? (parent[fieldName] as Array<NonNullable<ChildValue>>)
+            : [];
+          const newValue = {
+            ...parent,
+            [fieldName]: [...previousChildren, childFactory()],
+          };
           updateParent(newValue);
         }),
       ]}

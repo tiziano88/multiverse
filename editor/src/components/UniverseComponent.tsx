@@ -27,17 +27,16 @@ export const UniverseComponent: React.FC<Props<multiverse.IUniverse>> = ({
           uuid: generateId(),
         })
     ),
-    // repeated_field(
-    //   multiverse.Universe,
-    //   "publishedItems",
-    //   value,
-    //   Lens.fromProp<multiverse.IUniverse>()("publishedItems"),
-    //   updateValue,
-    //   PublishedItemComponent,
-    //   () =>
-    //     multiverse.PublishedItem.create({
-    //       uuid: generateId(),
-    //     })
-    // ),
+    repeated_field(
+      "articles",
+      value,
+      "articles",
+      updateValue,
+      ArticleComponent,
+      () =>
+        multiverse.Article.create({
+          uuid: generateId(),
+        })
+    ),
   ]);
 };
