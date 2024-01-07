@@ -1,6 +1,4 @@
-import { ChildProcess } from "child_process";
-import { Lens } from "monocle-ts";
-import { Field, Writer } from "protobufjs";
+import { Writer } from "protobufjs";
 import { ReactElement, ReactNode } from "react";
 import { multiverse } from "../compiled/schema";
 
@@ -56,7 +54,7 @@ export function optional_field<
   parent: ParentValue,
   fieldName: FieldName,
   updateParent: (value: ParentValue) => void,
-  component: React.FC<Props<NonNullable<ParentValue[FieldName]>>>,
+  component: FieldEditor<NonNullable<ParentValue[FieldName]>>,
   childFactory: () => ChildValue
 ): ReactElement {
   const value = parent[fieldName];
@@ -122,7 +120,7 @@ export function repeated_field<
   parent: ParentValue,
   fieldName: FieldName,
   updateParent: (value: ParentValue) => void,
-  component: React.FC<Props<NonNullable<InnerType<ParentValue[FieldName]>>>>,
+  component: FieldEditor<NonNullable<InnerType<ParentValue[FieldName]>>>,
   childFactory: () => ChildValue
 ): ReactElement {
   const value = Array.isArray(parent[fieldName])
@@ -198,3 +196,5 @@ export function clone_proto<U, T extends ProtoClass<U>>(
   // Shallow clone.
   // return { ...v };
 }
+
+export interface FieldEditor<T> extends React.FC<Props<T>> {}

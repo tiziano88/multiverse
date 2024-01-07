@@ -1,15 +1,8 @@
-import React from "react";
 import { multiverse } from "../compiled/schema";
-import {
-  Props,
-  optional_field,
-  repeated_field,
-  type,
-} from "../utils/components";
-import { Lens } from "monocle-ts";
+import { FieldEditor, optional_field, type } from "../utils/components";
 import { StringComponent } from "./StringComponent";
 
-export const ArticleComponent: React.FC<Props<multiverse.IArticle>> = ({
+export const ArticleComponent: FieldEditor<multiverse.IArticle> = ({
   value,
   updateValue,
 }) => {
