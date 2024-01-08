@@ -14,28 +14,6 @@ export const UniverseComponent: FieldEditor<multiverse.IUniverse> = ({
   updateValue,
 }) => {
   return type("Universe", [
-    optional_field(
-      "single_article",
-      value,
-      "singleArticle",
-      updateValue,
-      ArticleComponent,
-      () =>
-        multiverse.Article.create({
-          uuid: generateId(),
-        })
-    ),
-    repeated_field(
-      "articles",
-      value,
-      "articles",
-      updateValue,
-      ArticleComponent,
-      () =>
-        multiverse.Article.create({
-          uuid: generateId(),
-        })
-    ),
     repeated_field(
       "published_items",
       value,

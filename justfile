@@ -7,3 +7,9 @@ proto:
 
 install:
   npm install
+
+build: proto
+  cd ./editor && npm run build
+
+publish: build
+  wrangler pages deploy --project-name=multiverse ./editor/build
