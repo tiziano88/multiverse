@@ -179,22 +179,4 @@ export interface Props<T> {
   updateValue: (value: T) => void;
 }
 
-export interface ProtoClass<T> {
-  encode(message: T): Writer;
-  decode(bytes: Uint8Array): T;
-}
-
-export function clone_proto<U, T extends ProtoClass<U>>(
-  c: T,
-  v: U | null | undefined
-): U {
-  // Deep clone.
-  const encoded = v ? c.encode(v).finish() : new Uint8Array();
-  const newValue = c.decode(encoded);
-  return newValue;
-
-  // Shallow clone.
-  // return { ...v };
-}
-
 export interface FieldEditor<T> extends React.FC<Props<T>> {}
