@@ -1,4 +1,3 @@
-import React from "react";
 import { FieldEditor } from "../utils/components";
 
 export const StringComponent: FieldEditor<string> = ({

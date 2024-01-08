@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect } from "react";
-import { FieldEditor, Props } from "../utils/components";
+import React, { useEffect } from "react";
+import { FieldEditor } from "../utils/components";
 import { multiverse } from "../compiled/schema";
 
 const apiKey = "AIzaSyDvi0p-ecxb8t4FvBZfTghLfrIUaORWh-0";

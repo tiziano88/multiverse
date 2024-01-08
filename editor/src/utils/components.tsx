@@ -57,17 +57,6 @@ interface OptionalFieldProps<
   childFactory: () => ChildValue;
 }
 
-export function optional_field<
-  ParentValue,
-  FieldName extends keyof ParentValue,
-  ChildValue extends ParentValue[FieldName]
->(props: OptionalFieldProps<ParentValue, FieldName, ChildValue>) {
-  return React.createElement(
-    OptionalField<ParentValue, FieldName, ChildValue>,
-    props
-  );
-}
-
 // Parent -> Child
 export function OptionalField<
   ParentValue,
@@ -144,17 +133,6 @@ interface RepeatedFieldProps<
   updateParent: (value: ParentValue) => void;
   component: FieldEditor<NonNullable<InnerType<ParentValue[FieldName]>>>;
   childFactory: () => ChildValue;
-}
-
-export function repeated_field<
-  ParentValue,
-  FieldName extends keyof ParentValue,
-  ChildValue extends InnerType<ParentValue[FieldName]>
->(props: RepeatedFieldProps<ParentValue, FieldName, ChildValue>) {
-  return React.createElement(
-    RepeatedField<ParentValue, FieldName, ChildValue>,
-    props
-  );
 }
 
 // Parent -> Child[]
