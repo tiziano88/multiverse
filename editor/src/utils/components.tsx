@@ -33,11 +33,11 @@ export function type(name: string, rows: ReactElement[]) {
 
 export function field_row_add(name: string, addItem: () => void): ReactElement {
   return (
-    <div className="row">
-      <div className="row-label">{name}</div>
-      <div className="row-value">
-        <button className="button" onClick={addItem}>
-          Add {name}
+    <div className="row flex flex-row">
+      <div className="row-label">
+        {name}
+        <button className="inline-button" onClick={addItem}>
+          +
         </button>
       </div>
     </div>
