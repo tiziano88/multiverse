@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useEffect } from "react";
 import { FieldEditor, Props } from "../utils/components";
 import { multiverse } from "../compiled/schema";
 
@@ -8,21 +8,27 @@ export const MovieComponent: FieldEditor<multiverse.IMovie> = ({
   value,
   updateValue,
 }) => {
-  const [title, setTitle] = React.useState("");
+  console.log("creating MovieComponent", value);
+  const [omdbData, setOmdbData] = React.useState({} as any);
 
-  if (value.imdbId && value.imdbId.length > 5) {
-    console.log("value.imdbId", value.imdbId);
-    // fetch data from OMDB.
-    fetch(`https://www.omdbapi.com/?i=${value.imdbId}&apikey=${ApiKey}`).then(
-      (response) => {
-        response.json().then((data) => {
-          console.log("data", data);
-          setTitle(data.Title);
-        });
-      }
-    );
-    // TODO: Do something with the data.
-  }
+  useEffect(() => {
+    console.log("useEffect");
+    if (value.imdbId && value.imdbId.length > 5) {
+      console.log("value.imdbId", value.imdbId);
+      console.log("fetching data from omdb");
+      // fetch data from OMDB.
+      fetch(`https://www.omdbapi.com/?i=${value.imdbId}&apikey=${ApiKey}`).then(
+        (response) => {
+          response.json().then((data) => {
+            console.log("omdb data", data);
+            // Update the omdbData state variable.
+            setOmdbData(data);
+          });
+        }
+      );
+    }
+  }, [value.imdbId]);
+
   return (
     <div>
       <input
@@ -33,7 +39,8 @@ export const MovieComponent: FieldEditor<multiverse.IMovie> = ({
         }
         placeholder="Movie"
       />
-      <div>{title}</div>
+      <div>{omdbData.Title}</div>
+      <div>{omdbData.Year}</div>
     </div>
   );
 };

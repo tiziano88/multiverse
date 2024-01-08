@@ -11,5 +11,5 @@ install:
 build: proto
   cd ./editor && npm run build
 
-publish: build
-  wrangler pages deploy --project-name=multiverse ./editor/build
+deploy: build
+  wrangler pages deploy --commit-dirty=true --project-name=multiverse ./editor/build

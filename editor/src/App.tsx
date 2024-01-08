@@ -4,6 +4,8 @@ import { multiverse } from "./compiled/schema";
 import { UniverseComponent } from "./components/UniverseComponent";
 
 function App() {
+  console.log("App");
+
   const [universe, setUniverse] = useState<multiverse.IUniverse>(
     multiverse.Universe.create({})
   );

@@ -7,6 +7,7 @@ export const PublishedItemComponent: FieldEditor<multiverse.IPublishedItem> = ({
   value,
   updateValue,
 }) => {
+  console.log("creating PublishedItemComponent", value);
   return type("PublishedItem", [
     optional_field(
       "uuid",
