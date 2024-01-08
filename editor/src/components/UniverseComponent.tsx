@@ -1,3 +1,4 @@
+import React from "react";
 import { multiverse } from "../compiled/schema";
 import {
   FieldEditor,
@@ -14,15 +15,15 @@ export const UniverseComponent: FieldEditor<multiverse.IUniverse> = ({
   updateValue,
 }) => {
   return type("Universe", [
-    repeated_field(
-      value,
-      "publishedItems",
-      updateValue,
-      PublishedItemComponent,
-      () =>
+    repeated_field({
+      parent: value,
+      fieldName: "publishedItems",
+      updateParent: updateValue,
+      component: PublishedItemComponent,
+      childFactory: () =>
         multiverse.PublishedItem.create({
           uuid: generateId(),
-        })
-    ),
+        }),
+    }),
   ]);
 };

@@ -1,6 +1,7 @@
 import { Writer } from "protobufjs";
 import { ReactElement, ReactNode } from "react";
 import { multiverse } from "../compiled/schema";
+import React from "react";
 
 export function field_row(
   name: string,
@@ -44,18 +45,41 @@ export function field_row_add(name: string, addItem: () => void): ReactElement {
   );
 }
 
-// Parent -> Child
+interface OptionalFieldProps<
+  ParentValue,
+  FieldName extends keyof ParentValue,
+  ChildValue extends ParentValue[FieldName]
+> {
+  parent: ParentValue;
+  fieldName: FieldName;
+  updateParent: (value: ParentValue) => void;
+  component: FieldEditor<NonNullable<ParentValue[FieldName]>>;
+  childFactory: () => ChildValue;
+}
+
 export function optional_field<
   ParentValue,
   FieldName extends keyof ParentValue,
   ChildValue extends ParentValue[FieldName]
->(
-  parent: ParentValue,
-  fieldName: FieldName,
-  updateParent: (value: ParentValue) => void,
-  component: FieldEditor<NonNullable<ParentValue[FieldName]>>,
-  childFactory: () => ChildValue
-): ReactElement {
+>(props: OptionalFieldProps<ParentValue, FieldName, ChildValue>) {
+  return React.createElement(
+    OptionalField<ParentValue, FieldName, ChildValue>,
+    props
+  );
+}
+
+// Parent -> Child
+export function OptionalField<
+  ParentValue,
+  FieldName extends keyof ParentValue,
+  ChildValue extends ParentValue[FieldName]
+>({
+  parent,
+  fieldName,
+  updateParent,
+  component,
+  childFactory,
+}: OptionalFieldProps<ParentValue, FieldName, ChildValue>): ReactElement {
   const displayName = fieldName.toString();
   const value = parent[fieldName];
 
@@ -110,18 +134,41 @@ type Thing = {
 
 type InnerType<T> = T extends Array<infer U> ? U : never;
 
-// Parent -> Child[]
+interface RepeatedFieldProps<
+  ParentValue,
+  FieldName extends keyof ParentValue,
+  ChildValue extends InnerType<ParentValue[FieldName]>
+> {
+  parent: ParentValue;
+  fieldName: FieldName;
+  updateParent: (value: ParentValue) => void;
+  component: FieldEditor<NonNullable<InnerType<ParentValue[FieldName]>>>;
+  childFactory: () => ChildValue;
+}
+
 export function repeated_field<
   ParentValue,
   FieldName extends keyof ParentValue,
   ChildValue extends InnerType<ParentValue[FieldName]>
->(
-  parent: ParentValue,
-  fieldName: FieldName,
-  updateParent: (value: ParentValue) => void,
-  component: FieldEditor<NonNullable<InnerType<ParentValue[FieldName]>>>,
-  childFactory: () => ChildValue
-): ReactElement {
+>(props: RepeatedFieldProps<ParentValue, FieldName, ChildValue>) {
+  return React.createElement(
+    RepeatedField<ParentValue, FieldName, ChildValue>,
+    props
+  );
+}
+
+// Parent -> Child[]
+export function RepeatedField<
+  ParentValue,
+  FieldName extends keyof ParentValue,
+  ChildValue extends InnerType<ParentValue[FieldName]>
+>({
+  parent,
+  fieldName,
+  updateParent,
+  component,
+  childFactory,
+}: RepeatedFieldProps<ParentValue, FieldName, ChildValue>): ReactElement {
   const displayName = fieldName.toString();
   const value = Array.isArray(parent[fieldName])
     ? (parent[fieldName] as Array<NonNullable<ChildValue>>)

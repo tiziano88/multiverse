@@ -7,9 +7,27 @@ export const ArticleComponent: FieldEditor<multiverse.IArticle> = ({
   updateValue,
 }) => {
   return type("Article", [
-    optional_field(value, "uuid", updateValue, StringComponent, () => ""),
-    optional_field(value, "title", updateValue, StringComponent, () => ""),
-    optional_field(value, "body", updateValue, StringComponent, () => ""),
+    optional_field({
+      parent: value,
+      fieldName: "uuid",
+      updateParent: updateValue,
+      component: StringComponent,
+      childFactory: () => "",
+    }),
+    optional_field({
+      parent: value,
+      fieldName: "title",
+      updateParent: updateValue,
+      component: StringComponent,
+      childFactory: () => "",
+    }),
+    optional_field({
+      parent: value,
+      fieldName: "body",
+      updateParent: updateValue,
+      component: StringComponent,
+      childFactory: () => "",
+    }),
     // repeated_field(
     //   multiverse.PublishedItem,
     //   "test",
