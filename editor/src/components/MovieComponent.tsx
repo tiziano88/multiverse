@@ -11,9 +11,13 @@ export const MovieComponent: FieldEditor<multiverse.IMovie> = ({
   console.log("creating MovieComponent", value);
   const [omdbData, setOmdbData] = React.useState({} as any);
 
+  const isValidId = (id: string) => {
+    return id.startsWith("tt") && id.length === 9;
+  };
+
   useEffect(() => {
     console.log("useEffect");
-    if (value.imdbId && value.imdbId.length > 5) {
+    if (isValidId(value.imdbId || "")) {
       console.log("value.imdbId", value.imdbId);
       console.log("fetching data from omdb");
       // fetch data from OMDB.
@@ -31,13 +35,14 @@ export const MovieComponent: FieldEditor<multiverse.IMovie> = ({
 
   return (
     <div>
+      IMDB ID:
       <input
         type="text"
         value={value.imdbId || ""}
         onChange={(e) =>
           updateValue(multiverse.Movie.create({ imdbId: e.target.value }))
         }
-        placeholder="Movie"
+        placeholder="IMDB ID"
       />
       <div>{omdbData.Title}</div>
       <div>{omdbData.Year}</div>

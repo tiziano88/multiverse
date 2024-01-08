@@ -11,17 +11,22 @@ export const YoutubeVideoComponent: FieldEditor<multiverse.IYouTubeVideo> = ({
   console.log("creating YoutubeVideo", value);
   const [videoData, setVideoData] = React.useState({} as any);
 
+  // e.g. nRrxt7cVLi8
+  const isValidId = (id: string) => {
+    return id.length === 11;
+  };
+
   useEffect(() => {
     console.log("useEffect");
-    if (value.videoId && value.videoId.length > 5) {
+    if (isValidId(value.videoId || "")) {
       console.log("value.videoId", value.videoId);
       console.log("fetching data from YT");
-      // fetch data from OMDB.
+      // fetch data from YT API.
       fetch(
         `https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${value.videoId}&key=${apiKey}`
       ).then((response) => {
         response.json().then((data) => {
-          console.log("omdb data", data);
+          console.log("YT data", data);
           // Update the state variable.
           setVideoData(data);
         });
@@ -31,6 +36,7 @@ export const YoutubeVideoComponent: FieldEditor<multiverse.IYouTubeVideo> = ({
 
   return (
     <div>
+      YouTube video id:
       <input
         type="text"
         value={value.videoId || ""}
@@ -39,7 +45,7 @@ export const YoutubeVideoComponent: FieldEditor<multiverse.IYouTubeVideo> = ({
             multiverse.YouTubeVideo.create({ videoId: e.target.value })
           )
         }
-        placeholder="Movie"
+        placeholder="YouTube video id"
       />
       <div>
         {videoData &&
