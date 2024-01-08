@@ -2,6 +2,7 @@ import { multiverse } from "../compiled/schema";
 import { FieldEditor, Props, optional_field, type } from "../utils/components";
 import { RatingComponent } from "./RatingComponent";
 import { StringComponent } from "./StringComponent";
+import { YoutubeVideoComponent } from "./YoutubeVideoComponent";
 
 export const PublishedItemComponent: FieldEditor<multiverse.IPublishedItem> = ({
   value,
@@ -24,6 +25,14 @@ export const PublishedItemComponent: FieldEditor<multiverse.IPublishedItem> = ({
       updateValue,
       RatingComponent,
       () => multiverse.Rating.create({})
+    ),
+    optional_field(
+      "youtube_video",
+      value,
+      "youtubeVideo",
+      updateValue,
+      YoutubeVideoComponent,
+      () => multiverse.YouTubeVideo.create({})
     ),
   ]);
 };

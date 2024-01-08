@@ -7,12 +7,19 @@
 }
 
 .row {
-  @apply flex flex-row;
-  @apply border-spacing-1 border-cyan-950 border;
+  @apply bg-cyan-700;
+  @apply p-1;
+  @apply border-spacing-1 border-cyan-950 border rounded-md p-1;
 }
 
 .row-label {
   @apply w-44;
 }
 .row-value {
+  @apply bg-cyan-900;
+  @apply border border-cyan-950 rounded-md p-1;
+}
+
+.type-fields {
+  @apply ml-4;
 }

@@ -25,8 +25,8 @@ export function field_row(
 export function type(name: string, rows: ReactElement[]) {
   return (
     <div className="type">
-      <div className="type-name">{name}</div>
-      {rows}
+      {/* <div className="type-name">{name}</div> */}
+      <div className="type-fields">{rows}</div>
     </div>
   );
 }

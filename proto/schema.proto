@@ -29,6 +29,7 @@ message Article {
 
 message YouTubeVideo {
     // e.g. https://www.youtube.com/watch?v=9bZkp7q19f0
+    // nRrxt7cVLi8
     string video_id = 2372736;
 }
 
