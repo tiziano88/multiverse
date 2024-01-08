@@ -86,10 +86,27 @@ export function OptionalField<
       updateParent(newValue);
     },
   });
-  return field_row(displayName, element, () => {
-    const newValue = { ...parent, [fieldName]: childFactory() };
+
+  const clear = () => {
+    const newValue = { ...parent, [fieldName]: undefined };
     updateParent(newValue);
-  });
+  };
+
+  const removeButton =
+    typeof value === "object" ? (
+      <button className="inline-button" onClick={clear}>
+        X
+      </button>
+    ) : null;
+  return (
+    <div className="row">
+      <div className="row-label">
+        {displayName}
+        {removeButton}
+      </div>
+      <div className="row-value">{element}</div>
+    </div>
+  );
 }
 
 type RepeatedFields<T> = {
