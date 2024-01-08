@@ -10,24 +10,11 @@ export const PublishedItemComponent: FieldEditor<multiverse.IPublishedItem> = ({
 }) => {
   console.log("creating PublishedItemComponent", value);
   return type("PublishedItem", [
-    optional_field(
-      "uuid",
-      value,
-      "uuid",
-      updateValue,
-      StringComponent,
-      () => ""
+    optional_field(value, "uuid", updateValue, StringComponent, () => ""),
+    optional_field(value, "rating", updateValue, RatingComponent, () =>
+      multiverse.Rating.create({})
     ),
     optional_field(
-      "rating",
-      value,
-      "rating",
-      updateValue,
-      RatingComponent,
-      () => multiverse.Rating.create({})
-    ),
-    optional_field(
-      "youtube_video",
       value,
       "youtubeVideo",
       updateValue,

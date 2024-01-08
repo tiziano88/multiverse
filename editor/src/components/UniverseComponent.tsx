@@ -15,7 +15,6 @@ export const UniverseComponent: FieldEditor<multiverse.IUniverse> = ({
 }) => {
   return type("Universe", [
     repeated_field(
-      "published_items",
       value,
       "publishedItems",
       updateValue,

@@ -8,7 +8,7 @@ export const RatingComponent: FieldEditor<multiverse.IRating> = ({
 }) => {
   console.log("creating RatingComponent", value);
   return type("Rating", [
-    optional_field("movie", value, "movie", updateValue, MovieComponent, () =>
+    optional_field(value, "movie", updateValue, MovieComponent, () =>
       multiverse.Movie.create({})
     ),
   ]);

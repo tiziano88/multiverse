@@ -50,17 +50,17 @@ export function optional_field<
   FieldName extends keyof ParentValue,
   ChildValue extends ParentValue[FieldName]
 >(
-  name: string,
   parent: ParentValue,
   fieldName: FieldName,
   updateParent: (value: ParentValue) => void,
   component: FieldEditor<NonNullable<ParentValue[FieldName]>>,
   childFactory: () => ChildValue
 ): ReactElement {
+  const displayName = fieldName.toString();
   const value = parent[fieldName];
 
   if (value === null || value === undefined) {
-    return field_row_add(name, () => {
+    return field_row_add(displayName, () => {
       const newValue = { ...parent, [fieldName]: childFactory() };
       updateParent(newValue);
     });
@@ -73,7 +73,7 @@ export function optional_field<
       updateParent(newValue);
     },
   });
-  return field_row(name, element, () => {
+  return field_row(displayName, element, () => {
     const newValue = { ...parent, [fieldName]: childFactory() };
     updateParent(newValue);
   });
@@ -116,19 +116,19 @@ export function repeated_field<
   FieldName extends keyof ParentValue,
   ChildValue extends InnerType<ParentValue[FieldName]>
 >(
-  name: string,
   parent: ParentValue,
   fieldName: FieldName,
   updateParent: (value: ParentValue) => void,
   component: FieldEditor<NonNullable<InnerType<ParentValue[FieldName]>>>,
   childFactory: () => ChildValue
 ): ReactElement {
+  const displayName = fieldName.toString();
   const value = Array.isArray(parent[fieldName])
     ? (parent[fieldName] as Array<NonNullable<ChildValue>>)
     : [];
 
   if (value === null || value === undefined || value.length === 0) {
-    return field_row_add(name, () => {
+    return field_row_add(displayName, () => {
       console.log("repeated field row add");
       const newValue = { ...parent, [fieldName]: [childFactory()] };
       updateParent(newValue);
@@ -136,7 +136,7 @@ export function repeated_field<
   }
   const elements: ReactNode[] = value.map((v: NonNullable<ChildValue>, i) =>
     field_row(
-      name,
+      displayName,
       component({
         value: v,
         updateValue: (v) => {
@@ -158,7 +158,7 @@ export function repeated_field<
     <div>
       {[
         ...elements,
-        field_row_add(name, () => {
+        field_row_add(displayName, () => {
           console.log("repeated update");
           const previousChildren = Array.isArray(parent[fieldName])
             ? (parent[fieldName] as Array<NonNullable<ChildValue>>)
