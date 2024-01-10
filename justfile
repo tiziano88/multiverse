@@ -19,3 +19,9 @@ build: proto
 
 deploy: build
   wrangler pages deploy --commit-dirty=true --project-name=multiverse ./editor/build
+
+build-viewer: proto
+  cd ./viewer && npm run build
+
+deploy-viewer: build-viewer
+  wrangler pages deploy --commit-dirty=true --project-name=multiverse-viewer-0 ./viewer/build

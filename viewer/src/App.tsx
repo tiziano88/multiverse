@@ -11,36 +11,32 @@ function App() {
   const [universe, setUniverse] = useState<multiverse.IUniverse>(
     multiverse.Universe.create({})
   );
-  function saveProto() {
-    const encoded = multiverse.Universe.encode(universe).finish();
-    console.log(encoded);
-    // Save to local storage, first encode as base64.
-    let s = "";
-    for (let i = 0; i < encoded.length; i++) {
-      s += String.fromCharCode(encoded[i]);
-    }
-    localStorage.setItem("universe", btoa(s));
-    console.log("Saved to local storage.");
-  }
-  function loadProto() {
-    const s = localStorage.getItem("universe");
-    if (!s) {
-      console.log("No universe saved to local storage.");
+
+  async function loadProto() {
+    // fetch from URL.
+    console.log("url", url);
+    if (url === "") {
       return;
     }
-    const decoded = atob(s);
-    const arr = new Uint8Array(decoded.length);
-    for (let i = 0; i < decoded.length; i++) {
-      arr[i] = decoded.charCodeAt(i);
-    }
-    const decodedUniverse = multiverse.Universe.decode(arr);
-    console.log("loaded from local storage");
+    const response = await fetch(url);
+    const content = await response.arrayBuffer();
+    console.log("content", content);
+    // convert to string
+    const s = new TextDecoder("utf-8").decode(content);
+    console.log("s", s);
+
+    const arr = new Uint8Array(content);
+    console.log("content", arr);
+    const decodedUniverse = multiverse.Universe.decode(new Uint8Array(content));
+    console.log("loaded from URL");
     setUniverse(decodedUniverse);
   }
 
+  const currentOrigin = window.location.origin;
+  console.log("currentOrigin", currentOrigin);
   navigator.registerProtocolHandler(
     "web+multiverse",
-    "http://localhost:3000/?url=%s"
+    `${currentOrigin}/?url=%s`
   );
 
   // get url parameter, and use that to populate the input-url.
@@ -55,6 +51,10 @@ function App() {
     }
   });
 
+  useEffect(() => {
+    loadProto();
+  }, [url]);
+
   return (
     <div className="App">
       <div className="text-xl">Viewer</div>
@@ -63,7 +63,9 @@ function App() {
       <button className="button" onClick={loadProto}>
         Load
       </button>
-      <a href="web+multiverse://www.google.com">Try</a>
+      <a href="web+multiverse://raw.githubusercontent.com/tiziano88/universe/main/tiziano88.pb">
+        Try
+      </a>
     </div>
   );
 }
