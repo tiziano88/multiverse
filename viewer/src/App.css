@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.input-url {
+  @apply border border-gray-400 rounded-md p-1;
+}
+
+.button {
+  @apply bg-blue-500 text-white font-bold py-2 px-4 rounded;
+}
+
+.inline-button {
+  @apply bg-blue-500 text-white font-bold py-1 px-1 rounded;
+}
+
+.row {
+  @apply bg-cyan-700;
+  @apply p-1;
+  @apply border-spacing-1 border-cyan-950 border rounded-md p-1;
+}
+
+.row-label {
+  @apply w-44;
+}
+.row-value {
+  @apply bg-cyan-900;
+  @apply border border-cyan-950 rounded-md p-1;
+}
+
+.type-fields {
+  @apply ml-4;
+}
