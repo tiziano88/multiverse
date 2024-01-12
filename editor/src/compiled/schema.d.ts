@@ -121,20 +121,123 @@ export namespace multiverse {
         public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
+    /** Properties of an UniverseDetails. */
+    interface IUniverseDetails {
+
+        /** UniverseDetails name */
+        name?: (string|null);
+
+        /** UniverseDetails description */
+        description?: (multiverse.IContent|null);
+
+        /** UniverseDetails thumbnail */
+        thumbnail?: (multiverse.IImage|null);
+    }
+
+    /** Represents an UniverseDetails. */
+    class UniverseDetails implements IUniverseDetails {
+
+        /**
+         * Constructs a new UniverseDetails.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: multiverse.IUniverseDetails);
+
+        /** UniverseDetails name. */
+        public name: string;
+
+        /** UniverseDetails description. */
+        public description?: (multiverse.IContent|null);
+
+        /** UniverseDetails thumbnail. */
+        public thumbnail?: (multiverse.IImage|null);
+
+        /**
+         * Creates a new UniverseDetails instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns UniverseDetails instance
+         */
+        public static create(properties?: multiverse.IUniverseDetails): multiverse.UniverseDetails;
+
+        /**
+         * Encodes the specified UniverseDetails message. Does not implicitly {@link multiverse.UniverseDetails.verify|verify} messages.
+         * @param message UniverseDetails message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: multiverse.IUniverseDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified UniverseDetails message, length delimited. Does not implicitly {@link multiverse.UniverseDetails.verify|verify} messages.
+         * @param message UniverseDetails message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: multiverse.IUniverseDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes an UniverseDetails message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns UniverseDetails
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): multiverse.UniverseDetails;
+
+        /**
+         * Decodes an UniverseDetails message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns UniverseDetails
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): multiverse.UniverseDetails;
+
+        /**
+         * Verifies an UniverseDetails message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates an UniverseDetails message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns UniverseDetails
+         */
+        public static fromObject(object: { [k: string]: any }): multiverse.UniverseDetails;
+
+        /**
+         * Creates a plain object from an UniverseDetails message. Also converts values to other types if specified.
+         * @param message UniverseDetails
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: multiverse.UniverseDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this UniverseDetails to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for UniverseDetails
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
     /** Properties of an Universe. */
     interface IUniverse {
 
-        /** Universe ratings */
-        ratings?: (multiverse.IRating[]|null);
-
-        /** Universe articles */
-        articles?: (multiverse.IArticle[]|null);
+        /** Universe details */
+        details?: (multiverse.IUniverseDetails|null);
 
         /** Universe publishedItems */
         publishedItems?: (multiverse.IPublishedItem[]|null);
-
-        /** Universe singleArticle */
-        singleArticle?: (multiverse.IArticle|null);
     }
 
     /** Represents an Universe. */
@@ -146,17 +249,11 @@ export namespace multiverse {
          */
         constructor(properties?: multiverse.IUniverse);
 
-        /** Universe ratings. */
-        public ratings: multiverse.IRating[];
-
-        /** Universe articles. */
-        public articles: multiverse.IArticle[];
+        /** Universe details. */
+        public details?: (multiverse.IUniverseDetails|null);
 
         /** Universe publishedItems. */
         public publishedItems: multiverse.IPublishedItem[];
-
-        /** Universe singleArticle. */
-        public singleArticle?: (multiverse.IArticle|null);
 
         /**
          * Creates a new Universe instance using the specified properties.
@@ -551,200 +648,97 @@ export namespace multiverse {
         public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
-    /** Properties of a LinkRating. */
-    interface ILinkRating {
+    /** Properties of a URL. */
+    interface IURL {
 
-        /** LinkRating link */
-        link?: (multiverse.ILink|null);
-
-        /** LinkRating rating */
-        rating?: (multiverse.IRating|null);
-    }
-
-    /** Represents a LinkRating. */
-    class LinkRating implements ILinkRating {
-
-        /**
-         * Constructs a new LinkRating.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: multiverse.ILinkRating);
-
-        /** LinkRating link. */
-        public link?: (multiverse.ILink|null);
-
-        /** LinkRating rating. */
-        public rating?: (multiverse.IRating|null);
-
-        /**
-         * Creates a new LinkRating instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns LinkRating instance
-         */
-        public static create(properties?: multiverse.ILinkRating): multiverse.LinkRating;
-
-        /**
-         * Encodes the specified LinkRating message. Does not implicitly {@link multiverse.LinkRating.verify|verify} messages.
-         * @param message LinkRating message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: multiverse.ILinkRating, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified LinkRating message, length delimited. Does not implicitly {@link multiverse.LinkRating.verify|verify} messages.
-         * @param message LinkRating message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: multiverse.ILinkRating, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a LinkRating message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns LinkRating
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): multiverse.LinkRating;
-
-        /**
-         * Decodes a LinkRating message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns LinkRating
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): multiverse.LinkRating;
-
-        /**
-         * Verifies a LinkRating message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a LinkRating message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns LinkRating
-         */
-        public static fromObject(object: { [k: string]: any }): multiverse.LinkRating;
-
-        /**
-         * Creates a plain object from a LinkRating message. Also converts values to other types if specified.
-         * @param message LinkRating
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: multiverse.LinkRating, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this LinkRating to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-
-        /**
-         * Gets the default type url for LinkRating
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
-    }
-
-    /** Properties of a Link. */
-    interface ILink {
-
-        /** Link url */
+        /** URL url */
         url?: (string|null);
     }
 
-    /** Represents a Link. */
-    class Link implements ILink {
+    /** Represents a URL. */
+    class URL implements IURL {
 
         /**
-         * Constructs a new Link.
+         * Constructs a new URL.
          * @param [properties] Properties to set
          */
-        constructor(properties?: multiverse.ILink);
+        constructor(properties?: multiverse.IURL);
 
-        /** Link url. */
+        /** URL url. */
         public url: string;
 
         /**
-         * Creates a new Link instance using the specified properties.
+         * Creates a new URL instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns Link instance
+         * @returns URL instance
          */
-        public static create(properties?: multiverse.ILink): multiverse.Link;
+        public static create(properties?: multiverse.IURL): multiverse.URL;
 
         /**
-         * Encodes the specified Link message. Does not implicitly {@link multiverse.Link.verify|verify} messages.
-         * @param message Link message or plain object to encode
+         * Encodes the specified URL message. Does not implicitly {@link multiverse.URL.verify|verify} messages.
+         * @param message URL message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: multiverse.ILink, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: multiverse.IURL, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified Link message, length delimited. Does not implicitly {@link multiverse.Link.verify|verify} messages.
-         * @param message Link message or plain object to encode
+         * Encodes the specified URL message, length delimited. Does not implicitly {@link multiverse.URL.verify|verify} messages.
+         * @param message URL message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: multiverse.ILink, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: multiverse.IURL, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a Link message from the specified reader or buffer.
+         * Decodes a URL message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns Link
+         * @returns URL
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): multiverse.Link;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): multiverse.URL;
 
         /**
-         * Decodes a Link message from the specified reader or buffer, length delimited.
+         * Decodes a URL message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns Link
+         * @returns URL
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): multiverse.Link;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): multiverse.URL;
 
         /**
-         * Verifies a Link message.
+         * Verifies a URL message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a Link message from a plain object. Also converts values to their respective internal types.
+         * Creates a URL message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns Link
+         * @returns URL
          */
-        public static fromObject(object: { [k: string]: any }): multiverse.Link;
+        public static fromObject(object: { [k: string]: any }): multiverse.URL;
 
         /**
-         * Creates a plain object from a Link message. Also converts values to other types if specified.
-         * @param message Link
+         * Creates a plain object from a URL message. Also converts values to other types if specified.
+         * @param message URL
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: multiverse.Link, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: multiverse.URL, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this Link to JSON.
+         * Converts this URL to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
 
         /**
-         * Gets the default type url for Link
+         * Gets the default type url for URL
          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns The default type url
          */
@@ -767,8 +761,8 @@ export namespace multiverse {
         /** Rating movie */
         movie?: (multiverse.IMovie|null);
 
-        /** Rating link */
-        link?: (multiverse.ILink|null);
+        /** Rating externalResource */
+        externalResource?: (multiverse.IExternalResource|null);
 
         /** Rating amazonProduct */
         amazonProduct?: (multiverse.IAmazonProduct|null);
@@ -798,8 +792,8 @@ export namespace multiverse {
         /** Rating movie. */
         public movie?: (multiverse.IMovie|null);
 
-        /** Rating link. */
-        public link?: (multiverse.ILink|null);
+        /** Rating externalResource. */
+        public externalResource?: (multiverse.IExternalResource|null);
 
         /** Rating amazonProduct. */
         public amazonProduct?: (multiverse.IAmazonProduct|null);
@@ -817,7 +811,7 @@ export namespace multiverse {
         public starRating: multiverse.StarRating;
 
         /** Rating subject. */
-        public subject?: ("movie"|"link"|"amazonProduct"|"githubAccount"|"githubRepo"|"youtubeVideo");
+        public subject?: ("movie"|"externalResource"|"amazonProduct"|"githubAccount"|"githubRepo"|"youtubeVideo");
 
         /**
          * Creates a new Rating instance using the specified properties.
@@ -1382,6 +1376,818 @@ export namespace multiverse {
 
         /**
          * Gets the default type url for Markdown
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a Content. */
+    interface IContent {
+
+        /** Content markdown */
+        markdown?: (multiverse.IMarkdown|null);
+    }
+
+    /** Represents a Content. */
+    class Content implements IContent {
+
+        /**
+         * Constructs a new Content.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: multiverse.IContent);
+
+        /** Content markdown. */
+        public markdown?: (multiverse.IMarkdown|null);
+
+        /** Content content. */
+        public content?: "markdown";
+
+        /**
+         * Creates a new Content instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns Content instance
+         */
+        public static create(properties?: multiverse.IContent): multiverse.Content;
+
+        /**
+         * Encodes the specified Content message. Does not implicitly {@link multiverse.Content.verify|verify} messages.
+         * @param message Content message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: multiverse.IContent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified Content message, length delimited. Does not implicitly {@link multiverse.Content.verify|verify} messages.
+         * @param message Content message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: multiverse.IContent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a Content message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns Content
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): multiverse.Content;
+
+        /**
+         * Decodes a Content message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns Content
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): multiverse.Content;
+
+        /**
+         * Verifies a Content message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a Content message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns Content
+         */
+        public static fromObject(object: { [k: string]: any }): multiverse.Content;
+
+        /**
+         * Creates a plain object from a Content message. Also converts values to other types if specified.
+         * @param message Content
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: multiverse.Content, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this Content to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for Content
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of an Image. */
+    interface IImage {
+
+        /** Image externalResource */
+        externalResource?: (multiverse.IExternalResource|null);
+    }
+
+    /** Represents an Image. */
+    class Image implements IImage {
+
+        /**
+         * Constructs a new Image.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: multiverse.IImage);
+
+        /** Image externalResource. */
+        public externalResource?: (multiverse.IExternalResource|null);
+
+        /**
+         * Creates a new Image instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns Image instance
+         */
+        public static create(properties?: multiverse.IImage): multiverse.Image;
+
+        /**
+         * Encodes the specified Image message. Does not implicitly {@link multiverse.Image.verify|verify} messages.
+         * @param message Image message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: multiverse.IImage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified Image message, length delimited. Does not implicitly {@link multiverse.Image.verify|verify} messages.
+         * @param message Image message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: multiverse.IImage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes an Image message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns Image
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): multiverse.Image;
+
+        /**
+         * Decodes an Image message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns Image
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): multiverse.Image;
+
+        /**
+         * Verifies an Image message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates an Image message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns Image
+         */
+        public static fromObject(object: { [k: string]: any }): multiverse.Image;
+
+        /**
+         * Creates a plain object from an Image message. Also converts values to other types if specified.
+         * @param message Image
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: multiverse.Image, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this Image to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for Image
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of an ExternalResource. */
+    interface IExternalResource {
+
+        /** ExternalResource url */
+        url?: (multiverse.IURL|null);
+
+        /** ExternalResource digest */
+        digest?: (multiverse.IDigest|null);
+    }
+
+    /** Represents an ExternalResource. */
+    class ExternalResource implements IExternalResource {
+
+        /**
+         * Constructs a new ExternalResource.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: multiverse.IExternalResource);
+
+        /** ExternalResource url. */
+        public url?: (multiverse.IURL|null);
+
+        /** ExternalResource digest. */
+        public digest?: (multiverse.IDigest|null);
+
+        /** ExternalResource resource. */
+        public resource?: ("url"|"digest");
+
+        /**
+         * Creates a new ExternalResource instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns ExternalResource instance
+         */
+        public static create(properties?: multiverse.IExternalResource): multiverse.ExternalResource;
+
+        /**
+         * Encodes the specified ExternalResource message. Does not implicitly {@link multiverse.ExternalResource.verify|verify} messages.
+         * @param message ExternalResource message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: multiverse.IExternalResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified ExternalResource message, length delimited. Does not implicitly {@link multiverse.ExternalResource.verify|verify} messages.
+         * @param message ExternalResource message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: multiverse.IExternalResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes an ExternalResource message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns ExternalResource
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): multiverse.ExternalResource;
+
+        /**
+         * Decodes an ExternalResource message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns ExternalResource
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): multiverse.ExternalResource;
+
+        /**
+         * Verifies an ExternalResource message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates an ExternalResource message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns ExternalResource
+         */
+        public static fromObject(object: { [k: string]: any }): multiverse.ExternalResource;
+
+        /**
+         * Creates a plain object from an ExternalResource message. Also converts values to other types if specified.
+         * @param message ExternalResource
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: multiverse.ExternalResource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this ExternalResource to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for ExternalResource
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a Digest. */
+    interface IDigest {
+
+        /** Digest sha2_256 */
+        sha2_256?: (Uint8Array|null);
+
+        /** Digest sha2_512 */
+        sha2_512?: (Uint8Array|null);
+
+        /** Digest sha3_256 */
+        sha3_256?: (Uint8Array|null);
+
+        /** Digest sha3_512 */
+        sha3_512?: (Uint8Array|null);
+    }
+
+    /** Represents a Digest. */
+    class Digest implements IDigest {
+
+        /**
+         * Constructs a new Digest.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: multiverse.IDigest);
+
+        /** Digest sha2_256. */
+        public sha2_256: Uint8Array;
+
+        /** Digest sha2_512. */
+        public sha2_512: Uint8Array;
+
+        /** Digest sha3_256. */
+        public sha3_256: Uint8Array;
+
+        /** Digest sha3_512. */
+        public sha3_512: Uint8Array;
+
+        /**
+         * Creates a new Digest instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns Digest instance
+         */
+        public static create(properties?: multiverse.IDigest): multiverse.Digest;
+
+        /**
+         * Encodes the specified Digest message. Does not implicitly {@link multiverse.Digest.verify|verify} messages.
+         * @param message Digest message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: multiverse.IDigest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified Digest message, length delimited. Does not implicitly {@link multiverse.Digest.verify|verify} messages.
+         * @param message Digest message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: multiverse.IDigest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a Digest message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns Digest
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): multiverse.Digest;
+
+        /**
+         * Decodes a Digest message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns Digest
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): multiverse.Digest;
+
+        /**
+         * Verifies a Digest message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a Digest message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns Digest
+         */
+        public static fromObject(object: { [k: string]: any }): multiverse.Digest;
+
+        /**
+         * Creates a plain object from a Digest message. Also converts values to other types if specified.
+         * @param message Digest
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: multiverse.Digest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this Digest to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for Digest
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a TwitterAccount. */
+    interface ITwitterAccount {
+
+        /** TwitterAccount handle */
+        handle?: (string|null);
+    }
+
+    /** Represents a TwitterAccount. */
+    class TwitterAccount implements ITwitterAccount {
+
+        /**
+         * Constructs a new TwitterAccount.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: multiverse.ITwitterAccount);
+
+        /** TwitterAccount handle. */
+        public handle: string;
+
+        /**
+         * Creates a new TwitterAccount instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns TwitterAccount instance
+         */
+        public static create(properties?: multiverse.ITwitterAccount): multiverse.TwitterAccount;
+
+        /**
+         * Encodes the specified TwitterAccount message. Does not implicitly {@link multiverse.TwitterAccount.verify|verify} messages.
+         * @param message TwitterAccount message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: multiverse.ITwitterAccount, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified TwitterAccount message, length delimited. Does not implicitly {@link multiverse.TwitterAccount.verify|verify} messages.
+         * @param message TwitterAccount message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: multiverse.ITwitterAccount, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a TwitterAccount message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns TwitterAccount
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): multiverse.TwitterAccount;
+
+        /**
+         * Decodes a TwitterAccount message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns TwitterAccount
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): multiverse.TwitterAccount;
+
+        /**
+         * Verifies a TwitterAccount message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a TwitterAccount message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns TwitterAccount
+         */
+        public static fromObject(object: { [k: string]: any }): multiverse.TwitterAccount;
+
+        /**
+         * Creates a plain object from a TwitterAccount message. Also converts values to other types if specified.
+         * @param message TwitterAccount
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: multiverse.TwitterAccount, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this TwitterAccount to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for TwitterAccount
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a TwitterPost. */
+    interface ITwitterPost {
+
+        /** TwitterPost author */
+        author?: (multiverse.ITwitterAccount|null);
+
+        /** TwitterPost id */
+        id?: (string|null);
+    }
+
+    /** Represents a TwitterPost. */
+    class TwitterPost implements ITwitterPost {
+
+        /**
+         * Constructs a new TwitterPost.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: multiverse.ITwitterPost);
+
+        /** TwitterPost author. */
+        public author?: (multiverse.ITwitterAccount|null);
+
+        /** TwitterPost id. */
+        public id: string;
+
+        /**
+         * Creates a new TwitterPost instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns TwitterPost instance
+         */
+        public static create(properties?: multiverse.ITwitterPost): multiverse.TwitterPost;
+
+        /**
+         * Encodes the specified TwitterPost message. Does not implicitly {@link multiverse.TwitterPost.verify|verify} messages.
+         * @param message TwitterPost message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: multiverse.ITwitterPost, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified TwitterPost message, length delimited. Does not implicitly {@link multiverse.TwitterPost.verify|verify} messages.
+         * @param message TwitterPost message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: multiverse.ITwitterPost, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a TwitterPost message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns TwitterPost
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): multiverse.TwitterPost;
+
+        /**
+         * Decodes a TwitterPost message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns TwitterPost
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): multiverse.TwitterPost;
+
+        /**
+         * Verifies a TwitterPost message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a TwitterPost message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns TwitterPost
+         */
+        public static fromObject(object: { [k: string]: any }): multiverse.TwitterPost;
+
+        /**
+         * Creates a plain object from a TwitterPost message. Also converts values to other types if specified.
+         * @param message TwitterPost
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: multiverse.TwitterPost, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this TwitterPost to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for TwitterPost
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a MediumAccount. */
+    interface IMediumAccount {
+
+        /** MediumAccount handle */
+        handle?: (string|null);
+    }
+
+    /** Represents a MediumAccount. */
+    class MediumAccount implements IMediumAccount {
+
+        /**
+         * Constructs a new MediumAccount.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: multiverse.IMediumAccount);
+
+        /** MediumAccount handle. */
+        public handle: string;
+
+        /**
+         * Creates a new MediumAccount instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns MediumAccount instance
+         */
+        public static create(properties?: multiverse.IMediumAccount): multiverse.MediumAccount;
+
+        /**
+         * Encodes the specified MediumAccount message. Does not implicitly {@link multiverse.MediumAccount.verify|verify} messages.
+         * @param message MediumAccount message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: multiverse.IMediumAccount, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified MediumAccount message, length delimited. Does not implicitly {@link multiverse.MediumAccount.verify|verify} messages.
+         * @param message MediumAccount message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: multiverse.IMediumAccount, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a MediumAccount message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns MediumAccount
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): multiverse.MediumAccount;
+
+        /**
+         * Decodes a MediumAccount message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns MediumAccount
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): multiverse.MediumAccount;
+
+        /**
+         * Verifies a MediumAccount message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a MediumAccount message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns MediumAccount
+         */
+        public static fromObject(object: { [k: string]: any }): multiverse.MediumAccount;
+
+        /**
+         * Creates a plain object from a MediumAccount message. Also converts values to other types if specified.
+         * @param message MediumAccount
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: multiverse.MediumAccount, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this MediumAccount to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for MediumAccount
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a StockSymbol. */
+    interface IStockSymbol {
+
+        /** StockSymbol symbol */
+        symbol?: (string|null);
+    }
+
+    /** Represents a StockSymbol. */
+    class StockSymbol implements IStockSymbol {
+
+        /**
+         * Constructs a new StockSymbol.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: multiverse.IStockSymbol);
+
+        /** StockSymbol symbol. */
+        public symbol: string;
+
+        /**
+         * Creates a new StockSymbol instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns StockSymbol instance
+         */
+        public static create(properties?: multiverse.IStockSymbol): multiverse.StockSymbol;
+
+        /**
+         * Encodes the specified StockSymbol message. Does not implicitly {@link multiverse.StockSymbol.verify|verify} messages.
+         * @param message StockSymbol message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: multiverse.IStockSymbol, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified StockSymbol message, length delimited. Does not implicitly {@link multiverse.StockSymbol.verify|verify} messages.
+         * @param message StockSymbol message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: multiverse.IStockSymbol, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a StockSymbol message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns StockSymbol
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): multiverse.StockSymbol;
+
+        /**
+         * Decodes a StockSymbol message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns StockSymbol
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): multiverse.StockSymbol;
+
+        /**
+         * Verifies a StockSymbol message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a StockSymbol message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns StockSymbol
+         */
+        public static fromObject(object: { [k: string]: any }): multiverse.StockSymbol;
+
+        /**
+         * Creates a plain object from a StockSymbol message. Also converts values to other types if specified.
+         * @param message StockSymbol
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: multiverse.StockSymbol, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this StockSymbol to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for StockSymbol
          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns The default type url
          */

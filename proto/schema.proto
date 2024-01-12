@@ -3,7 +3,7 @@ syntax = "proto3";
 package multiverse;
 
 message PublishedItem {
-    string uuid = 2128273;
+    string uuid = 21283000;
 
     oneof item {
         Article article = 1728797;
@@ -12,19 +12,25 @@ message PublishedItem {
     }
 }
 
+message UniverseDetails {
+    string name = 7872837;
+
+    Content description = 761222;
+    Image thumbnail = 112362;
+}
+
 message Universe {
-    repeated Rating ratings = 521667;
-    repeated Article articles = 1278123;
+    UniverseDetails details = 611112;
+
     repeated PublishedItem published_items = 625362;
-    Article single_article = 721873;
 }
 
 message Article {
-    string uuid = 9282123;
-    string title = 2138293;
-    string body = 4723948;
-    DateTime created_at = 8742394;
-    repeated string test = 218731;
+    string uuid = 92823;
+    string title = 28293;
+    string body = 473948;
+    DateTime created_at = 42394;
+    repeated string test = 2731;
 }
 
 message YouTubeVideo {
@@ -37,12 +43,7 @@ message DateTime {
     int64 unix_timestamp = 23947;
 }
 
-message LinkRating {
-    Link link = 949667;
-    Rating rating = 126273;
-}
-
-message Link {
+message URL {
     string url = 956450;
 }
 
@@ -59,17 +60,17 @@ enum StarRating {
 message Rating {
     oneof subject {
         Movie movie = 724351;
-        Link link = 32847932;
+        ExternalResource external_resource = 32932;
         AmazonProduct amazon_product = 387423;
-        GitHubAccount github_account = 9384723;
-        GitHubRepo github_repo = 628761827;
-        YouTubeVideo youtube_video = 982731237;
+        GitHubAccount github_account = 827312;
+        GitHubRepo github_repo = 661827;
+        YouTubeVideo youtube_video = 931237;
     }
     StarRating star_rating = 521667;
 }
 
 message AmazonProduct {
-    string asin = 949521667;
+    string asin = 87273;
 }
 
 message Movie {
@@ -81,14 +82,55 @@ message Movie {
 }
 
 message GitHubAccount {
-    string name = 23789723;
+    string name = 23723;
 }
 
 message GitHubRepo {
-    GitHubAccount owner = 23789723;
-    string name = 384378293;
+    GitHubAccount owner = 89723;
+    string name = 384293;
 }
 
 message Markdown {
     string markdown = 85270;
+}
+
+message Content {
+    oneof content {
+        Markdown markdown = 762622;
+    }
+}
+
+message Image {
+    ExternalResource external_resource = 211122;
+}
+
+message ExternalResource {
+    oneof resource {
+        URL url = 32932;
+        Digest digest = 621112;
+    }
+}
+
+message Digest {
+    bytes sha2_256 = 9812731;
+    bytes sha2_512 = 1627273;
+    bytes sha3_256 = 1287112;
+    bytes sha3_512 = 5441122;
+}
+
+message TwitterAccount {
+    string handle = 1126324;
+}
+
+message TwitterPost {
+    TwitterAccount author = 6716122;
+    string id = 1173336;
+}
+
+message MediumAccount {
+    string handle = 2212215;
+}
+
+message StockSymbol {
+    string symbol = 9912272;
 }

@@ -122,7 +122,7 @@ $root.multiverse = (function() {
             if (message.article != null && Object.hasOwnProperty.call(message, "article"))
                 $root.multiverse.Article.encode(message.article, writer.uint32(/* id 1728797, wireType 2 =*/13830378).fork()).ldelim();
             if (message.uuid != null && Object.hasOwnProperty.call(message, "uuid"))
-                writer.uint32(/* id 2128273, wireType 2 =*/17026186).string(message.uuid);
+                writer.uint32(/* id 21283000, wireType 2 =*/170264002).string(message.uuid);
             return writer;
         };
 
@@ -157,7 +157,7 @@ $root.multiverse = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 2128273: {
+                case 21283000: {
                         message.uuid = reader.string();
                         break;
                     }
@@ -339,16 +339,274 @@ $root.multiverse = (function() {
         return PublishedItem;
     })();
 
+    multiverse.UniverseDetails = (function() {
+
+        /**
+         * Properties of an UniverseDetails.
+         * @memberof multiverse
+         * @interface IUniverseDetails
+         * @property {string|null} [name] UniverseDetails name
+         * @property {multiverse.IContent|null} [description] UniverseDetails description
+         * @property {multiverse.IImage|null} [thumbnail] UniverseDetails thumbnail
+         */
+
+        /**
+         * Constructs a new UniverseDetails.
+         * @memberof multiverse
+         * @classdesc Represents an UniverseDetails.
+         * @implements IUniverseDetails
+         * @constructor
+         * @param {multiverse.IUniverseDetails=} [properties] Properties to set
+         */
+        function UniverseDetails(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * UniverseDetails name.
+         * @member {string} name
+         * @memberof multiverse.UniverseDetails
+         * @instance
+         */
+        UniverseDetails.prototype.name = "";
+
+        /**
+         * UniverseDetails description.
+         * @member {multiverse.IContent|null|undefined} description
+         * @memberof multiverse.UniverseDetails
+         * @instance
+         */
+        UniverseDetails.prototype.description = null;
+
+        /**
+         * UniverseDetails thumbnail.
+         * @member {multiverse.IImage|null|undefined} thumbnail
+         * @memberof multiverse.UniverseDetails
+         * @instance
+         */
+        UniverseDetails.prototype.thumbnail = null;
+
+        /**
+         * Creates a new UniverseDetails instance using the specified properties.
+         * @function create
+         * @memberof multiverse.UniverseDetails
+         * @static
+         * @param {multiverse.IUniverseDetails=} [properties] Properties to set
+         * @returns {multiverse.UniverseDetails} UniverseDetails instance
+         */
+        UniverseDetails.create = function create(properties) {
+            return new UniverseDetails(properties);
+        };
+
+        /**
+         * Encodes the specified UniverseDetails message. Does not implicitly {@link multiverse.UniverseDetails.verify|verify} messages.
+         * @function encode
+         * @memberof multiverse.UniverseDetails
+         * @static
+         * @param {multiverse.IUniverseDetails} message UniverseDetails message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UniverseDetails.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.thumbnail != null && Object.hasOwnProperty.call(message, "thumbnail"))
+                $root.multiverse.Image.encode(message.thumbnail, writer.uint32(/* id 112362, wireType 2 =*/898898).fork()).ldelim();
+            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                $root.multiverse.Content.encode(message.description, writer.uint32(/* id 761222, wireType 2 =*/6089778).fork()).ldelim();
+            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                writer.uint32(/* id 7872837, wireType 2 =*/62982698).string(message.name);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified UniverseDetails message, length delimited. Does not implicitly {@link multiverse.UniverseDetails.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof multiverse.UniverseDetails
+         * @static
+         * @param {multiverse.IUniverseDetails} message UniverseDetails message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UniverseDetails.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes an UniverseDetails message from the specified reader or buffer.
+         * @function decode
+         * @memberof multiverse.UniverseDetails
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {multiverse.UniverseDetails} UniverseDetails
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UniverseDetails.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.multiverse.UniverseDetails();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 7872837: {
+                        message.name = reader.string();
+                        break;
+                    }
+                case 761222: {
+                        message.description = $root.multiverse.Content.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 112362: {
+                        message.thumbnail = $root.multiverse.Image.decode(reader, reader.uint32());
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes an UniverseDetails message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof multiverse.UniverseDetails
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {multiverse.UniverseDetails} UniverseDetails
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UniverseDetails.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies an UniverseDetails message.
+         * @function verify
+         * @memberof multiverse.UniverseDetails
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        UniverseDetails.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.name != null && message.hasOwnProperty("name"))
+                if (!$util.isString(message.name))
+                    return "name: string expected";
+            if (message.description != null && message.hasOwnProperty("description")) {
+                var error = $root.multiverse.Content.verify(message.description);
+                if (error)
+                    return "description." + error;
+            }
+            if (message.thumbnail != null && message.hasOwnProperty("thumbnail")) {
+                var error = $root.multiverse.Image.verify(message.thumbnail);
+                if (error)
+                    return "thumbnail." + error;
+            }
+            return null;
+        };
+
+        /**
+         * Creates an UniverseDetails message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof multiverse.UniverseDetails
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {multiverse.UniverseDetails} UniverseDetails
+         */
+        UniverseDetails.fromObject = function fromObject(object) {
+            if (object instanceof $root.multiverse.UniverseDetails)
+                return object;
+            var message = new $root.multiverse.UniverseDetails();
+            if (object.name != null)
+                message.name = String(object.name);
+            if (object.description != null) {
+                if (typeof object.description !== "object")
+                    throw TypeError(".multiverse.UniverseDetails.description: object expected");
+                message.description = $root.multiverse.Content.fromObject(object.description);
+            }
+            if (object.thumbnail != null) {
+                if (typeof object.thumbnail !== "object")
+                    throw TypeError(".multiverse.UniverseDetails.thumbnail: object expected");
+                message.thumbnail = $root.multiverse.Image.fromObject(object.thumbnail);
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from an UniverseDetails message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof multiverse.UniverseDetails
+         * @static
+         * @param {multiverse.UniverseDetails} message UniverseDetails
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        UniverseDetails.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.thumbnail = null;
+                object.description = null;
+                object.name = "";
+            }
+            if (message.thumbnail != null && message.hasOwnProperty("thumbnail"))
+                object.thumbnail = $root.multiverse.Image.toObject(message.thumbnail, options);
+            if (message.description != null && message.hasOwnProperty("description"))
+                object.description = $root.multiverse.Content.toObject(message.description, options);
+            if (message.name != null && message.hasOwnProperty("name"))
+                object.name = message.name;
+            return object;
+        };
+
+        /**
+         * Converts this UniverseDetails to JSON.
+         * @function toJSON
+         * @memberof multiverse.UniverseDetails
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        UniverseDetails.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for UniverseDetails
+         * @function getTypeUrl
+         * @memberof multiverse.UniverseDetails
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        UniverseDetails.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/multiverse.UniverseDetails";
+        };
+
+        return UniverseDetails;
+    })();
+
     multiverse.Universe = (function() {
 
         /**
          * Properties of an Universe.
          * @memberof multiverse
          * @interface IUniverse
-         * @property {Array.<multiverse.IRating>|null} [ratings] Universe ratings
-         * @property {Array.<multiverse.IArticle>|null} [articles] Universe articles
+         * @property {multiverse.IUniverseDetails|null} [details] Universe details
          * @property {Array.<multiverse.IPublishedItem>|null} [publishedItems] Universe publishedItems
-         * @property {multiverse.IArticle|null} [singleArticle] Universe singleArticle
          */
 
         /**
@@ -360,8 +618,6 @@ $root.multiverse = (function() {
          * @param {multiverse.IUniverse=} [properties] Properties to set
          */
         function Universe(properties) {
-            this.ratings = [];
-            this.articles = [];
             this.publishedItems = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
@@ -370,20 +626,12 @@ $root.multiverse = (function() {
         }
 
         /**
-         * Universe ratings.
-         * @member {Array.<multiverse.IRating>} ratings
+         * Universe details.
+         * @member {multiverse.IUniverseDetails|null|undefined} details
          * @memberof multiverse.Universe
          * @instance
          */
-        Universe.prototype.ratings = $util.emptyArray;
-
-        /**
-         * Universe articles.
-         * @member {Array.<multiverse.IArticle>} articles
-         * @memberof multiverse.Universe
-         * @instance
-         */
-        Universe.prototype.articles = $util.emptyArray;
+        Universe.prototype.details = null;
 
         /**
          * Universe publishedItems.
@@ -392,14 +640,6 @@ $root.multiverse = (function() {
          * @instance
          */
         Universe.prototype.publishedItems = $util.emptyArray;
-
-        /**
-         * Universe singleArticle.
-         * @member {multiverse.IArticle|null|undefined} singleArticle
-         * @memberof multiverse.Universe
-         * @instance
-         */
-        Universe.prototype.singleArticle = null;
 
         /**
          * Creates a new Universe instance using the specified properties.
@@ -425,17 +665,11 @@ $root.multiverse = (function() {
         Universe.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.ratings != null && message.ratings.length)
-                for (var i = 0; i < message.ratings.length; ++i)
-                    $root.multiverse.Rating.encode(message.ratings[i], writer.uint32(/* id 521667, wireType 2 =*/4173338).fork()).ldelim();
+            if (message.details != null && Object.hasOwnProperty.call(message, "details"))
+                $root.multiverse.UniverseDetails.encode(message.details, writer.uint32(/* id 611112, wireType 2 =*/4888898).fork()).ldelim();
             if (message.publishedItems != null && message.publishedItems.length)
                 for (var i = 0; i < message.publishedItems.length; ++i)
                     $root.multiverse.PublishedItem.encode(message.publishedItems[i], writer.uint32(/* id 625362, wireType 2 =*/5002898).fork()).ldelim();
-            if (message.singleArticle != null && Object.hasOwnProperty.call(message, "singleArticle"))
-                $root.multiverse.Article.encode(message.singleArticle, writer.uint32(/* id 721873, wireType 2 =*/5774986).fork()).ldelim();
-            if (message.articles != null && message.articles.length)
-                for (var i = 0; i < message.articles.length; ++i)
-                    $root.multiverse.Article.encode(message.articles[i], writer.uint32(/* id 1278123, wireType 2 =*/10224986).fork()).ldelim();
             return writer;
         };
 
@@ -470,26 +704,14 @@ $root.multiverse = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 521667: {
-                        if (!(message.ratings && message.ratings.length))
-                            message.ratings = [];
-                        message.ratings.push($root.multiverse.Rating.decode(reader, reader.uint32()));
-                        break;
-                    }
-                case 1278123: {
-                        if (!(message.articles && message.articles.length))
-                            message.articles = [];
-                        message.articles.push($root.multiverse.Article.decode(reader, reader.uint32()));
+                case 611112: {
+                        message.details = $root.multiverse.UniverseDetails.decode(reader, reader.uint32());
                         break;
                     }
                 case 625362: {
                         if (!(message.publishedItems && message.publishedItems.length))
                             message.publishedItems = [];
                         message.publishedItems.push($root.multiverse.PublishedItem.decode(reader, reader.uint32()));
-                        break;
-                    }
-                case 721873: {
-                        message.singleArticle = $root.multiverse.Article.decode(reader, reader.uint32());
                         break;
                     }
                 default:
@@ -527,23 +749,10 @@ $root.multiverse = (function() {
         Universe.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.ratings != null && message.hasOwnProperty("ratings")) {
-                if (!Array.isArray(message.ratings))
-                    return "ratings: array expected";
-                for (var i = 0; i < message.ratings.length; ++i) {
-                    var error = $root.multiverse.Rating.verify(message.ratings[i]);
-                    if (error)
-                        return "ratings." + error;
-                }
-            }
-            if (message.articles != null && message.hasOwnProperty("articles")) {
-                if (!Array.isArray(message.articles))
-                    return "articles: array expected";
-                for (var i = 0; i < message.articles.length; ++i) {
-                    var error = $root.multiverse.Article.verify(message.articles[i]);
-                    if (error)
-                        return "articles." + error;
-                }
+            if (message.details != null && message.hasOwnProperty("details")) {
+                var error = $root.multiverse.UniverseDetails.verify(message.details);
+                if (error)
+                    return "details." + error;
             }
             if (message.publishedItems != null && message.hasOwnProperty("publishedItems")) {
                 if (!Array.isArray(message.publishedItems))
@@ -553,11 +762,6 @@ $root.multiverse = (function() {
                     if (error)
                         return "publishedItems." + error;
                 }
-            }
-            if (message.singleArticle != null && message.hasOwnProperty("singleArticle")) {
-                var error = $root.multiverse.Article.verify(message.singleArticle);
-                if (error)
-                    return "singleArticle." + error;
             }
             return null;
         };
@@ -574,25 +778,10 @@ $root.multiverse = (function() {
             if (object instanceof $root.multiverse.Universe)
                 return object;
             var message = new $root.multiverse.Universe();
-            if (object.ratings) {
-                if (!Array.isArray(object.ratings))
-                    throw TypeError(".multiverse.Universe.ratings: array expected");
-                message.ratings = [];
-                for (var i = 0; i < object.ratings.length; ++i) {
-                    if (typeof object.ratings[i] !== "object")
-                        throw TypeError(".multiverse.Universe.ratings: object expected");
-                    message.ratings[i] = $root.multiverse.Rating.fromObject(object.ratings[i]);
-                }
-            }
-            if (object.articles) {
-                if (!Array.isArray(object.articles))
-                    throw TypeError(".multiverse.Universe.articles: array expected");
-                message.articles = [];
-                for (var i = 0; i < object.articles.length; ++i) {
-                    if (typeof object.articles[i] !== "object")
-                        throw TypeError(".multiverse.Universe.articles: object expected");
-                    message.articles[i] = $root.multiverse.Article.fromObject(object.articles[i]);
-                }
+            if (object.details != null) {
+                if (typeof object.details !== "object")
+                    throw TypeError(".multiverse.Universe.details: object expected");
+                message.details = $root.multiverse.UniverseDetails.fromObject(object.details);
             }
             if (object.publishedItems) {
                 if (!Array.isArray(object.publishedItems))
@@ -603,11 +792,6 @@ $root.multiverse = (function() {
                         throw TypeError(".multiverse.Universe.publishedItems: object expected");
                     message.publishedItems[i] = $root.multiverse.PublishedItem.fromObject(object.publishedItems[i]);
                 }
-            }
-            if (object.singleArticle != null) {
-                if (typeof object.singleArticle !== "object")
-                    throw TypeError(".multiverse.Universe.singleArticle: object expected");
-                message.singleArticle = $root.multiverse.Article.fromObject(object.singleArticle);
             }
             return message;
         };
@@ -625,29 +809,16 @@ $root.multiverse = (function() {
             if (!options)
                 options = {};
             var object = {};
-            if (options.arrays || options.defaults) {
-                object.ratings = [];
+            if (options.arrays || options.defaults)
                 object.publishedItems = [];
-                object.articles = [];
-            }
             if (options.defaults)
-                object.singleArticle = null;
-            if (message.ratings && message.ratings.length) {
-                object.ratings = [];
-                for (var j = 0; j < message.ratings.length; ++j)
-                    object.ratings[j] = $root.multiverse.Rating.toObject(message.ratings[j], options);
-            }
+                object.details = null;
+            if (message.details != null && message.hasOwnProperty("details"))
+                object.details = $root.multiverse.UniverseDetails.toObject(message.details, options);
             if (message.publishedItems && message.publishedItems.length) {
                 object.publishedItems = [];
                 for (var j = 0; j < message.publishedItems.length; ++j)
                     object.publishedItems[j] = $root.multiverse.PublishedItem.toObject(message.publishedItems[j], options);
-            }
-            if (message.singleArticle != null && message.hasOwnProperty("singleArticle"))
-                object.singleArticle = $root.multiverse.Article.toObject(message.singleArticle, options);
-            if (message.articles && message.articles.length) {
-                object.articles = [];
-                for (var j = 0; j < message.articles.length; ++j)
-                    object.articles[j] = $root.multiverse.Article.toObject(message.articles[j], options);
             }
             return object;
         };
@@ -776,15 +947,15 @@ $root.multiverse = (function() {
                 writer = $Writer.create();
             if (message.test != null && message.test.length)
                 for (var i = 0; i < message.test.length; ++i)
-                    writer.uint32(/* id 218731, wireType 2 =*/1749850).string(message.test[i]);
+                    writer.uint32(/* id 2731, wireType 2 =*/21850).string(message.test[i]);
             if (message.title != null && Object.hasOwnProperty.call(message, "title"))
-                writer.uint32(/* id 2138293, wireType 2 =*/17106346).string(message.title);
-            if (message.body != null && Object.hasOwnProperty.call(message, "body"))
-                writer.uint32(/* id 4723948, wireType 2 =*/37791586).string(message.body);
+                writer.uint32(/* id 28293, wireType 2 =*/226346).string(message.title);
             if (message.createdAt != null && Object.hasOwnProperty.call(message, "createdAt"))
-                $root.multiverse.DateTime.encode(message.createdAt, writer.uint32(/* id 8742394, wireType 2 =*/69939154).fork()).ldelim();
+                $root.multiverse.DateTime.encode(message.createdAt, writer.uint32(/* id 42394, wireType 2 =*/339154).fork()).ldelim();
             if (message.uuid != null && Object.hasOwnProperty.call(message, "uuid"))
-                writer.uint32(/* id 9282123, wireType 2 =*/74256986).string(message.uuid);
+                writer.uint32(/* id 92823, wireType 2 =*/742586).string(message.uuid);
+            if (message.body != null && Object.hasOwnProperty.call(message, "body"))
+                writer.uint32(/* id 473948, wireType 2 =*/3791586).string(message.body);
             return writer;
         };
 
@@ -819,23 +990,23 @@ $root.multiverse = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 9282123: {
+                case 92823: {
                         message.uuid = reader.string();
                         break;
                     }
-                case 2138293: {
+                case 28293: {
                         message.title = reader.string();
                         break;
                     }
-                case 4723948: {
+                case 473948: {
                         message.body = reader.string();
                         break;
                     }
-                case 8742394: {
+                case 42394: {
                         message.createdAt = $root.multiverse.DateTime.decode(reader, reader.uint32());
                         break;
                     }
-                case 218731: {
+                case 2731: {
                         if (!(message.test && message.test.length))
                             message.test = [];
                         message.test.push(reader.string());
@@ -950,9 +1121,9 @@ $root.multiverse = (function() {
                 object.test = [];
             if (options.defaults) {
                 object.title = "";
-                object.body = "";
                 object.createdAt = null;
                 object.uuid = "";
+                object.body = "";
             }
             if (message.test && message.test.length) {
                 object.test = [];
@@ -961,12 +1132,12 @@ $root.multiverse = (function() {
             }
             if (message.title != null && message.hasOwnProperty("title"))
                 object.title = message.title;
-            if (message.body != null && message.hasOwnProperty("body"))
-                object.body = message.body;
             if (message.createdAt != null && message.hasOwnProperty("createdAt"))
                 object.createdAt = $root.multiverse.DateTime.toObject(message.createdAt, options);
             if (message.uuid != null && message.hasOwnProperty("uuid"))
                 object.uuid = message.uuid;
+            if (message.body != null && message.hasOwnProperty("body"))
+                object.body = message.body;
             return object;
         };
 
@@ -1419,25 +1590,24 @@ $root.multiverse = (function() {
         return DateTime;
     })();
 
-    multiverse.LinkRating = (function() {
+    multiverse.URL = (function() {
 
         /**
-         * Properties of a LinkRating.
+         * Properties of a URL.
          * @memberof multiverse
-         * @interface ILinkRating
-         * @property {multiverse.ILink|null} [link] LinkRating link
-         * @property {multiverse.IRating|null} [rating] LinkRating rating
+         * @interface IURL
+         * @property {string|null} [url] URL url
          */
 
         /**
-         * Constructs a new LinkRating.
+         * Constructs a new URL.
          * @memberof multiverse
-         * @classdesc Represents a LinkRating.
-         * @implements ILinkRating
+         * @classdesc Represents a URL.
+         * @implements IURL
          * @constructor
-         * @param {multiverse.ILinkRating=} [properties] Properties to set
+         * @param {multiverse.IURL=} [properties] Properties to set
          */
-        function LinkRating(properties) {
+        function URL(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -1445,271 +1615,35 @@ $root.multiverse = (function() {
         }
 
         /**
-         * LinkRating link.
-         * @member {multiverse.ILink|null|undefined} link
-         * @memberof multiverse.LinkRating
-         * @instance
-         */
-        LinkRating.prototype.link = null;
-
-        /**
-         * LinkRating rating.
-         * @member {multiverse.IRating|null|undefined} rating
-         * @memberof multiverse.LinkRating
-         * @instance
-         */
-        LinkRating.prototype.rating = null;
-
-        /**
-         * Creates a new LinkRating instance using the specified properties.
-         * @function create
-         * @memberof multiverse.LinkRating
-         * @static
-         * @param {multiverse.ILinkRating=} [properties] Properties to set
-         * @returns {multiverse.LinkRating} LinkRating instance
-         */
-        LinkRating.create = function create(properties) {
-            return new LinkRating(properties);
-        };
-
-        /**
-         * Encodes the specified LinkRating message. Does not implicitly {@link multiverse.LinkRating.verify|verify} messages.
-         * @function encode
-         * @memberof multiverse.LinkRating
-         * @static
-         * @param {multiverse.ILinkRating} message LinkRating message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        LinkRating.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.rating != null && Object.hasOwnProperty.call(message, "rating"))
-                $root.multiverse.Rating.encode(message.rating, writer.uint32(/* id 126273, wireType 2 =*/1010186).fork()).ldelim();
-            if (message.link != null && Object.hasOwnProperty.call(message, "link"))
-                $root.multiverse.Link.encode(message.link, writer.uint32(/* id 949667, wireType 2 =*/7597338).fork()).ldelim();
-            return writer;
-        };
-
-        /**
-         * Encodes the specified LinkRating message, length delimited. Does not implicitly {@link multiverse.LinkRating.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof multiverse.LinkRating
-         * @static
-         * @param {multiverse.ILinkRating} message LinkRating message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        LinkRating.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        /**
-         * Decodes a LinkRating message from the specified reader or buffer.
-         * @function decode
-         * @memberof multiverse.LinkRating
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {multiverse.LinkRating} LinkRating
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        LinkRating.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.multiverse.LinkRating();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 949667: {
-                        message.link = $root.multiverse.Link.decode(reader, reader.uint32());
-                        break;
-                    }
-                case 126273: {
-                        message.rating = $root.multiverse.Rating.decode(reader, reader.uint32());
-                        break;
-                    }
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        /**
-         * Decodes a LinkRating message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof multiverse.LinkRating
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {multiverse.LinkRating} LinkRating
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        LinkRating.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        /**
-         * Verifies a LinkRating message.
-         * @function verify
-         * @memberof multiverse.LinkRating
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        LinkRating.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.link != null && message.hasOwnProperty("link")) {
-                var error = $root.multiverse.Link.verify(message.link);
-                if (error)
-                    return "link." + error;
-            }
-            if (message.rating != null && message.hasOwnProperty("rating")) {
-                var error = $root.multiverse.Rating.verify(message.rating);
-                if (error)
-                    return "rating." + error;
-            }
-            return null;
-        };
-
-        /**
-         * Creates a LinkRating message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof multiverse.LinkRating
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {multiverse.LinkRating} LinkRating
-         */
-        LinkRating.fromObject = function fromObject(object) {
-            if (object instanceof $root.multiverse.LinkRating)
-                return object;
-            var message = new $root.multiverse.LinkRating();
-            if (object.link != null) {
-                if (typeof object.link !== "object")
-                    throw TypeError(".multiverse.LinkRating.link: object expected");
-                message.link = $root.multiverse.Link.fromObject(object.link);
-            }
-            if (object.rating != null) {
-                if (typeof object.rating !== "object")
-                    throw TypeError(".multiverse.LinkRating.rating: object expected");
-                message.rating = $root.multiverse.Rating.fromObject(object.rating);
-            }
-            return message;
-        };
-
-        /**
-         * Creates a plain object from a LinkRating message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof multiverse.LinkRating
-         * @static
-         * @param {multiverse.LinkRating} message LinkRating
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        LinkRating.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.rating = null;
-                object.link = null;
-            }
-            if (message.rating != null && message.hasOwnProperty("rating"))
-                object.rating = $root.multiverse.Rating.toObject(message.rating, options);
-            if (message.link != null && message.hasOwnProperty("link"))
-                object.link = $root.multiverse.Link.toObject(message.link, options);
-            return object;
-        };
-
-        /**
-         * Converts this LinkRating to JSON.
-         * @function toJSON
-         * @memberof multiverse.LinkRating
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        LinkRating.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        /**
-         * Gets the default type url for LinkRating
-         * @function getTypeUrl
-         * @memberof multiverse.LinkRating
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        LinkRating.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/multiverse.LinkRating";
-        };
-
-        return LinkRating;
-    })();
-
-    multiverse.Link = (function() {
-
-        /**
-         * Properties of a Link.
-         * @memberof multiverse
-         * @interface ILink
-         * @property {string|null} [url] Link url
-         */
-
-        /**
-         * Constructs a new Link.
-         * @memberof multiverse
-         * @classdesc Represents a Link.
-         * @implements ILink
-         * @constructor
-         * @param {multiverse.ILink=} [properties] Properties to set
-         */
-        function Link(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        /**
-         * Link url.
+         * URL url.
          * @member {string} url
-         * @memberof multiverse.Link
+         * @memberof multiverse.URL
          * @instance
          */
-        Link.prototype.url = "";
+        URL.prototype.url = "";
 
         /**
-         * Creates a new Link instance using the specified properties.
+         * Creates a new URL instance using the specified properties.
          * @function create
-         * @memberof multiverse.Link
+         * @memberof multiverse.URL
          * @static
-         * @param {multiverse.ILink=} [properties] Properties to set
-         * @returns {multiverse.Link} Link instance
+         * @param {multiverse.IURL=} [properties] Properties to set
+         * @returns {multiverse.URL} URL instance
          */
-        Link.create = function create(properties) {
-            return new Link(properties);
+        URL.create = function create(properties) {
+            return new URL(properties);
         };
 
         /**
-         * Encodes the specified Link message. Does not implicitly {@link multiverse.Link.verify|verify} messages.
+         * Encodes the specified URL message. Does not implicitly {@link multiverse.URL.verify|verify} messages.
          * @function encode
-         * @memberof multiverse.Link
+         * @memberof multiverse.URL
          * @static
-         * @param {multiverse.ILink} message Link message or plain object to encode
+         * @param {multiverse.IURL} message URL message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        Link.encode = function encode(message, writer) {
+        URL.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.url != null && Object.hasOwnProperty.call(message, "url"))
@@ -1718,33 +1652,33 @@ $root.multiverse = (function() {
         };
 
         /**
-         * Encodes the specified Link message, length delimited. Does not implicitly {@link multiverse.Link.verify|verify} messages.
+         * Encodes the specified URL message, length delimited. Does not implicitly {@link multiverse.URL.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof multiverse.Link
+         * @memberof multiverse.URL
          * @static
-         * @param {multiverse.ILink} message Link message or plain object to encode
+         * @param {multiverse.IURL} message URL message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        Link.encodeDelimited = function encodeDelimited(message, writer) {
+        URL.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
         /**
-         * Decodes a Link message from the specified reader or buffer.
+         * Decodes a URL message from the specified reader or buffer.
          * @function decode
-         * @memberof multiverse.Link
+         * @memberof multiverse.URL
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {multiverse.Link} Link
+         * @returns {multiverse.URL} URL
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        Link.decode = function decode(reader, length) {
+        URL.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.multiverse.Link();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.multiverse.URL();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -1761,30 +1695,30 @@ $root.multiverse = (function() {
         };
 
         /**
-         * Decodes a Link message from the specified reader or buffer, length delimited.
+         * Decodes a URL message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof multiverse.Link
+         * @memberof multiverse.URL
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {multiverse.Link} Link
+         * @returns {multiverse.URL} URL
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        Link.decodeDelimited = function decodeDelimited(reader) {
+        URL.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
         /**
-         * Verifies a Link message.
+         * Verifies a URL message.
          * @function verify
-         * @memberof multiverse.Link
+         * @memberof multiverse.URL
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
-        Link.verify = function verify(message) {
+        URL.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.url != null && message.hasOwnProperty("url"))
@@ -1794,32 +1728,32 @@ $root.multiverse = (function() {
         };
 
         /**
-         * Creates a Link message from a plain object. Also converts values to their respective internal types.
+         * Creates a URL message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof multiverse.Link
+         * @memberof multiverse.URL
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {multiverse.Link} Link
+         * @returns {multiverse.URL} URL
          */
-        Link.fromObject = function fromObject(object) {
-            if (object instanceof $root.multiverse.Link)
+        URL.fromObject = function fromObject(object) {
+            if (object instanceof $root.multiverse.URL)
                 return object;
-            var message = new $root.multiverse.Link();
+            var message = new $root.multiverse.URL();
             if (object.url != null)
                 message.url = String(object.url);
             return message;
         };
 
         /**
-         * Creates a plain object from a Link message. Also converts values to other types if specified.
+         * Creates a plain object from a URL message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof multiverse.Link
+         * @memberof multiverse.URL
          * @static
-         * @param {multiverse.Link} message Link
+         * @param {multiverse.URL} message URL
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        Link.toObject = function toObject(message, options) {
+        URL.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -1831,32 +1765,32 @@ $root.multiverse = (function() {
         };
 
         /**
-         * Converts this Link to JSON.
+         * Converts this URL to JSON.
          * @function toJSON
-         * @memberof multiverse.Link
+         * @memberof multiverse.URL
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
-        Link.prototype.toJSON = function toJSON() {
+        URL.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
         /**
-         * Gets the default type url for Link
+         * Gets the default type url for URL
          * @function getTypeUrl
-         * @memberof multiverse.Link
+         * @memberof multiverse.URL
          * @static
          * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns {string} The default type url
          */
-        Link.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+        URL.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
             if (typeUrlPrefix === undefined) {
                 typeUrlPrefix = "type.googleapis.com";
             }
-            return typeUrlPrefix + "/multiverse.Link";
+            return typeUrlPrefix + "/multiverse.URL";
         };
 
-        return Link;
+        return URL;
     })();
 
     /**
@@ -1888,7 +1822,7 @@ $root.multiverse = (function() {
          * @memberof multiverse
          * @interface IRating
          * @property {multiverse.IMovie|null} [movie] Rating movie
-         * @property {multiverse.ILink|null} [link] Rating link
+         * @property {multiverse.IExternalResource|null} [externalResource] Rating externalResource
          * @property {multiverse.IAmazonProduct|null} [amazonProduct] Rating amazonProduct
          * @property {multiverse.IGitHubAccount|null} [githubAccount] Rating githubAccount
          * @property {multiverse.IGitHubRepo|null} [githubRepo] Rating githubRepo
@@ -1920,12 +1854,12 @@ $root.multiverse = (function() {
         Rating.prototype.movie = null;
 
         /**
-         * Rating link.
-         * @member {multiverse.ILink|null|undefined} link
+         * Rating externalResource.
+         * @member {multiverse.IExternalResource|null|undefined} externalResource
          * @memberof multiverse.Rating
          * @instance
          */
-        Rating.prototype.link = null;
+        Rating.prototype.externalResource = null;
 
         /**
          * Rating amazonProduct.
@@ -1972,12 +1906,12 @@ $root.multiverse = (function() {
 
         /**
          * Rating subject.
-         * @member {"movie"|"link"|"amazonProduct"|"githubAccount"|"githubRepo"|"youtubeVideo"|undefined} subject
+         * @member {"movie"|"externalResource"|"amazonProduct"|"githubAccount"|"githubRepo"|"youtubeVideo"|undefined} subject
          * @memberof multiverse.Rating
          * @instance
          */
         Object.defineProperty(Rating.prototype, "subject", {
-            get: $util.oneOfGetter($oneOfFields = ["movie", "link", "amazonProduct", "githubAccount", "githubRepo", "youtubeVideo"]),
+            get: $util.oneOfGetter($oneOfFields = ["movie", "externalResource", "amazonProduct", "githubAccount", "githubRepo", "youtubeVideo"]),
             set: $util.oneOfSetter($oneOfFields)
         });
 
@@ -2005,20 +1939,20 @@ $root.multiverse = (function() {
         Rating.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
+            if (message.externalResource != null && Object.hasOwnProperty.call(message, "externalResource"))
+                $root.multiverse.ExternalResource.encode(message.externalResource, writer.uint32(/* id 32932, wireType 2 =*/263458).fork()).ldelim();
             if (message.amazonProduct != null && Object.hasOwnProperty.call(message, "amazonProduct"))
                 $root.multiverse.AmazonProduct.encode(message.amazonProduct, writer.uint32(/* id 387423, wireType 2 =*/3099386).fork()).ldelim();
             if (message.starRating != null && Object.hasOwnProperty.call(message, "starRating"))
                 writer.uint32(/* id 521667, wireType 0 =*/4173336).int32(message.starRating);
+            if (message.githubRepo != null && Object.hasOwnProperty.call(message, "githubRepo"))
+                $root.multiverse.GitHubRepo.encode(message.githubRepo, writer.uint32(/* id 661827, wireType 2 =*/5294618).fork()).ldelim();
             if (message.movie != null && Object.hasOwnProperty.call(message, "movie"))
                 $root.multiverse.Movie.encode(message.movie, writer.uint32(/* id 724351, wireType 2 =*/5794810).fork()).ldelim();
             if (message.githubAccount != null && Object.hasOwnProperty.call(message, "githubAccount"))
-                $root.multiverse.GitHubAccount.encode(message.githubAccount, writer.uint32(/* id 9384723, wireType 2 =*/75077786).fork()).ldelim();
-            if (message.link != null && Object.hasOwnProperty.call(message, "link"))
-                $root.multiverse.Link.encode(message.link, writer.uint32(/* id 32847932, wireType 2 =*/262783458).fork()).ldelim();
-            if (message.githubRepo != null && Object.hasOwnProperty.call(message, "githubRepo"))
-                $root.multiverse.GitHubRepo.encode(message.githubRepo, writer.uint32(/* id 91890915, wireType 2 =*/735127322).fork()).ldelim();
+                $root.multiverse.GitHubAccount.encode(message.githubAccount, writer.uint32(/* id 827312, wireType 2 =*/6618498).fork()).ldelim();
             if (message.youtubeVideo != null && Object.hasOwnProperty.call(message, "youtubeVideo"))
-                $root.multiverse.YouTubeVideo.encode(message.youtubeVideo, writer.uint32(/* id 445860325, wireType 2 =*/3566882602).fork()).ldelim();
+                $root.multiverse.YouTubeVideo.encode(message.youtubeVideo, writer.uint32(/* id 931237, wireType 2 =*/7449898).fork()).ldelim();
             return writer;
         };
 
@@ -2057,23 +1991,23 @@ $root.multiverse = (function() {
                         message.movie = $root.multiverse.Movie.decode(reader, reader.uint32());
                         break;
                     }
-                case 32847932: {
-                        message.link = $root.multiverse.Link.decode(reader, reader.uint32());
+                case 32932: {
+                        message.externalResource = $root.multiverse.ExternalResource.decode(reader, reader.uint32());
                         break;
                     }
                 case 387423: {
                         message.amazonProduct = $root.multiverse.AmazonProduct.decode(reader, reader.uint32());
                         break;
                     }
-                case 9384723: {
+                case 827312: {
                         message.githubAccount = $root.multiverse.GitHubAccount.decode(reader, reader.uint32());
                         break;
                     }
-                case 628761827: {
+                case 661827: {
                         message.githubRepo = $root.multiverse.GitHubRepo.decode(reader, reader.uint32());
                         break;
                     }
-                case 982731237: {
+                case 931237: {
                         message.youtubeVideo = $root.multiverse.YouTubeVideo.decode(reader, reader.uint32());
                         break;
                     }
@@ -2125,14 +2059,14 @@ $root.multiverse = (function() {
                         return "movie." + error;
                 }
             }
-            if (message.link != null && message.hasOwnProperty("link")) {
+            if (message.externalResource != null && message.hasOwnProperty("externalResource")) {
                 if (properties.subject === 1)
                     return "subject: multiple values";
                 properties.subject = 1;
                 {
-                    var error = $root.multiverse.Link.verify(message.link);
+                    var error = $root.multiverse.ExternalResource.verify(message.externalResource);
                     if (error)
-                        return "link." + error;
+                        return "externalResource." + error;
                 }
             }
             if (message.amazonProduct != null && message.hasOwnProperty("amazonProduct")) {
@@ -2207,10 +2141,10 @@ $root.multiverse = (function() {
                     throw TypeError(".multiverse.Rating.movie: object expected");
                 message.movie = $root.multiverse.Movie.fromObject(object.movie);
             }
-            if (object.link != null) {
-                if (typeof object.link !== "object")
-                    throw TypeError(".multiverse.Rating.link: object expected");
-                message.link = $root.multiverse.Link.fromObject(object.link);
+            if (object.externalResource != null) {
+                if (typeof object.externalResource !== "object")
+                    throw TypeError(".multiverse.Rating.externalResource: object expected");
+                message.externalResource = $root.multiverse.ExternalResource.fromObject(object.externalResource);
             }
             if (object.amazonProduct != null) {
                 if (typeof object.amazonProduct !== "object")
@@ -2282,6 +2216,11 @@ $root.multiverse = (function() {
             var object = {};
             if (options.defaults)
                 object.starRating = options.enums === String ? "UNKNOWN" : 0;
+            if (message.externalResource != null && message.hasOwnProperty("externalResource")) {
+                object.externalResource = $root.multiverse.ExternalResource.toObject(message.externalResource, options);
+                if (options.oneofs)
+                    object.subject = "externalResource";
+            }
             if (message.amazonProduct != null && message.hasOwnProperty("amazonProduct")) {
                 object.amazonProduct = $root.multiverse.AmazonProduct.toObject(message.amazonProduct, options);
                 if (options.oneofs)
@@ -2289,6 +2228,11 @@ $root.multiverse = (function() {
             }
             if (message.starRating != null && message.hasOwnProperty("starRating"))
                 object.starRating = options.enums === String ? $root.multiverse.StarRating[message.starRating] === undefined ? message.starRating : $root.multiverse.StarRating[message.starRating] : message.starRating;
+            if (message.githubRepo != null && message.hasOwnProperty("githubRepo")) {
+                object.githubRepo = $root.multiverse.GitHubRepo.toObject(message.githubRepo, options);
+                if (options.oneofs)
+                    object.subject = "githubRepo";
+            }
             if (message.movie != null && message.hasOwnProperty("movie")) {
                 object.movie = $root.multiverse.Movie.toObject(message.movie, options);
                 if (options.oneofs)
@@ -2298,16 +2242,6 @@ $root.multiverse = (function() {
                 object.githubAccount = $root.multiverse.GitHubAccount.toObject(message.githubAccount, options);
                 if (options.oneofs)
                     object.subject = "githubAccount";
-            }
-            if (message.link != null && message.hasOwnProperty("link")) {
-                object.link = $root.multiverse.Link.toObject(message.link, options);
-                if (options.oneofs)
-                    object.subject = "link";
-            }
-            if (message.githubRepo != null && message.hasOwnProperty("githubRepo")) {
-                object.githubRepo = $root.multiverse.GitHubRepo.toObject(message.githubRepo, options);
-                if (options.oneofs)
-                    object.subject = "githubRepo";
             }
             if (message.youtubeVideo != null && message.hasOwnProperty("youtubeVideo")) {
                 object.youtubeVideo = $root.multiverse.YouTubeVideo.toObject(message.youtubeVideo, options);
@@ -2403,7 +2337,7 @@ $root.multiverse = (function() {
             if (!writer)
                 writer = $Writer.create();
             if (message.asin != null && Object.hasOwnProperty.call(message, "asin"))
-                writer.uint32(/* id 412650755, wireType 2 =*/3301206042).string(message.asin);
+                writer.uint32(/* id 87273, wireType 2 =*/698186).string(message.asin);
             return writer;
         };
 
@@ -2438,7 +2372,7 @@ $root.multiverse = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 949521667: {
+                case 87273: {
                         message.asin = reader.string();
                         break;
                     }
@@ -2809,7 +2743,7 @@ $root.multiverse = (function() {
             if (!writer)
                 writer = $Writer.create();
             if (message.name != null && Object.hasOwnProperty.call(message, "name"))
-                writer.uint32(/* id 23789723, wireType 2 =*/190317786).string(message.name);
+                writer.uint32(/* id 23723, wireType 2 =*/189786).string(message.name);
             return writer;
         };
 
@@ -2844,7 +2778,7 @@ $root.multiverse = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 23789723: {
+                case 23723: {
                         message.name = reader.string();
                         break;
                     }
@@ -3021,9 +2955,9 @@ $root.multiverse = (function() {
             if (!writer)
                 writer = $Writer.create();
             if (message.owner != null && Object.hasOwnProperty.call(message, "owner"))
-                $root.multiverse.GitHubAccount.encode(message.owner, writer.uint32(/* id 23789723, wireType 2 =*/190317786).fork()).ldelim();
+                $root.multiverse.GitHubAccount.encode(message.owner, writer.uint32(/* id 89723, wireType 2 =*/717786).fork()).ldelim();
             if (message.name != null && Object.hasOwnProperty.call(message, "name"))
-                writer.uint32(/* id 384378293, wireType 2 =*/3075026346).string(message.name);
+                writer.uint32(/* id 384293, wireType 2 =*/3074346).string(message.name);
             return writer;
         };
 
@@ -3058,11 +2992,11 @@ $root.multiverse = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 23789723: {
+                case 89723: {
                         message.owner = $root.multiverse.GitHubAccount.decode(reader, reader.uint32());
                         break;
                     }
-                case 384378293: {
+                case 384293: {
                         message.name = reader.string();
                         break;
                     }
@@ -3388,6 +3322,1853 @@ $root.multiverse = (function() {
         };
 
         return Markdown;
+    })();
+
+    multiverse.Content = (function() {
+
+        /**
+         * Properties of a Content.
+         * @memberof multiverse
+         * @interface IContent
+         * @property {multiverse.IMarkdown|null} [markdown] Content markdown
+         */
+
+        /**
+         * Constructs a new Content.
+         * @memberof multiverse
+         * @classdesc Represents a Content.
+         * @implements IContent
+         * @constructor
+         * @param {multiverse.IContent=} [properties] Properties to set
+         */
+        function Content(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * Content markdown.
+         * @member {multiverse.IMarkdown|null|undefined} markdown
+         * @memberof multiverse.Content
+         * @instance
+         */
+        Content.prototype.markdown = null;
+
+        // OneOf field names bound to virtual getters and setters
+        var $oneOfFields;
+
+        /**
+         * Content content.
+         * @member {"markdown"|undefined} content
+         * @memberof multiverse.Content
+         * @instance
+         */
+        Object.defineProperty(Content.prototype, "content", {
+            get: $util.oneOfGetter($oneOfFields = ["markdown"]),
+            set: $util.oneOfSetter($oneOfFields)
+        });
+
+        /**
+         * Creates a new Content instance using the specified properties.
+         * @function create
+         * @memberof multiverse.Content
+         * @static
+         * @param {multiverse.IContent=} [properties] Properties to set
+         * @returns {multiverse.Content} Content instance
+         */
+        Content.create = function create(properties) {
+            return new Content(properties);
+        };
+
+        /**
+         * Encodes the specified Content message. Does not implicitly {@link multiverse.Content.verify|verify} messages.
+         * @function encode
+         * @memberof multiverse.Content
+         * @static
+         * @param {multiverse.IContent} message Content message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        Content.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.markdown != null && Object.hasOwnProperty.call(message, "markdown"))
+                $root.multiverse.Markdown.encode(message.markdown, writer.uint32(/* id 762622, wireType 2 =*/6100978).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified Content message, length delimited. Does not implicitly {@link multiverse.Content.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof multiverse.Content
+         * @static
+         * @param {multiverse.IContent} message Content message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        Content.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a Content message from the specified reader or buffer.
+         * @function decode
+         * @memberof multiverse.Content
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {multiverse.Content} Content
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        Content.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.multiverse.Content();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 762622: {
+                        message.markdown = $root.multiverse.Markdown.decode(reader, reader.uint32());
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a Content message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof multiverse.Content
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {multiverse.Content} Content
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        Content.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a Content message.
+         * @function verify
+         * @memberof multiverse.Content
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        Content.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            var properties = {};
+            if (message.markdown != null && message.hasOwnProperty("markdown")) {
+                properties.content = 1;
+                {
+                    var error = $root.multiverse.Markdown.verify(message.markdown);
+                    if (error)
+                        return "markdown." + error;
+                }
+            }
+            return null;
+        };
+
+        /**
+         * Creates a Content message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof multiverse.Content
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {multiverse.Content} Content
+         */
+        Content.fromObject = function fromObject(object) {
+            if (object instanceof $root.multiverse.Content)
+                return object;
+            var message = new $root.multiverse.Content();
+            if (object.markdown != null) {
+                if (typeof object.markdown !== "object")
+                    throw TypeError(".multiverse.Content.markdown: object expected");
+                message.markdown = $root.multiverse.Markdown.fromObject(object.markdown);
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a Content message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof multiverse.Content
+         * @static
+         * @param {multiverse.Content} message Content
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        Content.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (message.markdown != null && message.hasOwnProperty("markdown")) {
+                object.markdown = $root.multiverse.Markdown.toObject(message.markdown, options);
+                if (options.oneofs)
+                    object.content = "markdown";
+            }
+            return object;
+        };
+
+        /**
+         * Converts this Content to JSON.
+         * @function toJSON
+         * @memberof multiverse.Content
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        Content.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for Content
+         * @function getTypeUrl
+         * @memberof multiverse.Content
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        Content.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/multiverse.Content";
+        };
+
+        return Content;
+    })();
+
+    multiverse.Image = (function() {
+
+        /**
+         * Properties of an Image.
+         * @memberof multiverse
+         * @interface IImage
+         * @property {multiverse.IExternalResource|null} [externalResource] Image externalResource
+         */
+
+        /**
+         * Constructs a new Image.
+         * @memberof multiverse
+         * @classdesc Represents an Image.
+         * @implements IImage
+         * @constructor
+         * @param {multiverse.IImage=} [properties] Properties to set
+         */
+        function Image(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * Image externalResource.
+         * @member {multiverse.IExternalResource|null|undefined} externalResource
+         * @memberof multiverse.Image
+         * @instance
+         */
+        Image.prototype.externalResource = null;
+
+        /**
+         * Creates a new Image instance using the specified properties.
+         * @function create
+         * @memberof multiverse.Image
+         * @static
+         * @param {multiverse.IImage=} [properties] Properties to set
+         * @returns {multiverse.Image} Image instance
+         */
+        Image.create = function create(properties) {
+            return new Image(properties);
+        };
+
+        /**
+         * Encodes the specified Image message. Does not implicitly {@link multiverse.Image.verify|verify} messages.
+         * @function encode
+         * @memberof multiverse.Image
+         * @static
+         * @param {multiverse.IImage} message Image message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        Image.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.externalResource != null && Object.hasOwnProperty.call(message, "externalResource"))
+                $root.multiverse.ExternalResource.encode(message.externalResource, writer.uint32(/* id 211122, wireType 2 =*/1688978).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified Image message, length delimited. Does not implicitly {@link multiverse.Image.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof multiverse.Image
+         * @static
+         * @param {multiverse.IImage} message Image message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        Image.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes an Image message from the specified reader or buffer.
+         * @function decode
+         * @memberof multiverse.Image
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {multiverse.Image} Image
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        Image.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.multiverse.Image();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 211122: {
+                        message.externalResource = $root.multiverse.ExternalResource.decode(reader, reader.uint32());
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes an Image message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof multiverse.Image
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {multiverse.Image} Image
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        Image.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies an Image message.
+         * @function verify
+         * @memberof multiverse.Image
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        Image.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.externalResource != null && message.hasOwnProperty("externalResource")) {
+                var error = $root.multiverse.ExternalResource.verify(message.externalResource);
+                if (error)
+                    return "externalResource." + error;
+            }
+            return null;
+        };
+
+        /**
+         * Creates an Image message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof multiverse.Image
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {multiverse.Image} Image
+         */
+        Image.fromObject = function fromObject(object) {
+            if (object instanceof $root.multiverse.Image)
+                return object;
+            var message = new $root.multiverse.Image();
+            if (object.externalResource != null) {
+                if (typeof object.externalResource !== "object")
+                    throw TypeError(".multiverse.Image.externalResource: object expected");
+                message.externalResource = $root.multiverse.ExternalResource.fromObject(object.externalResource);
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from an Image message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof multiverse.Image
+         * @static
+         * @param {multiverse.Image} message Image
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        Image.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.externalResource = null;
+            if (message.externalResource != null && message.hasOwnProperty("externalResource"))
+                object.externalResource = $root.multiverse.ExternalResource.toObject(message.externalResource, options);
+            return object;
+        };
+
+        /**
+         * Converts this Image to JSON.
+         * @function toJSON
+         * @memberof multiverse.Image
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        Image.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for Image
+         * @function getTypeUrl
+         * @memberof multiverse.Image
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        Image.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/multiverse.Image";
+        };
+
+        return Image;
+    })();
+
+    multiverse.ExternalResource = (function() {
+
+        /**
+         * Properties of an ExternalResource.
+         * @memberof multiverse
+         * @interface IExternalResource
+         * @property {multiverse.IURL|null} [url] ExternalResource url
+         * @property {multiverse.IDigest|null} [digest] ExternalResource digest
+         */
+
+        /**
+         * Constructs a new ExternalResource.
+         * @memberof multiverse
+         * @classdesc Represents an ExternalResource.
+         * @implements IExternalResource
+         * @constructor
+         * @param {multiverse.IExternalResource=} [properties] Properties to set
+         */
+        function ExternalResource(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * ExternalResource url.
+         * @member {multiverse.IURL|null|undefined} url
+         * @memberof multiverse.ExternalResource
+         * @instance
+         */
+        ExternalResource.prototype.url = null;
+
+        /**
+         * ExternalResource digest.
+         * @member {multiverse.IDigest|null|undefined} digest
+         * @memberof multiverse.ExternalResource
+         * @instance
+         */
+        ExternalResource.prototype.digest = null;
+
+        // OneOf field names bound to virtual getters and setters
+        var $oneOfFields;
+
+        /**
+         * ExternalResource resource.
+         * @member {"url"|"digest"|undefined} resource
+         * @memberof multiverse.ExternalResource
+         * @instance
+         */
+        Object.defineProperty(ExternalResource.prototype, "resource", {
+            get: $util.oneOfGetter($oneOfFields = ["url", "digest"]),
+            set: $util.oneOfSetter($oneOfFields)
+        });
+
+        /**
+         * Creates a new ExternalResource instance using the specified properties.
+         * @function create
+         * @memberof multiverse.ExternalResource
+         * @static
+         * @param {multiverse.IExternalResource=} [properties] Properties to set
+         * @returns {multiverse.ExternalResource} ExternalResource instance
+         */
+        ExternalResource.create = function create(properties) {
+            return new ExternalResource(properties);
+        };
+
+        /**
+         * Encodes the specified ExternalResource message. Does not implicitly {@link multiverse.ExternalResource.verify|verify} messages.
+         * @function encode
+         * @memberof multiverse.ExternalResource
+         * @static
+         * @param {multiverse.IExternalResource} message ExternalResource message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        ExternalResource.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.url != null && Object.hasOwnProperty.call(message, "url"))
+                $root.multiverse.URL.encode(message.url, writer.uint32(/* id 32932, wireType 2 =*/263458).fork()).ldelim();
+            if (message.digest != null && Object.hasOwnProperty.call(message, "digest"))
+                $root.multiverse.Digest.encode(message.digest, writer.uint32(/* id 621112, wireType 2 =*/4968898).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified ExternalResource message, length delimited. Does not implicitly {@link multiverse.ExternalResource.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof multiverse.ExternalResource
+         * @static
+         * @param {multiverse.IExternalResource} message ExternalResource message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        ExternalResource.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes an ExternalResource message from the specified reader or buffer.
+         * @function decode
+         * @memberof multiverse.ExternalResource
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {multiverse.ExternalResource} ExternalResource
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        ExternalResource.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.multiverse.ExternalResource();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 32932: {
+                        message.url = $root.multiverse.URL.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 621112: {
+                        message.digest = $root.multiverse.Digest.decode(reader, reader.uint32());
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes an ExternalResource message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof multiverse.ExternalResource
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {multiverse.ExternalResource} ExternalResource
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        ExternalResource.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies an ExternalResource message.
+         * @function verify
+         * @memberof multiverse.ExternalResource
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        ExternalResource.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            var properties = {};
+            if (message.url != null && message.hasOwnProperty("url")) {
+                properties.resource = 1;
+                {
+                    var error = $root.multiverse.URL.verify(message.url);
+                    if (error)
+                        return "url." + error;
+                }
+            }
+            if (message.digest != null && message.hasOwnProperty("digest")) {
+                if (properties.resource === 1)
+                    return "resource: multiple values";
+                properties.resource = 1;
+                {
+                    var error = $root.multiverse.Digest.verify(message.digest);
+                    if (error)
+                        return "digest." + error;
+                }
+            }
+            return null;
+        };
+
+        /**
+         * Creates an ExternalResource message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof multiverse.ExternalResource
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {multiverse.ExternalResource} ExternalResource
+         */
+        ExternalResource.fromObject = function fromObject(object) {
+            if (object instanceof $root.multiverse.ExternalResource)
+                return object;
+            var message = new $root.multiverse.ExternalResource();
+            if (object.url != null) {
+                if (typeof object.url !== "object")
+                    throw TypeError(".multiverse.ExternalResource.url: object expected");
+                message.url = $root.multiverse.URL.fromObject(object.url);
+            }
+            if (object.digest != null) {
+                if (typeof object.digest !== "object")
+                    throw TypeError(".multiverse.ExternalResource.digest: object expected");
+                message.digest = $root.multiverse.Digest.fromObject(object.digest);
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from an ExternalResource message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof multiverse.ExternalResource
+         * @static
+         * @param {multiverse.ExternalResource} message ExternalResource
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        ExternalResource.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (message.url != null && message.hasOwnProperty("url")) {
+                object.url = $root.multiverse.URL.toObject(message.url, options);
+                if (options.oneofs)
+                    object.resource = "url";
+            }
+            if (message.digest != null && message.hasOwnProperty("digest")) {
+                object.digest = $root.multiverse.Digest.toObject(message.digest, options);
+                if (options.oneofs)
+                    object.resource = "digest";
+            }
+            return object;
+        };
+
+        /**
+         * Converts this ExternalResource to JSON.
+         * @function toJSON
+         * @memberof multiverse.ExternalResource
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        ExternalResource.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for ExternalResource
+         * @function getTypeUrl
+         * @memberof multiverse.ExternalResource
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        ExternalResource.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/multiverse.ExternalResource";
+        };
+
+        return ExternalResource;
+    })();
+
+    multiverse.Digest = (function() {
+
+        /**
+         * Properties of a Digest.
+         * @memberof multiverse
+         * @interface IDigest
+         * @property {Uint8Array|null} [sha2_256] Digest sha2_256
+         * @property {Uint8Array|null} [sha2_512] Digest sha2_512
+         * @property {Uint8Array|null} [sha3_256] Digest sha3_256
+         * @property {Uint8Array|null} [sha3_512] Digest sha3_512
+         */
+
+        /**
+         * Constructs a new Digest.
+         * @memberof multiverse
+         * @classdesc Represents a Digest.
+         * @implements IDigest
+         * @constructor
+         * @param {multiverse.IDigest=} [properties] Properties to set
+         */
+        function Digest(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * Digest sha2_256.
+         * @member {Uint8Array} sha2_256
+         * @memberof multiverse.Digest
+         * @instance
+         */
+        Digest.prototype.sha2_256 = $util.newBuffer([]);
+
+        /**
+         * Digest sha2_512.
+         * @member {Uint8Array} sha2_512
+         * @memberof multiverse.Digest
+         * @instance
+         */
+        Digest.prototype.sha2_512 = $util.newBuffer([]);
+
+        /**
+         * Digest sha3_256.
+         * @member {Uint8Array} sha3_256
+         * @memberof multiverse.Digest
+         * @instance
+         */
+        Digest.prototype.sha3_256 = $util.newBuffer([]);
+
+        /**
+         * Digest sha3_512.
+         * @member {Uint8Array} sha3_512
+         * @memberof multiverse.Digest
+         * @instance
+         */
+        Digest.prototype.sha3_512 = $util.newBuffer([]);
+
+        /**
+         * Creates a new Digest instance using the specified properties.
+         * @function create
+         * @memberof multiverse.Digest
+         * @static
+         * @param {multiverse.IDigest=} [properties] Properties to set
+         * @returns {multiverse.Digest} Digest instance
+         */
+        Digest.create = function create(properties) {
+            return new Digest(properties);
+        };
+
+        /**
+         * Encodes the specified Digest message. Does not implicitly {@link multiverse.Digest.verify|verify} messages.
+         * @function encode
+         * @memberof multiverse.Digest
+         * @static
+         * @param {multiverse.IDigest} message Digest message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        Digest.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.sha3_256 != null && Object.hasOwnProperty.call(message, "sha3_256"))
+                writer.uint32(/* id 1287112, wireType 2 =*/10296898).bytes(message.sha3_256);
+            if (message.sha2_512 != null && Object.hasOwnProperty.call(message, "sha2_512"))
+                writer.uint32(/* id 1627273, wireType 2 =*/13018186).bytes(message.sha2_512);
+            if (message.sha3_512 != null && Object.hasOwnProperty.call(message, "sha3_512"))
+                writer.uint32(/* id 5441122, wireType 2 =*/43528978).bytes(message.sha3_512);
+            if (message.sha2_256 != null && Object.hasOwnProperty.call(message, "sha2_256"))
+                writer.uint32(/* id 9812731, wireType 2 =*/78501850).bytes(message.sha2_256);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified Digest message, length delimited. Does not implicitly {@link multiverse.Digest.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof multiverse.Digest
+         * @static
+         * @param {multiverse.IDigest} message Digest message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        Digest.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a Digest message from the specified reader or buffer.
+         * @function decode
+         * @memberof multiverse.Digest
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {multiverse.Digest} Digest
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        Digest.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.multiverse.Digest();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 9812731: {
+                        message.sha2_256 = reader.bytes();
+                        break;
+                    }
+                case 1627273: {
+                        message.sha2_512 = reader.bytes();
+                        break;
+                    }
+                case 1287112: {
+                        message.sha3_256 = reader.bytes();
+                        break;
+                    }
+                case 5441122: {
+                        message.sha3_512 = reader.bytes();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a Digest message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof multiverse.Digest
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {multiverse.Digest} Digest
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        Digest.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a Digest message.
+         * @function verify
+         * @memberof multiverse.Digest
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        Digest.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.sha2_256 != null && message.hasOwnProperty("sha2_256"))
+                if (!(message.sha2_256 && typeof message.sha2_256.length === "number" || $util.isString(message.sha2_256)))
+                    return "sha2_256: buffer expected";
+            if (message.sha2_512 != null && message.hasOwnProperty("sha2_512"))
+                if (!(message.sha2_512 && typeof message.sha2_512.length === "number" || $util.isString(message.sha2_512)))
+                    return "sha2_512: buffer expected";
+            if (message.sha3_256 != null && message.hasOwnProperty("sha3_256"))
+                if (!(message.sha3_256 && typeof message.sha3_256.length === "number" || $util.isString(message.sha3_256)))
+                    return "sha3_256: buffer expected";
+            if (message.sha3_512 != null && message.hasOwnProperty("sha3_512"))
+                if (!(message.sha3_512 && typeof message.sha3_512.length === "number" || $util.isString(message.sha3_512)))
+                    return "sha3_512: buffer expected";
+            return null;
+        };
+
+        /**
+         * Creates a Digest message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof multiverse.Digest
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {multiverse.Digest} Digest
+         */
+        Digest.fromObject = function fromObject(object) {
+            if (object instanceof $root.multiverse.Digest)
+                return object;
+            var message = new $root.multiverse.Digest();
+            if (object.sha2_256 != null)
+                if (typeof object.sha2_256 === "string")
+                    $util.base64.decode(object.sha2_256, message.sha2_256 = $util.newBuffer($util.base64.length(object.sha2_256)), 0);
+                else if (object.sha2_256.length >= 0)
+                    message.sha2_256 = object.sha2_256;
+            if (object.sha2_512 != null)
+                if (typeof object.sha2_512 === "string")
+                    $util.base64.decode(object.sha2_512, message.sha2_512 = $util.newBuffer($util.base64.length(object.sha2_512)), 0);
+                else if (object.sha2_512.length >= 0)
+                    message.sha2_512 = object.sha2_512;
+            if (object.sha3_256 != null)
+                if (typeof object.sha3_256 === "string")
+                    $util.base64.decode(object.sha3_256, message.sha3_256 = $util.newBuffer($util.base64.length(object.sha3_256)), 0);
+                else if (object.sha3_256.length >= 0)
+                    message.sha3_256 = object.sha3_256;
+            if (object.sha3_512 != null)
+                if (typeof object.sha3_512 === "string")
+                    $util.base64.decode(object.sha3_512, message.sha3_512 = $util.newBuffer($util.base64.length(object.sha3_512)), 0);
+                else if (object.sha3_512.length >= 0)
+                    message.sha3_512 = object.sha3_512;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a Digest message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof multiverse.Digest
+         * @static
+         * @param {multiverse.Digest} message Digest
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        Digest.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if (options.bytes === String)
+                    object.sha3_256 = "";
+                else {
+                    object.sha3_256 = [];
+                    if (options.bytes !== Array)
+                        object.sha3_256 = $util.newBuffer(object.sha3_256);
+                }
+                if (options.bytes === String)
+                    object.sha2_512 = "";
+                else {
+                    object.sha2_512 = [];
+                    if (options.bytes !== Array)
+                        object.sha2_512 = $util.newBuffer(object.sha2_512);
+                }
+                if (options.bytes === String)
+                    object.sha3_512 = "";
+                else {
+                    object.sha3_512 = [];
+                    if (options.bytes !== Array)
+                        object.sha3_512 = $util.newBuffer(object.sha3_512);
+                }
+                if (options.bytes === String)
+                    object.sha2_256 = "";
+                else {
+                    object.sha2_256 = [];
+                    if (options.bytes !== Array)
+                        object.sha2_256 = $util.newBuffer(object.sha2_256);
+                }
+            }
+            if (message.sha3_256 != null && message.hasOwnProperty("sha3_256"))
+                object.sha3_256 = options.bytes === String ? $util.base64.encode(message.sha3_256, 0, message.sha3_256.length) : options.bytes === Array ? Array.prototype.slice.call(message.sha3_256) : message.sha3_256;
+            if (message.sha2_512 != null && message.hasOwnProperty("sha2_512"))
+                object.sha2_512 = options.bytes === String ? $util.base64.encode(message.sha2_512, 0, message.sha2_512.length) : options.bytes === Array ? Array.prototype.slice.call(message.sha2_512) : message.sha2_512;
+            if (message.sha3_512 != null && message.hasOwnProperty("sha3_512"))
+                object.sha3_512 = options.bytes === String ? $util.base64.encode(message.sha3_512, 0, message.sha3_512.length) : options.bytes === Array ? Array.prototype.slice.call(message.sha3_512) : message.sha3_512;
+            if (message.sha2_256 != null && message.hasOwnProperty("sha2_256"))
+                object.sha2_256 = options.bytes === String ? $util.base64.encode(message.sha2_256, 0, message.sha2_256.length) : options.bytes === Array ? Array.prototype.slice.call(message.sha2_256) : message.sha2_256;
+            return object;
+        };
+
+        /**
+         * Converts this Digest to JSON.
+         * @function toJSON
+         * @memberof multiverse.Digest
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        Digest.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for Digest
+         * @function getTypeUrl
+         * @memberof multiverse.Digest
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        Digest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/multiverse.Digest";
+        };
+
+        return Digest;
+    })();
+
+    multiverse.TwitterAccount = (function() {
+
+        /**
+         * Properties of a TwitterAccount.
+         * @memberof multiverse
+         * @interface ITwitterAccount
+         * @property {string|null} [handle] TwitterAccount handle
+         */
+
+        /**
+         * Constructs a new TwitterAccount.
+         * @memberof multiverse
+         * @classdesc Represents a TwitterAccount.
+         * @implements ITwitterAccount
+         * @constructor
+         * @param {multiverse.ITwitterAccount=} [properties] Properties to set
+         */
+        function TwitterAccount(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * TwitterAccount handle.
+         * @member {string} handle
+         * @memberof multiverse.TwitterAccount
+         * @instance
+         */
+        TwitterAccount.prototype.handle = "";
+
+        /**
+         * Creates a new TwitterAccount instance using the specified properties.
+         * @function create
+         * @memberof multiverse.TwitterAccount
+         * @static
+         * @param {multiverse.ITwitterAccount=} [properties] Properties to set
+         * @returns {multiverse.TwitterAccount} TwitterAccount instance
+         */
+        TwitterAccount.create = function create(properties) {
+            return new TwitterAccount(properties);
+        };
+
+        /**
+         * Encodes the specified TwitterAccount message. Does not implicitly {@link multiverse.TwitterAccount.verify|verify} messages.
+         * @function encode
+         * @memberof multiverse.TwitterAccount
+         * @static
+         * @param {multiverse.ITwitterAccount} message TwitterAccount message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        TwitterAccount.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.handle != null && Object.hasOwnProperty.call(message, "handle"))
+                writer.uint32(/* id 1126324, wireType 2 =*/9010594).string(message.handle);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified TwitterAccount message, length delimited. Does not implicitly {@link multiverse.TwitterAccount.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof multiverse.TwitterAccount
+         * @static
+         * @param {multiverse.ITwitterAccount} message TwitterAccount message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        TwitterAccount.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a TwitterAccount message from the specified reader or buffer.
+         * @function decode
+         * @memberof multiverse.TwitterAccount
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {multiverse.TwitterAccount} TwitterAccount
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        TwitterAccount.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.multiverse.TwitterAccount();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1126324: {
+                        message.handle = reader.string();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a TwitterAccount message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof multiverse.TwitterAccount
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {multiverse.TwitterAccount} TwitterAccount
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        TwitterAccount.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a TwitterAccount message.
+         * @function verify
+         * @memberof multiverse.TwitterAccount
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        TwitterAccount.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.handle != null && message.hasOwnProperty("handle"))
+                if (!$util.isString(message.handle))
+                    return "handle: string expected";
+            return null;
+        };
+
+        /**
+         * Creates a TwitterAccount message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof multiverse.TwitterAccount
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {multiverse.TwitterAccount} TwitterAccount
+         */
+        TwitterAccount.fromObject = function fromObject(object) {
+            if (object instanceof $root.multiverse.TwitterAccount)
+                return object;
+            var message = new $root.multiverse.TwitterAccount();
+            if (object.handle != null)
+                message.handle = String(object.handle);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a TwitterAccount message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof multiverse.TwitterAccount
+         * @static
+         * @param {multiverse.TwitterAccount} message TwitterAccount
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        TwitterAccount.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.handle = "";
+            if (message.handle != null && message.hasOwnProperty("handle"))
+                object.handle = message.handle;
+            return object;
+        };
+
+        /**
+         * Converts this TwitterAccount to JSON.
+         * @function toJSON
+         * @memberof multiverse.TwitterAccount
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        TwitterAccount.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for TwitterAccount
+         * @function getTypeUrl
+         * @memberof multiverse.TwitterAccount
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        TwitterAccount.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/multiverse.TwitterAccount";
+        };
+
+        return TwitterAccount;
+    })();
+
+    multiverse.TwitterPost = (function() {
+
+        /**
+         * Properties of a TwitterPost.
+         * @memberof multiverse
+         * @interface ITwitterPost
+         * @property {multiverse.ITwitterAccount|null} [author] TwitterPost author
+         * @property {string|null} [id] TwitterPost id
+         */
+
+        /**
+         * Constructs a new TwitterPost.
+         * @memberof multiverse
+         * @classdesc Represents a TwitterPost.
+         * @implements ITwitterPost
+         * @constructor
+         * @param {multiverse.ITwitterPost=} [properties] Properties to set
+         */
+        function TwitterPost(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * TwitterPost author.
+         * @member {multiverse.ITwitterAccount|null|undefined} author
+         * @memberof multiverse.TwitterPost
+         * @instance
+         */
+        TwitterPost.prototype.author = null;
+
+        /**
+         * TwitterPost id.
+         * @member {string} id
+         * @memberof multiverse.TwitterPost
+         * @instance
+         */
+        TwitterPost.prototype.id = "";
+
+        /**
+         * Creates a new TwitterPost instance using the specified properties.
+         * @function create
+         * @memberof multiverse.TwitterPost
+         * @static
+         * @param {multiverse.ITwitterPost=} [properties] Properties to set
+         * @returns {multiverse.TwitterPost} TwitterPost instance
+         */
+        TwitterPost.create = function create(properties) {
+            return new TwitterPost(properties);
+        };
+
+        /**
+         * Encodes the specified TwitterPost message. Does not implicitly {@link multiverse.TwitterPost.verify|verify} messages.
+         * @function encode
+         * @memberof multiverse.TwitterPost
+         * @static
+         * @param {multiverse.ITwitterPost} message TwitterPost message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        TwitterPost.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                writer.uint32(/* id 1173336, wireType 2 =*/9386690).string(message.id);
+            if (message.author != null && Object.hasOwnProperty.call(message, "author"))
+                $root.multiverse.TwitterAccount.encode(message.author, writer.uint32(/* id 6716122, wireType 2 =*/53728978).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified TwitterPost message, length delimited. Does not implicitly {@link multiverse.TwitterPost.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof multiverse.TwitterPost
+         * @static
+         * @param {multiverse.ITwitterPost} message TwitterPost message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        TwitterPost.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a TwitterPost message from the specified reader or buffer.
+         * @function decode
+         * @memberof multiverse.TwitterPost
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {multiverse.TwitterPost} TwitterPost
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        TwitterPost.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.multiverse.TwitterPost();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 6716122: {
+                        message.author = $root.multiverse.TwitterAccount.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 1173336: {
+                        message.id = reader.string();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a TwitterPost message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof multiverse.TwitterPost
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {multiverse.TwitterPost} TwitterPost
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        TwitterPost.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a TwitterPost message.
+         * @function verify
+         * @memberof multiverse.TwitterPost
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        TwitterPost.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.author != null && message.hasOwnProperty("author")) {
+                var error = $root.multiverse.TwitterAccount.verify(message.author);
+                if (error)
+                    return "author." + error;
+            }
+            if (message.id != null && message.hasOwnProperty("id"))
+                if (!$util.isString(message.id))
+                    return "id: string expected";
+            return null;
+        };
+
+        /**
+         * Creates a TwitterPost message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof multiverse.TwitterPost
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {multiverse.TwitterPost} TwitterPost
+         */
+        TwitterPost.fromObject = function fromObject(object) {
+            if (object instanceof $root.multiverse.TwitterPost)
+                return object;
+            var message = new $root.multiverse.TwitterPost();
+            if (object.author != null) {
+                if (typeof object.author !== "object")
+                    throw TypeError(".multiverse.TwitterPost.author: object expected");
+                message.author = $root.multiverse.TwitterAccount.fromObject(object.author);
+            }
+            if (object.id != null)
+                message.id = String(object.id);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a TwitterPost message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof multiverse.TwitterPost
+         * @static
+         * @param {multiverse.TwitterPost} message TwitterPost
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        TwitterPost.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.id = "";
+                object.author = null;
+            }
+            if (message.id != null && message.hasOwnProperty("id"))
+                object.id = message.id;
+            if (message.author != null && message.hasOwnProperty("author"))
+                object.author = $root.multiverse.TwitterAccount.toObject(message.author, options);
+            return object;
+        };
+
+        /**
+         * Converts this TwitterPost to JSON.
+         * @function toJSON
+         * @memberof multiverse.TwitterPost
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        TwitterPost.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for TwitterPost
+         * @function getTypeUrl
+         * @memberof multiverse.TwitterPost
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        TwitterPost.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/multiverse.TwitterPost";
+        };
+
+        return TwitterPost;
+    })();
+
+    multiverse.MediumAccount = (function() {
+
+        /**
+         * Properties of a MediumAccount.
+         * @memberof multiverse
+         * @interface IMediumAccount
+         * @property {string|null} [handle] MediumAccount handle
+         */
+
+        /**
+         * Constructs a new MediumAccount.
+         * @memberof multiverse
+         * @classdesc Represents a MediumAccount.
+         * @implements IMediumAccount
+         * @constructor
+         * @param {multiverse.IMediumAccount=} [properties] Properties to set
+         */
+        function MediumAccount(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * MediumAccount handle.
+         * @member {string} handle
+         * @memberof multiverse.MediumAccount
+         * @instance
+         */
+        MediumAccount.prototype.handle = "";
+
+        /**
+         * Creates a new MediumAccount instance using the specified properties.
+         * @function create
+         * @memberof multiverse.MediumAccount
+         * @static
+         * @param {multiverse.IMediumAccount=} [properties] Properties to set
+         * @returns {multiverse.MediumAccount} MediumAccount instance
+         */
+        MediumAccount.create = function create(properties) {
+            return new MediumAccount(properties);
+        };
+
+        /**
+         * Encodes the specified MediumAccount message. Does not implicitly {@link multiverse.MediumAccount.verify|verify} messages.
+         * @function encode
+         * @memberof multiverse.MediumAccount
+         * @static
+         * @param {multiverse.IMediumAccount} message MediumAccount message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        MediumAccount.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.handle != null && Object.hasOwnProperty.call(message, "handle"))
+                writer.uint32(/* id 2212215, wireType 2 =*/17697722).string(message.handle);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified MediumAccount message, length delimited. Does not implicitly {@link multiverse.MediumAccount.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof multiverse.MediumAccount
+         * @static
+         * @param {multiverse.IMediumAccount} message MediumAccount message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        MediumAccount.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a MediumAccount message from the specified reader or buffer.
+         * @function decode
+         * @memberof multiverse.MediumAccount
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {multiverse.MediumAccount} MediumAccount
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        MediumAccount.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.multiverse.MediumAccount();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 2212215: {
+                        message.handle = reader.string();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a MediumAccount message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof multiverse.MediumAccount
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {multiverse.MediumAccount} MediumAccount
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        MediumAccount.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a MediumAccount message.
+         * @function verify
+         * @memberof multiverse.MediumAccount
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        MediumAccount.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.handle != null && message.hasOwnProperty("handle"))
+                if (!$util.isString(message.handle))
+                    return "handle: string expected";
+            return null;
+        };
+
+        /**
+         * Creates a MediumAccount message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof multiverse.MediumAccount
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {multiverse.MediumAccount} MediumAccount
+         */
+        MediumAccount.fromObject = function fromObject(object) {
+            if (object instanceof $root.multiverse.MediumAccount)
+                return object;
+            var message = new $root.multiverse.MediumAccount();
+            if (object.handle != null)
+                message.handle = String(object.handle);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a MediumAccount message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof multiverse.MediumAccount
+         * @static
+         * @param {multiverse.MediumAccount} message MediumAccount
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        MediumAccount.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.handle = "";
+            if (message.handle != null && message.hasOwnProperty("handle"))
+                object.handle = message.handle;
+            return object;
+        };
+
+        /**
+         * Converts this MediumAccount to JSON.
+         * @function toJSON
+         * @memberof multiverse.MediumAccount
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        MediumAccount.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for MediumAccount
+         * @function getTypeUrl
+         * @memberof multiverse.MediumAccount
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        MediumAccount.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/multiverse.MediumAccount";
+        };
+
+        return MediumAccount;
+    })();
+
+    multiverse.StockSymbol = (function() {
+
+        /**
+         * Properties of a StockSymbol.
+         * @memberof multiverse
+         * @interface IStockSymbol
+         * @property {string|null} [symbol] StockSymbol symbol
+         */
+
+        /**
+         * Constructs a new StockSymbol.
+         * @memberof multiverse
+         * @classdesc Represents a StockSymbol.
+         * @implements IStockSymbol
+         * @constructor
+         * @param {multiverse.IStockSymbol=} [properties] Properties to set
+         */
+        function StockSymbol(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * StockSymbol symbol.
+         * @member {string} symbol
+         * @memberof multiverse.StockSymbol
+         * @instance
+         */
+        StockSymbol.prototype.symbol = "";
+
+        /**
+         * Creates a new StockSymbol instance using the specified properties.
+         * @function create
+         * @memberof multiverse.StockSymbol
+         * @static
+         * @param {multiverse.IStockSymbol=} [properties] Properties to set
+         * @returns {multiverse.StockSymbol} StockSymbol instance
+         */
+        StockSymbol.create = function create(properties) {
+            return new StockSymbol(properties);
+        };
+
+        /**
+         * Encodes the specified StockSymbol message. Does not implicitly {@link multiverse.StockSymbol.verify|verify} messages.
+         * @function encode
+         * @memberof multiverse.StockSymbol
+         * @static
+         * @param {multiverse.IStockSymbol} message StockSymbol message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        StockSymbol.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.symbol != null && Object.hasOwnProperty.call(message, "symbol"))
+                writer.uint32(/* id 9912272, wireType 2 =*/79298178).string(message.symbol);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified StockSymbol message, length delimited. Does not implicitly {@link multiverse.StockSymbol.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof multiverse.StockSymbol
+         * @static
+         * @param {multiverse.IStockSymbol} message StockSymbol message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        StockSymbol.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a StockSymbol message from the specified reader or buffer.
+         * @function decode
+         * @memberof multiverse.StockSymbol
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {multiverse.StockSymbol} StockSymbol
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        StockSymbol.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.multiverse.StockSymbol();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 9912272: {
+                        message.symbol = reader.string();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a StockSymbol message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof multiverse.StockSymbol
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {multiverse.StockSymbol} StockSymbol
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        StockSymbol.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a StockSymbol message.
+         * @function verify
+         * @memberof multiverse.StockSymbol
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        StockSymbol.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.symbol != null && message.hasOwnProperty("symbol"))
+                if (!$util.isString(message.symbol))
+                    return "symbol: string expected";
+            return null;
+        };
+
+        /**
+         * Creates a StockSymbol message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof multiverse.StockSymbol
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {multiverse.StockSymbol} StockSymbol
+         */
+        StockSymbol.fromObject = function fromObject(object) {
+            if (object instanceof $root.multiverse.StockSymbol)
+                return object;
+            var message = new $root.multiverse.StockSymbol();
+            if (object.symbol != null)
+                message.symbol = String(object.symbol);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a StockSymbol message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof multiverse.StockSymbol
+         * @static
+         * @param {multiverse.StockSymbol} message StockSymbol
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        StockSymbol.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.symbol = "";
+            if (message.symbol != null && message.hasOwnProperty("symbol"))
+                object.symbol = message.symbol;
+            return object;
+        };
+
+        /**
+         * Converts this StockSymbol to JSON.
+         * @function toJSON
+         * @memberof multiverse.StockSymbol
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        StockSymbol.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for StockSymbol
+         * @function getTypeUrl
+         * @memberof multiverse.StockSymbol
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        StockSymbol.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/multiverse.StockSymbol";
+        };
+
+        return StockSymbol;
     })();
 
     return multiverse;
