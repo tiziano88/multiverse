@@ -18,7 +18,20 @@ function App() {
     if (url === "") {
       return;
     }
-    const response = await fetch(url);
+
+    var parsedUrl;
+    try {
+      parsedUrl = new URL(url);
+    } catch (error) {
+      // invalid url
+      return;
+    }
+    console.log("parsedUrl", parsedUrl);
+    if (parsedUrl.protocol === "web+multiverse:") {
+      parsedUrl.protocol = "https:";
+    }
+
+    const response = await fetch(parsedUrl);
     const content = await response.arrayBuffer();
     console.log("content", content);
     // convert to string
@@ -57,13 +70,22 @@ function App() {
 
   return (
     <div className="App">
-      <div className="text-xl">Viewer</div>
-      <input type="text" className="input-url" value={url}></input>
+      <div className="text-xl bg-blue-500">Viewer</div>
+      <div className="w-full relative">
+        <input
+          type="text"
+          className="input-url w-full"
+          value={url}
+          onChange={(e) => {
+            setUrl(e.target.value);
+          }}
+        ></input>
+        <button type="submit" className="button" onClick={loadProto}>
+          Load
+        </button>
+      </div>
       <UniverseComponent value={universe} updateValue={(v) => setUniverse(v)} />
-      <button className="button" onClick={loadProto}>
-        Load
-      </button>
-      <a href="web+multiverse://raw.githubusercontent.com/tiziano88/universe/main/tiziano88.pb">
+      <a href="?url=web%2bmultiverse://raw.githubusercontent.com/tiziano88/universe/main/tiziano88.pb">
         Try
       </a>
     </div>
