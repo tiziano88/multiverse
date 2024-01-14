@@ -1,12 +1,11 @@
 import React, { useEffect } from "react";
-import { FieldEditor } from "../utils/components";
+import { FieldEditor, FieldViewer } from "../utils/components";
 import { multiverse } from "../compiled/schema";
 
 const apiKey = "AIzaSyDvi0p-ecxb8t4FvBZfTghLfrIUaORWh-0";
 
-export const YoutubeVideoComponent: FieldEditor<multiverse.IYouTubeVideo> = ({
+export const YoutubeVideoComponent: FieldViewer<multiverse.IYouTubeVideo> = ({
   value,
-  updateValue,
 }) => {
   console.log("creating YoutubeVideo", value);
   const [videoData, setVideoData] = React.useState({} as any);
@@ -40,11 +39,6 @@ export const YoutubeVideoComponent: FieldEditor<multiverse.IYouTubeVideo> = ({
       <input
         type="text"
         value={value.videoId || ""}
-        onChange={(e) =>
-          updateValue(
-            multiverse.YouTubeVideo.create({ videoId: e.target.value })
-          )
-        }
         placeholder="YouTube video id"
       />
       <div>

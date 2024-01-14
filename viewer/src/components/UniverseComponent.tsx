@@ -1,6 +1,11 @@
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { multiverse } from "../compiled/schema";
-import { FieldEditor, RepeatedField, type } from "../utils/components";
+import {
+  FieldEditor,
+  FieldViewer,
+  RepeatedField,
+  type,
+} from "../utils/components";
 import { generateId } from "../utils/utils";
 import { PublishedItemComponent } from "./PublishedItemComponent";
 import { Fragment, useState } from "react";
@@ -29,24 +34,17 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
-export const UniverseComponent: FieldEditor<multiverse.IUniverse> = ({
+export const UniverseComponent: FieldViewer<multiverse.IUniverse> = ({
   value,
-  updateValue,
 }) => {
   const [selectedTab, setSelectedTab] = useState(0);
-  // return type("Universe", [
-  //   <RepeatedField
-  //     parent={value}
-  //     fieldName="publishedItems"
-  //     updateParent={updateValue}
-  //     component={PublishedItemComponent}
-  //     childFactory={() =>
-  //       multiverse.PublishedItem.create({
-  //         uuid: generateId(),
-  //       })
-  //     }
-  //   />,
-  // ]);
+  return type("Universe", [
+    <RepeatedField
+      parent={value}
+      fieldName="publishedItems"
+      component={PublishedItemComponent}
+    />,
+  ]);
   return (
     <>
       {/*

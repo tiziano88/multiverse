@@ -1,15 +1,5 @@
-import { FieldEditor } from "../utils/components";
+import { FieldEditor, FieldViewer } from "../utils/components";
 
-export const StringComponent: FieldEditor<string> = ({
-  value,
-  updateValue,
-}) => {
-  return (
-    <input
-      type="text"
-      value={value || ""}
-      onChange={(e) => updateValue(e.target.value)}
-      placeholder="---"
-    />
-  );
+export const StringComponent: FieldViewer<string> = ({ value }) => {
+  return <input type="text" value={value || ""} placeholder="---" />;
 };

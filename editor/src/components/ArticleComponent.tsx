@@ -1,5 +1,6 @@
 import { multiverse } from "../compiled/schema";
 import { FieldEditor, OptionalField, type } from "../utils/components";
+import { MarkdownComponent } from "./MarkdownComponent";
 import { StringComponent } from "./StringComponent";
 
 export const ArticleComponent: FieldEditor<multiverse.IArticle> = ({
@@ -18,7 +19,7 @@ export const ArticleComponent: FieldEditor<multiverse.IArticle> = ({
       parent={value}
       fieldName="body"
       updateParent={updateValue}
-      component={StringComponent}
+      component={MarkdownComponent}
       childFactory={() => ""}
     />,
     // repeated_field(

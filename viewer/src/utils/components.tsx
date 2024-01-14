@@ -1,4 +1,3 @@
-import { Writer } from "protobufjs";
 import { ReactElement, ReactNode } from "react";
 import { multiverse } from "../compiled/schema";
 import React from "react";
@@ -23,7 +22,7 @@ export function field_row(
   );
 }
 
-export function type(name: string, rows: ReactElement[]) {
+export function type(name: string, rows: (ReactElement | null | undefined)[]) {
   return (
     <div className="type">
       {/* <div className="type-name">{name}</div> */}
@@ -45,65 +44,34 @@ export function field_row_add(name: string, addItem: () => void): ReactElement {
   );
 }
 
-interface OptionalFieldProps<
-  ParentValue,
-  FieldName extends keyof ParentValue,
-  ChildValue extends ParentValue[FieldName]
-> {
+interface OptionalFieldProps<ParentValue, FieldName extends keyof ParentValue> {
   parent: ParentValue;
   fieldName: FieldName;
-  updateParent: (value: ParentValue) => void;
-  component: FieldEditor<NonNullable<ParentValue[FieldName]>>;
-  childFactory: () => ChildValue;
+  component: FieldViewer<NonNullable<ParentValue[FieldName]>>;
 }
 
 // Parent -> Child
 export function OptionalField<
   ParentValue,
-  FieldName extends keyof ParentValue,
-  ChildValue extends ParentValue[FieldName]
+  FieldName extends keyof ParentValue
 >({
   parent,
   fieldName,
-  updateParent,
   component,
-  childFactory,
-}: OptionalFieldProps<ParentValue, FieldName, ChildValue>): ReactElement {
+}: OptionalFieldProps<ParentValue, FieldName>): ReactElement {
   const displayName = fieldName.toString();
   const value = parent[fieldName];
 
   if (value === null || value === undefined) {
-    return field_row_add(displayName, () => {
-      const newValue = { ...parent, [fieldName]: childFactory() };
-      updateParent(newValue);
-    });
+    return <></>;
   }
   const element: ReactNode = component({
     value: value,
-    updateValue: (v) => {
-      const newValue = { ...parent, [fieldName]: v };
-      console.log("newValue", newValue);
-      updateParent(newValue);
-    },
   });
 
-  const clear = () => {
-    const newValue = { ...parent, [fieldName]: undefined };
-    updateParent(newValue);
-  };
-
-  const removeButton =
-    typeof value === "object" ? (
-      <button className="inline-button" onClick={clear}>
-        X
-      </button>
-    ) : null;
   return (
     <div className="row">
-      <div className="row-label">
-        {displayName}
-        {removeButton}
-      </div>
+      <div className="row-label">{displayName}</div>
       <div className="row-value">{element}</div>
     </div>
   );
@@ -140,16 +108,10 @@ type Thing = {
 
 type InnerType<T> = T extends Array<infer U> ? U : never;
 
-interface RepeatedFieldProps<
-  ParentValue,
-  FieldName extends keyof ParentValue,
-  ChildValue extends InnerType<ParentValue[FieldName]>
-> {
+interface RepeatedFieldProps<ParentValue, FieldName extends keyof ParentValue> {
   parent: ParentValue;
   fieldName: FieldName;
-  updateParent: (value: ParentValue) => void;
-  component: FieldEditor<NonNullable<InnerType<ParentValue[FieldName]>>>;
-  childFactory: () => ChildValue;
+  component: FieldViewer<NonNullable<InnerType<ParentValue[FieldName]>>>;
 }
 
 // Parent -> Child[]
@@ -160,60 +122,25 @@ export function RepeatedField<
 >({
   parent,
   fieldName,
-  updateParent,
   component,
-  childFactory,
-}: RepeatedFieldProps<ParentValue, FieldName, ChildValue>): ReactElement {
+}: RepeatedFieldProps<ParentValue, FieldName>): ReactElement {
   const displayName = fieldName.toString();
   const value = Array.isArray(parent[fieldName])
     ? (parent[fieldName] as Array<NonNullable<ChildValue>>)
     : [];
 
   if (value === null || value === undefined || value.length === 0) {
-    return field_row_add(displayName, () => {
-      console.log("repeated field row add");
-      const newValue = { ...parent, [fieldName]: [childFactory()] };
-      updateParent(newValue);
-    });
+    return <></>;
   }
   const elements: ReactNode[] = value.map((v: NonNullable<ChildValue>, i) =>
     field_row(
       displayName,
       component({
         value: v,
-        updateValue: (v) => {
-          const previousChildren = Array.isArray(parent[fieldName])
-            ? (parent[fieldName] as Array<NonNullable<ChildValue>>)
-            : [];
-          // TODO: fix this hack.
-          (previousChildren[i] as any) = v;
-          const newValue = {
-            ...parent,
-            [fieldName]: previousChildren,
-          };
-          updateParent(newValue);
-        },
       })
     )
   );
-  return (
-    <div>
-      {[
-        ...elements,
-        field_row_add(displayName, () => {
-          console.log("repeated update");
-          const previousChildren = Array.isArray(parent[fieldName])
-            ? (parent[fieldName] as Array<NonNullable<ChildValue>>)
-            : [];
-          const newValue = {
-            ...parent,
-            [fieldName]: [...previousChildren, childFactory()],
-          };
-          updateParent(newValue);
-        }),
-      ]}
-    </div>
-  );
+  return <div>{[...elements]}</div>;
 }
 
 export interface Props<T> {
@@ -222,3 +149,8 @@ export interface Props<T> {
 }
 
 export interface FieldEditor<T> extends React.FC<Props<T>> {}
+
+export interface PropsViewer<T> {
+  value: T;
+}
+export interface FieldViewer<T> extends React.FC<PropsViewer<T>> {}

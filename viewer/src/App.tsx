@@ -84,7 +84,7 @@ function App() {
           Load
         </button>
       </div>
-      <UniverseComponent value={universe} updateValue={(v) => setUniverse(v)} />
+      <UniverseComponent value={universe} />
       <a href="?url=web%2bmultiverse://raw.githubusercontent.com/tiziano88/universe/main/tiziano88.pb">
         Try
       </a>

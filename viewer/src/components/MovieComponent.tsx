@@ -1,13 +1,10 @@
 import React, { useEffect } from "react";
-import { FieldEditor } from "../utils/components";
+import { FieldEditor, FieldViewer } from "../utils/components";
 import { multiverse } from "../compiled/schema";
 
 const ApiKey = "f061fd14";
 
-export const MovieComponent: FieldEditor<multiverse.IMovie> = ({
-  value,
-  updateValue,
-}) => {
+export const MovieComponent: FieldViewer<multiverse.IMovie> = ({ value }) => {
   console.log("creating MovieComponent", value);
   const [omdbData, setOmdbData] = React.useState({} as any);
 
@@ -36,14 +33,7 @@ export const MovieComponent: FieldEditor<multiverse.IMovie> = ({
   return (
     <div>
       IMDB ID:
-      <input
-        type="text"
-        value={value.imdbId || ""}
-        onChange={(e) =>
-          updateValue(multiverse.Movie.create({ imdbId: e.target.value }))
-        }
-        placeholder="IMDB ID"
-      />
+      <input type="text" value={value.imdbId || ""} placeholder="IMDB ID" />
       <div>{omdbData.Title}</div>
       <div>{omdbData.Year}</div>
     </div>

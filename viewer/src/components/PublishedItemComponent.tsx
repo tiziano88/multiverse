@@ -1,43 +1,40 @@
 import { multiverse } from "../compiled/schema";
-import { FieldEditor, OptionalField, type } from "../utils/components";
+import {
+  FieldEditor,
+  FieldViewer,
+  OptionalField,
+  type,
+} from "../utils/components";
 import { ArticleComponent } from "./ArticleComponent";
 import { RatingComponent } from "./RatingComponent";
 import { StringComponent } from "./StringComponent";
 import { YoutubeVideoComponent } from "./YoutubeVideoComponent";
 
-export const PublishedItemComponent: FieldEditor<multiverse.IPublishedItem> = ({
+export const PublishedItemComponent: FieldViewer<multiverse.IPublishedItem> = ({
   value,
-  updateValue,
 }) => {
   console.log("creating PublishedItemComponent", value);
   return type("PublishedItem", [
+    value.youtubeVideo && <YoutubeVideoComponent value={value.youtubeVideo} />,
     <OptionalField
       parent={value}
       fieldName="uuid"
-      updateParent={updateValue}
       component={StringComponent}
-      childFactory={() => ""}
     />,
     <OptionalField
       parent={value}
       fieldName="rating"
-      updateParent={updateValue}
       component={RatingComponent}
-      childFactory={() => multiverse.Rating.create({})}
     />,
     <OptionalField
       parent={value}
       fieldName="youtubeVideo"
-      updateParent={updateValue}
       component={YoutubeVideoComponent}
-      childFactory={() => multiverse.YouTubeVideo.create({})}
     />,
     <OptionalField
       parent={value}
       fieldName="article"
-      updateParent={updateValue}
       component={ArticleComponent}
-      childFactory={() => multiverse.Article.create({})}
     />,
   ]);
 };
