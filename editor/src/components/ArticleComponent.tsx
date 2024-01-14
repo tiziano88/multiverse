@@ -9,13 +9,6 @@ export const ArticleComponent: FieldEditor<multiverse.IArticle> = ({
   return type("Article", [
     <OptionalField
       parent={value}
-      fieldName="uuid"
-      updateParent={updateValue}
-      component={StringComponent}
-      childFactory={() => ""}
-    />,
-    <OptionalField
-      parent={value}
       fieldName="title"
       updateParent={updateValue}
       component={StringComponent}

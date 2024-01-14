@@ -1,4 +1,4 @@
-run: proto
+editor: proto
   cd ./editor && npm start
 
 viewer: proto
@@ -14,10 +14,10 @@ proto:
 install:
   npm install
 
-build: proto
+build-editor: proto
   cd ./editor && npm run build
 
-deploy: build
+deploy-editor: build-editor
   wrangler pages deploy --commit-dirty=true --project-name=multiverse ./editor/build
 
 build-viewer: proto

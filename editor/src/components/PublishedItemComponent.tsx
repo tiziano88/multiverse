@@ -1,5 +1,6 @@
 import { multiverse } from "../compiled/schema";
 import { FieldEditor, OptionalField, type } from "../utils/components";
+import { ArticleComponent } from "./ArticleComponent";
 import { RatingComponent } from "./RatingComponent";
 import { StringComponent } from "./StringComponent";
 import { YoutubeVideoComponent } from "./YoutubeVideoComponent";
@@ -30,6 +31,13 @@ export const PublishedItemComponent: FieldEditor<multiverse.IPublishedItem> = ({
       updateParent={updateValue}
       component={YoutubeVideoComponent}
       childFactory={() => multiverse.YouTubeVideo.create({})}
+    />,
+    <OptionalField
+      parent={value}
+      fieldName="article"
+      updateParent={updateValue}
+      component={ArticleComponent}
+      childFactory={() => multiverse.Article.create({})}
     />,
   ]);
 };
