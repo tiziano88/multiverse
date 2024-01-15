@@ -1,0 +1,23 @@
+{
+  "name": "multiverse",
+  "version": "1.0.0",
+  "description": "Mutiverse is a specification for a self-hosted knowledge base.",
+  "main": "proto.js",
+  "dependencies": {
+    "protobufjs-cli": "^1.1.2",
+    "uuid": "^9.0.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tiziano88/multiverse.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tiziano88/multiverse/issues"
+  },
+  "homepage": "https://github.com/tiziano88/multiverse#readme"
+}
