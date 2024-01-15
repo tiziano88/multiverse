@@ -1,4 +1,4 @@
-import { TextareaHTMLAttributes } from "react";
+import { TextareaHTMLAttributes, useEffect } from "react";
 import { FieldEditor } from "../utils/components";
 
 export const MarkdownComponent: FieldEditor<string> = ({
@@ -14,6 +14,12 @@ export const MarkdownComponent: FieldEditor<string> = ({
     updateStyle(e.currentTarget);
     updateValue(e.currentTarget.value);
   }
+  useEffect(() => {
+    const t = document.querySelector("textarea");
+    if (t) {
+      updateStyle(t);
+    }
+  });
   return (
     <textarea
       value={value || ""}
