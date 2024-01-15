@@ -7,6 +7,7 @@ export const StringComponent: FieldEditor<string> = ({
   return (
     <input
       type="text"
+      className="input-box"
       value={value || ""}
       onChange={(e) => updateValue(e.target.value)}
       placeholder="---"

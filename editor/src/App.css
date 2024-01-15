@@ -10,6 +10,10 @@
   @apply bg-blue-500 text-white font-bold py-1 px-1 rounded;
 }
 
+.input-box {
+  @apply w-full;
+}
+
 .row {
   @apply bg-cyan-700;
   @apply p-1;

@@ -23,6 +23,7 @@ export const MarkdownComponent: FieldEditor<string> = ({
   return (
     <textarea
       value={value || ""}
+      className="input-box"
       onChange={(e) => onInput(e)}
       placeholder="---"
     />
