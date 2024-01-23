@@ -14,27 +14,11 @@ export const PublishedItemComponent: FieldViewer<multiverse.IPublishedItem> = ({
   value,
 }) => {
   console.log("creating PublishedItemComponent", value);
-  return type("PublishedItem", [
-    value.youtubeVideo && <YoutubeVideoComponent value={value.youtubeVideo} />,
-    <OptionalField
-      parent={value}
-      fieldName="uuid"
-      component={StringComponent}
-    />,
-    <OptionalField
-      parent={value}
-      fieldName="rating"
-      component={RatingComponent}
-    />,
-    <OptionalField
-      parent={value}
-      fieldName="youtubeVideo"
-      component={YoutubeVideoComponent}
-    />,
-    <OptionalField
-      parent={value}
-      fieldName="article"
-      component={ArticleComponent}
-    />,
-  ]);
+  if (!value) {
+    return <div>PublishedItem is null</div>;
+  }
+  if (value.article) {
+    return <ArticleComponent value={value.article} />;
+  }
+  return <div>Unknown PublishedItem</div>;
 };

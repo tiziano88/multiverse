@@ -31,7 +31,21 @@ function App() {
       parsedUrl.protocol = "https:";
     }
 
-    const response = await fetch(parsedUrl);
+    var urlToFetch = parsedUrl.toString();
+    if (parsedUrl.hostname === "storage.googleapis.com") {
+      urlToFetch =
+        "https://corsproxy.io/?" + encodeURIComponent(parsedUrl.toString());
+      console.log("using CORS proxy", urlToFetch);
+    }
+
+    const response = await fetch(urlToFetch, {
+      headers: {
+        // "content-type": "application/octet-stream",
+        // accept: "application/octet-stream",
+      },
+      // referrerPolicy: "no-referrer",
+      // mode: "cors",
+    });
     const content = await response.arrayBuffer();
     console.log("content", content);
     // convert to string
@@ -47,10 +61,14 @@ function App() {
 
   const currentOrigin = window.location.origin;
   console.log("currentOrigin", currentOrigin);
-  navigator.registerProtocolHandler(
-    "web+multiverse",
-    `${currentOrigin}/?url=%s`
-  );
+  try {
+    navigator.registerProtocolHandler(
+      "web+multiverse",
+      `${currentOrigin}/?url=%s`
+    );
+  } catch (error) {
+    console.log("error", error);
+  }
 
   // get url parameter, and use that to populate the input-url.
   // if there is no url parameter, then use the url from local storage.
@@ -85,9 +103,6 @@ function App() {
         </button>
       </div>
       <UniverseComponent value={universe} />
-      <a href="?url=web%2bmultiverse://raw.githubusercontent.com/tiziano88/universe/main/tiziano88.pb">
-        Try
-      </a>
     </div>
   );
 }

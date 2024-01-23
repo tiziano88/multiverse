@@ -38,13 +38,37 @@ export const UniverseComponent: FieldViewer<multiverse.IUniverse> = ({
   value,
 }) => {
   const [selectedTab, setSelectedTab] = useState(0);
-  return type("Universe", [
-    <RepeatedField
-      parent={value}
-      fieldName="publishedItems"
-      component={PublishedItemComponent}
-    />,
-  ]);
+  const [selectedItem, setSelectedItem] = useState("");
+  return (
+    <div className="flex h-full">
+      <div className="flex-1 overflow-auto max-w-96">
+        <ul className="p-1">
+          {(value.publishedItems || []).map((item) => {
+            return (
+              <li
+                onClick={() => setSelectedItem(item.uuid || "")}
+                className={
+                  "p-2 rounded " +
+                  (item.uuid === selectedItem
+                    ? "bg-slate-400"
+                    : "hover:bg-slate-200")
+                }
+              >
+                {item.uuid}
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+      <div className="flex-1 overflow-auto">
+        {(value.publishedItems || [])
+          .filter((v) => v.uuid === selectedItem)
+          .map((item) => {
+            return <PublishedItemComponent value={item} />;
+          })}
+      </div>
+    </div>
+  );
   return (
     <>
       {/*
