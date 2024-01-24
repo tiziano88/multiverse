@@ -1,18 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import "./App.css";
 import { multiverse } from "./compiled/schema";
 import { UniverseComponent } from "./components/UniverseComponent";
+import { useNavigate, useLocation } from "react-router-dom";
 
 function App() {
   console.log("App");
 
   const [url, setUrl] = useState("");
 
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const [universe, setUniverse] = useState<multiverse.IUniverse>(
     multiverse.Universe.create({})
   );
 
-  async function loadProto() {
+  const urlFromLocation = useMemo(() => {
+    const params = new URLSearchParams(location.search);
+    return params.get("url") || "";
+  }, [location]);
+
+  const loadProto = useCallback(async () => {
     // fetch from URL.
     console.log("url", url);
     if (url === "") {
@@ -26,6 +35,9 @@ function App() {
       // invalid url
       return;
     }
+
+    const params = new URLSearchParams(parsedUrl.search);
+
     console.log("parsedUrl", parsedUrl);
     if (parsedUrl.protocol === "web+multiverse:") {
       parsedUrl.protocol = "https:";
@@ -57,10 +69,9 @@ function App() {
     const decodedUniverse = multiverse.Universe.decode(new Uint8Array(content));
     console.log("loaded from URL");
     setUniverse(decodedUniverse);
-  }
+  }, [url]);
 
   const currentOrigin = window.location.origin;
-  console.log("currentOrigin", currentOrigin);
   try {
     navigator.registerProtocolHandler(
       "web+multiverse",
@@ -74,17 +85,11 @@ function App() {
   // if there is no url parameter, then use the url from local storage.
 
   useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const urlParam = urlParams.get("url");
-    if (urlParam) {
-      console.log("url", urlParam);
-      setUrl(urlParam);
-    }
-  });
-
-  useEffect(() => {
+    console.log("useEffect");
+    const params = new URLSearchParams(location.search);
+    setUrl(params.get("url") || "");
     loadProto();
-  }, [url]);
+  }, [location, setUrl, loadProto]);
 
   return (
     <div className="App">
@@ -96,6 +101,11 @@ function App() {
           value={url}
           onChange={(e) => {
             setUrl(e.target.value);
+          }}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              navigate(`?url=${encodeURIComponent(url)}`, { replace: true });
+            }
           }}
         ></input>
         <button type="submit" className="button" onClick={loadProto}>
